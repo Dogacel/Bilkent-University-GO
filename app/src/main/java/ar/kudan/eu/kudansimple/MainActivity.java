@@ -26,7 +26,9 @@ import android.view.MenuItem;
 
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
+import eu.kudan.kudan.ARArbiTrack;
 import eu.kudan.kudan.ARGyroPlaceManager;
+import eu.kudan.kudan.ARImageNode;
 
 public class MainActivity extends ARActivity implements SensorEventListener, LocationListener{
 
@@ -59,11 +61,7 @@ public class MainActivity extends ARActivity implements SensorEventListener, Loc
 
         }
 
-
-        // AR Content to be set up here
-        ARGyroPlaceManager gyroPlaceManager = ARGyroPlaceManager.getInstance();
-        gyroPlaceManager.initialise();
-
+        /*
         SensorManager sensors = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor accelSensor = sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         Sensor compassSensor = sensors.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
@@ -83,6 +81,30 @@ public class MainActivity extends ARActivity implements SensorEventListener, Loc
         Log.v("DEBUG","Best provider: " + best);
 
         locationManager.requestLocationUpdates(best, 50, 0, this);
+        */
+        // AR Content to be set up here
+
+        ARArbiTrack arArbiTrack = ARArbiTrack.getInstance();
+        arArbiTrack.initialise();
+
+        ARGyroPlaceManager gyroPlaceManager = ARGyroPlaceManager.getInstance();
+        gyroPlaceManager.initialise();
+
+        // Create a node to be used as the target.
+        ARImageNode targetNode = new ARImageNode("Cow Target.png");
+
+        // Add it to the Gyro Placement Manager's world so that it moves with the device's Gyroscope.
+        gyroPlaceManager.getWorld().addChild(targetNode);
+
+        // Rotate and scale the node to ensure it is displayed correctly.
+        targetNode.rotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
+        targetNode.rotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
+
+        targetNode.scaleByUniform(0.3f);
+        targetNode.setPosition(1.0f, 1.0f, 1.0f);
+        // Set the ArbiTracker's target node.
+        arArbiTrack.setTargetNode(targetNode);
+        arArbiTrack.getTargetNode().setVisible(true);
     }
 
     @Override
