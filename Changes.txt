@@ -1,0 +1,16 @@
+select has a problem sending arrays
+when I try to send FenFakHavuz coordinates same as the one add it to  select
+at the function onChange() somehow it changes its y coordinate sending it to the africa
+
+
+Array [ 3645538.3292401824, -6469011.083723077 ]
+
+Array [ 3645538.3292401824, 4846778.899146706 ]
+
+above one is what you get when you choose fenFakHavuz on select
+below sends to bilkent while top sends people to somewhere stupid
+only difference is y coordinate of the FenfakHavuz button has 0s at the end which I think has no relevancy
+
+
+...I quit for today
+
