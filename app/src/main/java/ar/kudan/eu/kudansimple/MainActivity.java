@@ -32,8 +32,9 @@ import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARArbiTrack;
 import eu.kudan.kudan.ARGyroPlaceManager;
 import eu.kudan.kudan.ARImageNode;
+import eu.kudan.kudan.ARWorld;
 
-public class MainActivity extends ARActivity implements SensorEventListener, LocationListener, GestureDetector.OnGestureListener{
+public class MainActivity extends ARActivity implements GestureDetector.OnGestureListener{
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
@@ -63,31 +64,10 @@ public class MainActivity extends ARActivity implements SensorEventListener, Loc
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     MY_PERMISSIONS_REQUEST_CAMERA);
+        } //endif
 
-        }
-
-        /*
-        SensorManager sensors = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor accelSensor = sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        Sensor compassSensor = sensors.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        Sensor gyroSensor = sensors.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-
-        boolean isAccelAvailable = sensors.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        boolean isCompassAvailable = sensors.registerListener(this, compassSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        boolean isGyroAvailable = sensors.registerListener(this, gyroSensor, SensorManager.SENSOR_DELAY_NORMAL);
-
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
-
-        String best = locationManager.getBestProvider(criteria, true);
-
-        Log.v("DEBUG","Best provider: " + best);
-
-        locationManager.requestLocationUpdates(best, 50, 0, this);
-        */
-        // AR Content to be set up here
+        ARWorld currentWorld = new ARWorld();
+        GPSManager gpsManager = new GPSManager(currentWorld);
 
         ARArbiTrack arArbiTrack = ARArbiTrack.getInstance();
         arArbiTrack.initialise();
@@ -159,50 +139,4 @@ public class MainActivity extends ARActivity implements SensorEventListener, Loc
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float f1, float f2) {return false;}
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        StringBuilder msg = new StringBuilder(event.sensor.getName()).append(" ");
-        for(float value: event.values)
-        {
-            msg.append("[").append(value).append("]");
-        }
-        // Log.d("SENSOR", msg.toString());
-        switch(event.sensor.getType())
-        {
-            case Sensor.TYPE_ACCELEROMETER:
-                accelData = msg.toString();
-                break;
-            case Sensor.TYPE_GYROSCOPE:
-                gyroData = msg.toString();
-                break;
-            case Sensor.TYPE_MAGNETIC_FIELD:
-                compassData = msg.toString();
-                break;
-        }
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor var1, int var2){
-        // Nothing
-    }
-
-    private Location lastLocation = null;
-
-    public void onLocationChanged(Location location) {
-        lastLocation = location;
-    }
-
-    public void onProviderDisabled(String provider) {
-        // ...
-    }
-
-    public void onProviderEnabled(String provider) {
-        // ...
-    }
-
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // ...
-    }
 }
