@@ -27,6 +27,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARArbiTrack;
@@ -66,38 +69,21 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
                     MY_PERMISSIONS_REQUEST_CAMERA);
         } //endif
 
+
         ARWorld currentWorld = new ARWorld();
-        GPSManager gpsManager = new GPSManager(currentWorld);
+        GPSManager gpsManager = new GPSManager(currentWorld, this);
 
-        ARArbiTrack arArbiTrack = ARArbiTrack.getInstance();
-        arArbiTrack.initialise();
-
-        ARGyroPlaceManager gyroPlaceManager = ARGyroPlaceManager.getInstance();
-        gyroPlaceManager.initialise();
-
-        // Create a node to be used as the target.
-        ARImageNode targetNode = new ARImageNode("Cow Target.png");
-        ARImageNode trackingNode = new ARImageNode("Cow Tracking.png");
-
-        // Add it to the Gyro Placement Manager's world so that  it moves with the device's Gyroscope.
-        gyroPlaceManager.getWorld().addChild(targetNode);
-
-        // Rotate and scale the node to ensure it is displayed correctly.
-        targetNode.rotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
-        targetNode.rotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
-
-        targetNode.scaleByUniform(0.3f);
-        // targetNode.setPosition(20.0f, 20.0f, 20.0f);
-        // Set the ArbiTracker's target node.
-
-        arArbiTrack.setTargetNode(targetNode);
-
-        trackingNode.rotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
-        trackingNode.rotateByDegrees(180.0f, 10.0f, 1.0f, 0.0f);
-
-        arArbiTrack.getWorld().addChild(trackingNode);
+        gpsManager.start();
 
 
+        /**
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Log.d("INFO", "Node_position: " + trackingNode.getFullPosition());
+            }
+        }, 0, 1000);//put here time 1000 milliseconds=1 second
+        **/
     }
 
     private GestureDetectorCompat gestureDetector;
