@@ -2,6 +2,7 @@ package ar.kudan.eu.kudansimple;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,6 +25,8 @@ public class GPSManager implements LocationListener, ARRendererListener{
     private Location previousLocation;
     private LocationManager locationManager;
 
+    private String provider;
+
     private boolean initiliased;
 
     /**
@@ -36,6 +39,14 @@ public class GPSManager implements LocationListener, ARRendererListener{
         this.arWorld = world;
 
         this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+
+        this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+        // set preferred provider based on the best accuracy possible
+        Criteria fineAccuracyCriteria = new Criteria();
+        fineAccuracyCriteria.setAccuracy(Criteria.ACCURACY_FINE);
+        provider = locationManager.getBestProvider(fineAccuracyCriteria, true);
 
         this.previousLocation = null;
 
@@ -78,16 +89,19 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
         Location location = null;
 
+
         this.arWorld.setVisible(true);
 
         try {
 
             locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    1000 * 15,
-                    1, this);
+                    provider,
+                    0,
+                    0, this);
 
             Log.d("GPS Enabled", "GPS Enabled");
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
 
@@ -137,8 +151,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
 
     public double bearingFrom(Location source, Location destination) {
-        //TODO: calculate bearing between two locations. ( Object and camera )
-        return 0.0;
+        return source.bearingTo(destination);
     }
 
     @Override
