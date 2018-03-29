@@ -20,6 +20,8 @@ import eu.kudan.kudan.ARWorld;
 
 public class GPSManager implements LocationListener, ARRendererListener{
 
+    private static GPSManager gpsManager;
+
     private ARWorld arWorld;
 
     private Location previousLocation;
@@ -27,7 +29,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
     private String provider;
 
-    private boolean initiliased;
+    private static boolean initiliased;
 
     /**
      * Consturctor for GPSManager
@@ -55,9 +57,16 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
         this.arWorld.setVisible(false);
 
-        this.initiliased = true;
+
     }
 
+    public static void init() {
+        initiliased = true;
+    }
+
+    public static GPSManager getInstance() {
+        return gpsManager;
+    }
 
     /**
      * Starts the GPSManager
@@ -73,13 +82,15 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
 
     /**
-     * Checks if whether GPSManager is initiliased
-     * @return is initiliased
+     * Checks if whether GPSManager is initialised
+     * @return is initialised
      */
     public boolean isInitiliased() {
         return this.initiliased;
     }
 
+
+    public Location getCurrentLocation() {return previousLocation;}
 
     /**
      * Gets location for determining relative positions of objects.
@@ -150,7 +161,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     }
 
 
-    public double bearingFrom(Location source, Location destination) {
+    public float bearingFrom(Location source, Location destination) {
         return source.bearingTo(destination);
     }
 
