@@ -31,12 +31,12 @@ public class GPSNode extends ARNode {
     private boolean interpolateMotionUsingHeading;
 
     public GPSNode(Location location, float bearing) {
-        //GPSManager *gpsManager = [GPSManager getInstance];
+        GPSManager gpsManager = GPSManager.getInstance();
         deviceHeight = 1.5f;
         interpolateMotionUsingHeading = false;
         previousFrameTime = 0;
 
-        if (true)  // [gpsManager getCurrentLocation] != nil
+        if (gpsManager.getCurrentLocation() != null);
         {
             this.setGpsLocation(location, bearing);
         }

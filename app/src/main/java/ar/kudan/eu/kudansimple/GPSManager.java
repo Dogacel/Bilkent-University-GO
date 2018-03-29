@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import eu.kudan.kudan.ARGyroManager;
+import eu.kudan.kudan.ARNode;
 import eu.kudan.kudan.ARRenderer;
 import eu.kudan.kudan.ARRendererListener;
 import eu.kudan.kudan.ARWorld;
@@ -22,7 +23,8 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
     private static GPSManager gpsManager;
 
-    private ARWorld arWorld;
+    private static ARWorld arWorld;
+    private static Activity activity;
 
     private Location previousLocation;
     private LocationManager locationManager;
@@ -38,10 +40,9 @@ public class GPSManager implements LocationListener, ARRendererListener{
     */
     public GPSManager (ARWorld world, Activity activity) {
 
+
         this.arWorld = world;
-
-        this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
+        this.activity = activity;
 
         this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
@@ -57,14 +58,17 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
         this.arWorld.setVisible(false);
 
-
     }
 
     public static void init() {
+        gpsManager = new GPSManager(arWorld, activity);
         initiliased = true;
     }
 
     public static GPSManager getInstance() {
+        if (initiliased)
+            return gpsManager;
+        init();
         return gpsManager;
     }
 
