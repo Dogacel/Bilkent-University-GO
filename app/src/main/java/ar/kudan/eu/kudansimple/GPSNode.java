@@ -18,10 +18,8 @@ import eu.kudan.kudan.ARRenderer;
 public class GPSNode extends ARImageNode {
 
     private Location gpsLocation;
-    private Vector3f position;
-    private Quaternion orientation;
 
-    private float bearing;
+    private float bearing; // In degrees
     private float deviceHeight;
 
     private float speed;
@@ -29,13 +27,10 @@ public class GPSNode extends ARImageNode {
 
     private long previousFrameTime;
 
-    private boolean interpolateMotionUsingHeading;
 
     public GPSNode(String photo, Location location, float bearing) {
         super(photo);
-        GPSManager gpsManager = GPSManager.getInstance();
         deviceHeight = 1.5f;
-        interpolateMotionUsingHeading = false;
         previousFrameTime = 0;
 
 
@@ -67,46 +62,52 @@ public class GPSNode extends ARImageNode {
     }
 
     public Vector3f calculateTranslationVector(float bearing, float distance) {
-        Vector3f northVector = new Vector3f(-1, 0, 0);
+        Vector3f northVector = new Vector3f(1, 0, 0);
 
         Quaternion q = new Quaternion();
-        northVector = q.fromAngleAxis((float) bearing, new Vector3f(0, -1, 0)).mult(northVector);
+        northVector = q.fromAngleAxis((float) Math.toRadians((double) bearing), new Vector3f(0, -1, 0)).mult(northVector);
 
         northVector.mult(distance);
 
         return northVector;
     }
 
-    public void updateWorldPosition() {
-        Location currentLocation = GPSManager.getInstance().getCurrentLocation();
-        Log.d("GPS", GPSManager.getInstance().toString());
+    public void updateWorldPosition(Location l) {
 
+        Location currentLocation = l;
         Log.d("GPS", gpsLocation.toString());
+
         float distanceToObject = gpsLocation.distanceTo(currentLocation);
-        float bearingToObbject = GPSManager.getInstance().bearingFrom(gpsLocation, currentLocation);
+        float bearingToObbject = GPSManager.bearingFrom(gpsLocation, currentLocation);
 
         this.speed = currentLocation.getSpeed();
         this.direction = currentLocation.getBearing();
 
         Vector3f translationVector = this.calculateTranslationVector(bearingToObbject, distanceToObject);
 
-        translationVector.y = -deviceHeight;
+        translationVector.y = -deviceHeight / 100;
 
-        this.position = translationVector;
+        this.setPosition(translationVector.mult(100));
 
         Quaternion qt = new Quaternion();
-        this.orientation = qt.fromAngleAxis(this.bearing, new Vector3f(0, -1, 0));
+        this.setOrientation(qt.fromAngleAxis((float) Math.toRadians((double) bearing), new Vector3f(0, -1, 0)));
+        //this.rotateByDegrees(90, 0f, 1f, 0f);
 
+        Log.d("POS", this.getPosition().toString());
+        Log.d("POS", this.getOrientation().toString());
     }
 
     @Override
     public void preRender() {
-        if(this.interpolateMotionUsingHeading) {
+        if(GPSManager.interpolateMotionUsingHeading) {
+            Log.d("GPS", this.speed + " : " +  this.direction);
             if (this.speed > 0 && this.direction > 0) {
                 long currentTime = ARRenderer.getInstance().getRenderTime();
                 long timeDelta = currentTime - this.previousFrameTime;
 
+                Log.d("GPS", "preRender: " + currentTime + " : " + this.previousFrameTime);
                 if (timeDelta > 1) {
+                    Log.d("GPS", "preRender: INTERPOLATE");
                     Vector3f translationVector = this.calculateTranslationVector(this.direction, timeDelta * this.speed);
                     this.translateByVector(translationVector.negate());
                 }

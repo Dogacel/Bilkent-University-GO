@@ -37,7 +37,7 @@ import eu.kudan.kudan.ARGyroPlaceManager;
 import eu.kudan.kudan.ARImageNode;
 import eu.kudan.kudan.ARWorld;
 
-public class MainActivity extends ARActivity {
+public class MainActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
@@ -53,7 +53,7 @@ public class MainActivity extends ARActivity {
         key.setAPIKey(skey);
     }
 
-
+    GestureDetectorCompat gestureDetector;
     @Override
     public void setup() {
         super.setup();
@@ -67,27 +67,27 @@ public class MainActivity extends ARActivity {
                     MY_PERMISSIONS_REQUEST_CAMERA);
         } //endif
 
-
+        gestureDetector = new GestureDetectorCompat(this, this);
         ARWorld currentWorld = new ARWorld();
 
 
         GPSManager gpsManager = new GPSManager(currentWorld, this);
-        GPSManager.init();
-
         gpsManager.start();
 
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
 
-        Location testLocation = new Location("dummyprovider");
-        testLocation.setLatitude(39.863910);
-        testLocation.setLongitude(32.748506);
-        GPSNode test = new GPSNode("Cow Target.png", testLocation, 90);
+        GPSNode test;
+        Location testLocation;
 
+        testLocation = new Location("dummyprovider");
+        testLocation.setLatitude(39.870011);
+        testLocation.setLongitude(32.749385);
 
+        test = new GPSNode("Cow Target.png", testLocation, -90);
         gpsManager.getArWorld().addChild(test);
 
-        test.scaleByUniform(0.3f);
+        test.scaleByUniform(0.05f);
         test.setVisible(true);
 
 
@@ -98,5 +98,44 @@ public class MainActivity extends ARActivity {
         }
         }, 0, 1000);//put here time 1000 milliseconds=1 second
          **/
+    }
+
+    //Testing
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        Log.d("GPS", "Tapped");
+        GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
     }
 }

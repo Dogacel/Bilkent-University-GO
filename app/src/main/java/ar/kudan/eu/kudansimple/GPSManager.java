@@ -23,15 +23,16 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
     private static GPSManager gpsManager;
 
-    private static ARWorld arWorld;
-    private static Activity activity;
+    private ARWorld arWorld;
+    private Activity activity;
 
-    private static Location previousLocation;
+    private Location previousLocation;
     private LocationManager locationManager;
 
     public String provider;
 
-    private static boolean initiliased;
+
+    public static boolean interpolateMotionUsingHeading;
 
     /**
      * Consturctor for GPSManager
@@ -57,20 +58,9 @@ public class GPSManager implements LocationListener, ARRendererListener{
         gyroManager.initialise();
 
         this.arWorld.setVisible(false);
-
+        interpolateMotionUsingHeading = false;
     }
 
-    public static void init() {
-        gpsManager = new GPSManager(arWorld, activity);
-        initiliased = true;
-    }
-
-    public static GPSManager getInstance() {
-        if (initiliased)
-            return gpsManager;
-        init();
-        return gpsManager;
-    }
 
     /**
      * Starts the GPSManager
@@ -84,14 +74,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
         ARRenderer.getInstance().addListener(this);
     }
 
-
-    /**
-     * Checks if whether GPSManager is initialised
-     * @return is initialised
-     */
-    public boolean isInitiliased() {
-        return this.initiliased;
-    }
 
 
     public Location getCurrentLocation() {return previousLocation;}
@@ -156,7 +138,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
                 for (ARNode node : this.getArWorld().getChildren()) {
                     if (node instanceof GPSNode) {
                         GPSNode gnode = (GPSNode) node;
-                        gnode.updateWorldPosition();
+                        gnode.updateWorldPosition(previousLocation);
                     }
                 }
                 Log.d("GPS", previousLocation.toString());
@@ -172,7 +154,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     }
 
 
-    public float bearingFrom(Location source, Location destination) {
+    public static float bearingFrom(Location source, Location destination) {
         return source.bearingTo(destination);
     }
 
