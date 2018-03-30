@@ -26,10 +26,10 @@ public class GPSManager implements LocationListener, ARRendererListener{
     private static ARWorld arWorld;
     private static Activity activity;
 
-    private Location previousLocation;
+    private static Location previousLocation;
     private LocationManager locationManager;
 
-    private String provider;
+    public String provider;
 
     private static boolean initiliased;
 
@@ -116,8 +116,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
             Log.d("GPS Enabled", "GPS Enabled");
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
 
         } catch (SecurityException e) {
@@ -154,12 +152,21 @@ public class GPSManager implements LocationListener, ARRendererListener{
     public void onLocationChanged(Location location) {
         try {
             this.previousLocation = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Log.d("LOCATION", previousLocation.toString());
+            if (getCurrentLocation() != null) {
+                for (ARNode node : this.getArWorld().getChildren()) {
+                    if (node instanceof GPSNode) {
+                        GPSNode gnode = (GPSNode) node;
+                        gnode.updateWorldPosition();
+                    }
+                }
+                Log.d("GPS", previousLocation.toString());
+            }
         } catch (SecurityException e) {
             e.printStackTrace();
         }
 
         //TODO: update each node's position on ARWorld.
+
 
         //foreach child in this.arWorld.children : update location.
     }

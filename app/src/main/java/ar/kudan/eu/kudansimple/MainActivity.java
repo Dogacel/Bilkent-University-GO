@@ -69,9 +69,26 @@ public class MainActivity extends ARActivity {
 
 
         ARWorld currentWorld = new ARWorld();
+
+
         GPSManager gpsManager = new GPSManager(currentWorld, this);
+        GPSManager.init();
 
         gpsManager.start();
+
+        getARView().getContentViewPort().getCamera().addChild(currentWorld);
+
+
+        Location testLocation = new Location("dummyprovider");
+        testLocation.setLatitude(39.863910);
+        testLocation.setLongitude(32.748506);
+        GPSNode test = new GPSNode("Cow Target.png", testLocation, 90);
+
+
+        gpsManager.getArWorld().addChild(test);
+
+        test.scaleByUniform(0.3f);
+        test.setVisible(true);
 
 
         /**

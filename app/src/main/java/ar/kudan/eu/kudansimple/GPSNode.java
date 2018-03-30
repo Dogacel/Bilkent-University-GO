@@ -7,6 +7,7 @@ import com.google.vrtoolkit.cardboard.sensors.internal.Vector3d;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
+import eu.kudan.kudan.ARImageNode;
 import eu.kudan.kudan.ARNode;
 import eu.kudan.kudan.ARRenderer;
 
@@ -14,7 +15,7 @@ import eu.kudan.kudan.ARRenderer;
  * Created by dogacel on 21.03.2018.
  */
 
-public class GPSNode extends ARNode {
+public class GPSNode extends ARImageNode {
 
     private Location gpsLocation;
     private Vector3f position;
@@ -30,20 +31,20 @@ public class GPSNode extends ARNode {
 
     private boolean interpolateMotionUsingHeading;
 
-    public GPSNode(Location location, float bearing) {
+    public GPSNode(String photo, Location location, float bearing) {
+        super(photo);
         GPSManager gpsManager = GPSManager.getInstance();
         deviceHeight = 1.5f;
         interpolateMotionUsingHeading = false;
         previousFrameTime = 0;
 
-        if (gpsManager.getCurrentLocation() != null);
-        {
-            this.setGpsLocation(location, bearing);
-        }
+
+        this.setGpsLocation(location, bearing);
+
     }
 
-    public GPSNode(Location l) {
-        this(l, 0);
+    public GPSNode(String photo, Location l) {
+        this(photo, l, 0);
     }
 
     public Location getGpsLocation() {
@@ -52,7 +53,8 @@ public class GPSNode extends ARNode {
     }
 
     public void setGpsLocation(Location l, float bearing) {
-        this.gpsLocation = l;
+        if (l != null)
+            this.gpsLocation = l;
         this.bearing = bearing;
     }
 
@@ -77,7 +79,9 @@ public class GPSNode extends ARNode {
 
     public void updateWorldPosition() {
         Location currentLocation = GPSManager.getInstance().getCurrentLocation();
+        Log.d("GPS", GPSManager.getInstance().toString());
 
+        Log.d("GPS", gpsLocation.toString());
         float distanceToObject = gpsLocation.distanceTo(currentLocation);
         float bearingToObbject = GPSManager.getInstance().bearingFrom(gpsLocation, currentLocation);
 
@@ -92,6 +96,7 @@ public class GPSNode extends ARNode {
 
         Quaternion qt = new Quaternion();
         this.orientation = qt.fromAngleAxis(this.bearing, new Vector3f(0, -1, 0));
+
     }
 
     @Override
@@ -101,7 +106,7 @@ public class GPSNode extends ARNode {
                 long currentTime = ARRenderer.getInstance().getRenderTime();
                 long timeDelta = currentTime - this.previousFrameTime;
 
-                if (timeDelta < 1) {
+                if (timeDelta > 1) {
                     Vector3f translationVector = this.calculateTranslationVector(this.direction, timeDelta * this.speed);
                     this.translateByVector(translationVector.negate());
                 }
