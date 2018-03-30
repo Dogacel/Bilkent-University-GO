@@ -62,10 +62,10 @@ public class GPSNode extends ARImageNode {
     }
 
     public Vector3f calculateTranslationVector(float bearing, float distance) {
-        Vector3f northVector = new Vector3f(1, 0, 0);
+        Vector3f northVector = new Vector3f(-1, 0, 0);
 
         Quaternion q = new Quaternion();
-        northVector = q.fromAngleAxis((float) Math.toRadians((double) bearing), new Vector3f(0, -1, 0)).mult(northVector);
+        northVector = q.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0)).mult(northVector);
 
         northVector.mult(distance);
 
@@ -78,20 +78,19 @@ public class GPSNode extends ARImageNode {
         Log.d("GPS", gpsLocation.toString());
 
         float distanceToObject = gpsLocation.distanceTo(currentLocation);
-        float bearingToObbject = GPSManager.bearingFrom(gpsLocation, currentLocation);
+        float bearingToObject = GPSManager.bearingFrom(gpsLocation, currentLocation);
 
         this.speed = currentLocation.getSpeed();
         this.direction = currentLocation.getBearing();
 
-        Vector3f translationVector = this.calculateTranslationVector(bearingToObbject, distanceToObject);
+        Vector3f translationVector = this.calculateTranslationVector(bearingToObject, distanceToObject);
 
         translationVector.y = -deviceHeight / 100;
 
-        this.setPosition(translationVector.mult(100));
+        this.setPosition(translationVector.mult(-100));
 
         Quaternion qt = new Quaternion();
-        this.setOrientation(qt.fromAngleAxis((float) Math.toRadians((double) bearing), new Vector3f(0, -1, 0)));
-        //this.rotateByDegrees(90, 0f, 1f, 0f);
+        this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0)));
 
         Log.d("POS", this.getPosition().toString());
         Log.d("POS", this.getOrientation().toString());

@@ -77,14 +77,14 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
 
-        GPSNode test;
-        Location testLocation;
+        GPSNode test, test2;
+        Location testLocation, testLocation2;
 
         testLocation = new Location("dummyprovider");
         testLocation.setLatitude(39.870011);
         testLocation.setLongitude(32.749385);
 
-        test = new GPSNode("Cow Target.png", testLocation, -90);
+        test = new GPSNode("LibraryTarget.png", testLocation, -90);
         gpsManager.getArWorld().addChild(test);
 
         test.scaleByUniform(0.05f);
