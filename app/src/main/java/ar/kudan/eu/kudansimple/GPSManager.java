@@ -16,33 +16,30 @@ import eu.kudan.kudan.ARRendererListener;
 import eu.kudan.kudan.ARWorld;
 
 /**
- * Created by dogacel on 21.03.2018.
+ * GPSManager class for handling GPSNodes on an ARWorld.
  */
-
-public class GPSManager implements LocationListener, ARRendererListener{
+class GPSManager implements LocationListener, ARRendererListener{
 
 
     private ARWorld arWorld; //Current world.
-    private Activity activity; //Current activity.
 
     private Location previousLocation; //Last location retrieved.
     private LocationManager locationManager; //LocationManager object for handling location requests.
 
-    public String provider; //Location provider.
+    private String provider; //Location provider.
 
     public static boolean interpolateMotionUsingHeading; //Testing
 
     /**
-     * Consturctor for GPSManager
+     * Constructor for GPSManager
      * @param world ARWorld for displaying GPSNode objects.
      * @param activity Current activity for getting location service.
     */
     public GPSManager (ARWorld world, Activity activity) {
 
         this.arWorld = world;
-        this.activity = activity;
 
-        this.locationManager = (LocationManager) this.activity.getSystemService(Context.LOCATION_SERVICE);
+        this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
         Criteria fineAccuracyCriteria = new Criteria();
         fineAccuracyCriteria.setAccuracy(Criteria.ACCURACY_FINE); // set preferred provider based on the best accuracy possible
@@ -72,17 +69,14 @@ public class GPSManager implements LocationListener, ARRendererListener{
      * Get current location
      * @return previous location retrieved.
      */
-    public Location getCurrentLocation() {return previousLocation;}
+    private Location getCurrentLocation() {return previousLocation;}
 
     /**
      * Gets location for determining relative positions of objects.
-     * @return last location got from GPS_PROVIDER
      */
-    private Location startLocationUpdates() {
-
-        Location location = null;
-
+    private void startLocationUpdates() {
         this.arWorld.setVisible(true);
+
         try {
             locationManager.requestLocationUpdates(
                     provider,
@@ -90,12 +84,10 @@ public class GPSManager implements LocationListener, ARRendererListener{
                     0, this);
 
             Log.d("GPS_DEBUG", "GPS Enabled");
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         } catch (SecurityException e) {
             e.printStackTrace();
         }
 
-        return location;
     }
 
     /**
@@ -108,7 +100,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
     /**
      * Sets current ARWorld to world
-     * @param world
+     * @param world Current World.
      * @return success.
      */
     public boolean setArWorld(ARWorld world) {
@@ -122,12 +114,13 @@ public class GPSManager implements LocationListener, ARRendererListener{
     @Override
     public void onLocationChanged(Location location) {
         try {
+            //TODO: GPS Provider takes a while to initialise so we can use Network provider until GPS Provider is ready or atleast there can be a popup saying waiting for GPS.
             this.previousLocation = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (getCurrentLocation() != null) {
                 for (ARNode node : this.getArWorld().getChildren()) { //Update each children's Position according to the new location data.
                     if (node instanceof GPSImageNode) {
-                        GPSImageNode gnode = (GPSImageNode) node;
-                        gnode.updateWorldPosition(previousLocation);
+                        GPSImageNode gpsImageNode = (GPSImageNode) node;
+                        gpsImageNode.updateWorldPosition(previousLocation);
                     }
                 }
                 Log.d("GPS_DEBUG", previousLocation.toString());
@@ -169,11 +162,17 @@ public class GPSManager implements LocationListener, ARRendererListener{
     }
 
     @Override
-    public void postRender() {}
+    public void postRender() {
+
+    }
 
     @Override
-    public void rendererDidPause() {}
+    public void rendererDidPause() {
+
+    }
 
     @Override
-    public void rendererDidResume() {}
+    public void rendererDidResume() {
+        
+    }
 }

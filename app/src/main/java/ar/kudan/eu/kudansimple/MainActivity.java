@@ -1,48 +1,25 @@
 package ar.kudan.eu.kudansimple;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
-import eu.kudan.kudan.ARArbiTrack;
-import eu.kudan.kudan.ARGyroPlaceManager;
-import eu.kudan.kudan.ARImageNode;
 import eu.kudan.kudan.ARWorld;
 
 public class MainActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
 
+    private GestureDetectorCompat gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +29,11 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
         key.setAPIKey(skey);
     }
 
-    GestureDetectorCompat gestureDetector;
     @Override
     public void setup() {
         super.setup();
 
-        Log.d("MAINACTIVITY", "Started !");
+        Log.d("MAIN_ACTIVITY", "Started !");
 
         //TODO: Permission checking is not working at the moment. Make a popup show for enabling camera and location permission.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
