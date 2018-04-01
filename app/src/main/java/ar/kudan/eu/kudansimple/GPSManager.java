@@ -29,6 +29,8 @@ public class GPSManager implements LocationListener, ARRendererListener{
     private Location previousLocation;
     private LocationManager locationManager;
 
+    public static Location northLocation;
+
     public String provider;
 
 
@@ -58,6 +60,10 @@ public class GPSManager implements LocationListener, ARRendererListener{
 
         this.arWorld.setVisible(false);
         interpolateMotionUsingHeading = false;
+
+        northLocation = new Location("dummyprovider");
+        northLocation.setLatitude(90.0f);
+        northLocation.setLatitude(0.0f);
     }
 
 

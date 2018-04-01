@@ -78,25 +78,52 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
 
 
         GPSNode test;
-        Location testLocation, northLocation;
+        Location testLocation;
 
-        northLocation = new Location("dummyprovider");
-        northLocation.setLatitude(90.0f);
-        northLocation.setLatitude(0.0f);
-
-        testLocation = new Location("dummyprovider");
-        testLocation.setLatitude(39.870011);
-        testLocation.setLongitude(32.749385);
+        //testLocation = new Location("dummyprovider");
+        //testLocation.setLatitude(39.870011);
+        //testLocation.setLongitude(32.749385);
 
 
 
 
-        test = new GPSNode("LibraryTarget.png", testLocation, -90);
-        gpsManager.getArWorld().addChild(test);
+        //test = new GPSNode("LibraryTarget.png", testLocation, -90);
+        //gpsManager.getArWorld().addChild(test);
 
-        test.scaleByUniform(0.05f);
-        test.setVisible(true);
+        //test.scaleByUniform(0.05f);
+        //test.setVisible(true);
 
+        Location northL = new Location("dummyprovider");
+        northL.setLongitude(90.0);
+        northL.setLatitude(0.0);
+        GPSNode north = new GPSNode("North.png", northL, 90);
+        gpsManager.getArWorld().addChild(north);
+        north.scaleByUniform(0.05f);
+        north.setVisible(true);
+
+        Location southL = new Location("dummyprovider");
+        southL.setLongitude(-90.0);
+        southL.setLatitude(0.0);
+        GPSNode south = new GPSNode("South.png", southL, 90);
+        gpsManager.getArWorld().addChild(south);
+        south.scaleByUniform(0.05f);
+        south.setVisible(true);
+
+        Location westL = new Location("dummyprovider");
+        westL.setLongitude(39.854630);
+        westL.setLatitude( -2.884413);
+        GPSNode west = new GPSNode("West.png", westL, 90);
+        gpsManager.getArWorld().addChild(west);
+        west.scaleByUniform(0.05f);
+        west.setVisible(true);
+
+        Location eastL = new Location("dummyprovider");
+        eastL.setLongitude(40.064261);
+        eastL.setLatitude(53.971932);
+        GPSNode east = new GPSNode("East.png", eastL, 90);
+        gpsManager.getArWorld().addChild(east);
+        east.scaleByUniform(0.05f);
+        east.setVisible(true);
 
         /**
          new Timer().scheduleAtFixedRate(new TimerTask() {
