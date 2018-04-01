@@ -27,15 +27,25 @@ public class GPSNode extends ARImageNode {
 
     private long previousFrameTime;
 
+    private Location northPole;
+    private Vector3f northVector;
 
     public GPSNode(String photo, Location location, float bearing) {
         super(photo);
+
         deviceHeight = 1.5f;
         previousFrameTime = 0;
 
-
+        this.northVector = null;
         this.setGpsLocation(location, bearing);
+    }
 
+    public void setNorthPole(Location l) {
+        this.northPole = l;
+    }
+
+    public void setNorthVector(Vector3f vector) {
+        this.northVector = vector;
     }
 
     public GPSNode(String photo, Location l) {
@@ -61,15 +71,20 @@ public class GPSNode extends ARImageNode {
         this.bearing = bearing;
     }
 
-    public Vector3f calculateTranslationVector(float bearing, float distance) {
-        Vector3f northVector = new Vector3f(-1, 0, 0);
+    public Vector3f calculateTranslationVector(float bearing, float distance, Location currentLocation) {
+
+        if (northVector == null) {
+
+        }
+
+        Vector3f rotatedNorthVector = northVector;
 
         Quaternion q = new Quaternion();
-        northVector = q.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0)).mult(northVector);
+        rotatedNorthVector = q.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0)).mult(northVector);
 
-        northVector.mult(distance);
+        rotatedNorthVector.mult(distance);
 
-        return northVector;
+        return rotatedNorthVector;
     }
 
     public void updateWorldPosition(Location l) {
@@ -83,7 +98,7 @@ public class GPSNode extends ARImageNode {
         this.speed = currentLocation.getSpeed();
         this.direction = currentLocation.getBearing();
 
-        Vector3f translationVector = this.calculateTranslationVector(bearingToObject, distanceToObject);
+        Vector3f translationVector = this.calculateTranslationVector(bearingToObject, distanceToObject, currentLocation);
 
         translationVector.y = -deviceHeight / 100;
 
@@ -107,7 +122,7 @@ public class GPSNode extends ARImageNode {
                 Log.d("GPS", "preRender: " + currentTime + " : " + this.previousFrameTime);
                 if (timeDelta > 1) {
                     Log.d("GPS", "preRender: INTERPOLATE");
-                    Vector3f translationVector = this.calculateTranslationVector(this.direction, timeDelta * this.speed);
+                    Vector3f translationVector = this.calculateTranslationVector(this.direction, timeDelta * this.speed, this.gpsLocation);
                     this.translateByVector(translationVector.negate());
                 }
 

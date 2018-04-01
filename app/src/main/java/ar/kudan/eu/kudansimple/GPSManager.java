@@ -41,7 +41,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
     */
     public GPSManager (ARWorld world, Activity activity) {
 
-
         this.arWorld = world;
         this.activity = activity;
 
@@ -50,7 +49,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
         // set preferred provider based on the best accuracy possible
         Criteria fineAccuracyCriteria = new Criteria();
         fineAccuracyCriteria.setAccuracy(Criteria.ACCURACY_FINE);
-        provider = locationManager.getBestProvider(fineAccuracyCriteria, true);
+        this.provider = locationManager.getBestProvider(fineAccuracyCriteria, true);
 
         this.previousLocation = null;
 

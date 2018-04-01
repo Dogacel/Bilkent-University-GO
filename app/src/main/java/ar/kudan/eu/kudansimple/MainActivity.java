@@ -77,12 +77,19 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
 
-        GPSNode test, test2;
-        Location testLocation, testLocation2;
+        GPSNode test;
+        Location testLocation, northLocation;
+
+        northLocation = new Location("dummyprovider");
+        northLocation.setLatitude(90.0f);
+        northLocation.setLatitude(0.0f);
 
         testLocation = new Location("dummyprovider");
         testLocation.setLatitude(39.870011);
         testLocation.setLongitude(32.749385);
+
+
+
 
         test = new GPSNode("LibraryTarget.png", testLocation, -90);
         gpsManager.getArWorld().addChild(test);
@@ -138,4 +145,6 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         return false;
     }
+
+
 }
