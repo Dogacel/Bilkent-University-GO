@@ -43,7 +43,6 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
-    private static String accelData, gyroData, compassData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +56,10 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
     @Override
     public void setup() {
         super.setup();
-        Log.d("IMPO", "Startdgc");
 
+        Log.d("MAINACTIVITY", "Started !");
+
+        //TODO: Permission checking is not working at the moment. Make a popup show for enabling camera and location permission.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
@@ -67,74 +68,69 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
                     MY_PERMISSIONS_REQUEST_CAMERA);
         } //endif
 
+        //For debug purposes.
         gestureDetector = new GestureDetectorCompat(this, this);
+
+        //Init a new world.
         ARWorld currentWorld = new ARWorld();
 
-
+        //Start GPSManager
         GPSManager gpsManager = new GPSManager(currentWorld, this);
         gpsManager.start();
 
+        //Add current world to our camera.
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
-
-        GPSNode test;
-        Location testLocation;
-
-        //testLocation = new Location("dummyprovider");
-        //testLocation.setLatitude(39.870011);
-        //testLocation.setLongitude(32.749385);
-
-
-
-
-        //test = new GPSNode("LibraryTarget.png", testLocation, -90);
-        //gpsManager.getArWorld().addChild(test);
-
-        //test.scaleByUniform(0.05f);
-        //test.setVisible(true);
-
+        //North Node
         Location northL = new Location("dummyprovider");
-        northL.setLongitude(90.0);
-        northL.setLatitude(0.0);
-        GPSNode north = new GPSNode("North.png", northL, 90);
+        northL.setLatitude(39.866699);
+        northL.setLongitude(32.748784);
+        GPSImageNode north = new GPSImageNode("North.png", northL, 90);
         gpsManager.getArWorld().addChild(north);
         north.scaleByUniform(0.05f);
         north.setVisible(true);
 
+
+        //South Node
         Location southL = new Location("dummyprovider");
-        southL.setLongitude(-90.0);
-        southL.setLatitude(0.0);
-        GPSNode south = new GPSNode("South.png", southL, 90);
+        southL.setLatitude(39.861362);
+        southL.setLongitude(32.748870);
+        GPSImageNode south = new GPSImageNode("South.png", southL, -90);
         gpsManager.getArWorld().addChild(south);
         south.scaleByUniform(0.05f);
         south.setVisible(true);
 
+
+        //West Node
         Location westL = new Location("dummyprovider");
-        westL.setLongitude(39.854630);
-        westL.setLatitude( -2.884413);
-        GPSNode west = new GPSNode("West.png", westL, 90);
+        westL.setLatitude(39.864003);
+        westL.setLongitude( 32.744766);
+        GPSImageNode west = new GPSImageNode("West.png", westL, 0);
         gpsManager.getArWorld().addChild(west);
         west.scaleByUniform(0.05f);
         west.setVisible(true);
 
+
+        //East Node
         Location eastL = new Location("dummyprovider");
-        eastL.setLongitude(40.064261);
-        eastL.setLatitude(53.971932);
-        GPSNode east = new GPSNode("East.png", eastL, 90);
+        eastL.setLatitude(39.863903);
+        eastL.setLongitude(32.751890);
+        GPSImageNode east = new GPSImageNode("East.png", eastL, 180);
         gpsManager.getArWorld().addChild(east);
         east.scaleByUniform(0.05f);
         east.setVisible(true);
-
-        /**
-         new Timer().scheduleAtFixedRate(new TimerTask() {
-        @Override public void run() {
-        Log.d("INFO", "Node_position: " + trackingNode.getFullPosition());
-        }
-        }, 0, 1000);//put here time 1000 milliseconds=1 second
-         **/
     }
 
     //Testing
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        Log.d("MAINACTIVITY", "Tapped");
+        //Useless, for testing only.
+        GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
+        return false;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
@@ -149,13 +145,6 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
     @Override
     public void onShowPress(MotionEvent motionEvent) {
 
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        Log.d("GPS", "Tapped");
-        GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
-        return false;
     }
 
     @Override
