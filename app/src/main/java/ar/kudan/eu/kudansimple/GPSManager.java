@@ -2,12 +2,16 @@ package ar.kudan.eu.kudansimple;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.GeomagneticField;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
 
 import eu.kudan.kudan.ARGyroManager;
 import eu.kudan.kudan.ARNode;
@@ -30,6 +34,12 @@ class GPSManager implements LocationListener, ARRendererListener{
 
     public static boolean interpolateMotionUsingHeading; //Testing
 
+    public static Vector3f northVector;
+    private static Bearing bearingNorth;
+    private static Compass compass;
+
+    private static Location previousStaticLocation;
+
     /**
      * Constructor for GPSManager
      * @param world ARWorld for displaying GPSNode objects.
@@ -46,12 +56,18 @@ class GPSManager implements LocationListener, ARRendererListener{
         this.provider = locationManager.getBestProvider(fineAccuracyCriteria, true);
 
         this.previousLocation = null;
+        previousStaticLocation = null;
+        northVector = null;
 
         ARGyroManager gyroManager = ARGyroManager.getInstance(); //Init gyroManager.
         gyroManager.initialise();
 
         this.arWorld.setVisible(false);
         interpolateMotionUsingHeading = false;
+
+        //TODO: Tell user to put phone on the ground and wait until or add an option for calibration.
+        bearingNorth = new Bearing();
+        compass = new Compass(activity, bearingNorth);
     }
 
 
@@ -116,7 +132,12 @@ class GPSManager implements LocationListener, ARRendererListener{
         try {
             //TODO: GPS Provider takes a while to initialise so we can use Network provider until GPS Provider is ready or atleast there can be a popup saying waiting for GPS.
             this.previousLocation = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            previousStaticLocation = this.previousLocation;
+
             if (getCurrentLocation() != null) {
+                if (this.northVector == null) {
+                    this.calculateNorthVector();
+                }
                 for (ARNode node : this.getArWorld().getChildren()) { //Update each children's Position according to the new location data.
                     if (node instanceof GPSImageNode) {
                         GPSImageNode gpsImageNode = (GPSImageNode) node;
@@ -142,8 +163,28 @@ class GPSManager implements LocationListener, ARRendererListener{
         this.updateNode();
     }
 
+    /**
+     * Gets angle between two position vectors.
+     * @param source Source location
+     * @param destination Destination location
+     * @return Angle between two locations in degrees.
+     */
     public static float bearingFrom(Location source, Location destination) {
         return source.bearingTo(destination);
+    }
+
+    public static void calculateNorthVector() {
+
+        //TODO: OPTIONAL Get bearing from NorthPole's Location. Tried but can't make it work.
+        float bearing = bearingNorth.getDegrees();
+        compass.destroy();
+
+        Log.d("GPS_DEBUG", "Bearing : " + bearing);
+
+        Quaternion qt = new Quaternion();
+        northVector = qt.fromAngleAxis((float) Math.toRadians(180 + bearing), new Vector3f(0, -1, 0)).mult(new Vector3f(-1, 0, 0));
+
+        Log.d("GPS_DEBUG", "North vector : " + northVector);
     }
 
     @Override
@@ -173,6 +214,6 @@ class GPSManager implements LocationListener, ARRendererListener{
 
     @Override
     public void rendererDidResume() {
-        
+
     }
 }

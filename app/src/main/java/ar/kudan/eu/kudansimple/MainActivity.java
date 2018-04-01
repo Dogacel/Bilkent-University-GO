@@ -80,7 +80,7 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
         //West Node
         Location westL = new Location("dummyprovider");
         westL.setLatitude(39.864003);
-        westL.setLongitude( 32.744766);
+        westL.setLongitude(32.744766);
         GPSImageNode west = new GPSImageNode("West.png", westL, 0);
         gpsManager.getArWorld().addChild(west);
         west.scaleByUniform(0.05f);

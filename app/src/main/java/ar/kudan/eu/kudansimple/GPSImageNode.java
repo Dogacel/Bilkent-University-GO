@@ -95,7 +95,7 @@ class GPSImageNode extends ARImageNode {
      */
     private Vector3f calculateTranslationVector(float bearing, float distance) {
 
-        Vector3f northVector = new Vector3f(-1, 0, 0); //Default north vector.
+        Vector3f northVector = GPSManager.northVector; //Default north vector.
 
         Quaternion q = new Quaternion();
         northVector = q.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0)).mult(northVector); //North vector is rotated by angle between Node A and Node B's position vectors.
