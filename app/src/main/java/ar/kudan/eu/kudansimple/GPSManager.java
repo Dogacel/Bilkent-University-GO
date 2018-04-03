@@ -22,7 +22,7 @@ import eu.kudan.kudan.ARWorld;
 /**
  * GPSManager class for handling GPSNodes on an ARWorld.
  */
-class GPSManager implements LocationListener, ARRendererListener{
+public class GPSManager implements LocationListener, ARRendererListener{
 
 
     private ARWorld arWorld; //Current world.
@@ -173,6 +173,9 @@ class GPSManager implements LocationListener, ARRendererListener{
         return source.bearingTo(destination);
     }
 
+    /**
+     * Calculates the north vector according to ARWorld position, device position and real north.
+     */
     public static void calculateNorthVector() {
 
         //TODO: OPTIONAL Get bearing from NorthPole's Location. Tried but can't make it work.
@@ -185,6 +188,14 @@ class GPSManager implements LocationListener, ARRendererListener{
         northVector = qt.fromAngleAxis((float) Math.toRadians(180 + bearing), new Vector3f(0, -1, 0)).mult(new Vector3f(-1, 0, 0));
 
         Log.d("GPS_DEBUG", "North vector : " + northVector);
+    }
+
+    /**
+     * Gets bearing to north.
+     * @return bearing to north in degrees.
+     */
+    public static float getRealBearing() {
+        return bearingNorth.getDegrees();
     }
 
     @Override

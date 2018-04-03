@@ -6,17 +6,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
-
-/**
- * Created by Dogacel on 4/1/2018.
- */
 
 public class Compass implements SensorEventListener {
 
-    private ImageView mPointer;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private Sensor mMagnetometer;
@@ -29,6 +22,11 @@ public class Compass implements SensorEventListener {
     private float[] mOrientation = new float[3];
     private float mCurrentDegree = 0f;
 
+    /**
+     * Constructor for compass class.
+     * @param activity Current activity working.
+     * @param bearing A bearing object for storing bearing to north in the beginning..
+     */
     public Compass(Activity activity, Bearing bearing) {
         this.bearing = bearing;
         mSensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
@@ -39,11 +37,18 @@ public class Compass implements SensorEventListener {
         mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_GAME);
     }
 
+    /**
+     * Destorys the compass object by unregistering listeners. Bearing won't update after this is done.
+     */
     public void destroy() {
         mSensorManager.unregisterListener(this, mAccelerometer);
         mSensorManager.unregisterListener(this, mMagnetometer);
     }
 
+    /**
+     * Updates bearing once after sensor is changed.
+     * @param event Sensor event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor == mAccelerometer) {
@@ -67,6 +72,10 @@ public class Compass implements SensorEventListener {
         }
     }
 
+    /**
+     * Get current bearing to north.
+     * @return
+     */
     public float getBearing() {
         return mCurrentDegree;
     }

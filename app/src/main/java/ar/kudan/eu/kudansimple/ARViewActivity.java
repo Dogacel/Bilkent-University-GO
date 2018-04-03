@@ -15,7 +15,7 @@ import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARWorld;
 
-public class MainActivity extends ARActivity implements GestureDetector.OnGestureListener {
+public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
 
@@ -24,16 +24,16 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String skey = "jZGcfDzRtoNpR6eCGWzQalY7udjOAIHrdIXwiQTFopkqjf9bh0nORhUoH/kS1Y28yDZNKKlM5kYjLCNuBx772wZbSQpyS+3AIqr10vEDMbOyJi3pzsAzim7o6zw6dT4rFDqN0BTAivKULfJol3sbJhyp+PWSjZKN/wLKoDzRspL24JTboYqJ1SXsseSTaoqDqdnrTZ2R0TKKciGlxYy3HB+Js8l9miRVGGk6p8Y0bkldc54gl5Bj2txesMqXhBE8nY1RKpVHZsmJxKEDntPjCvWYtZwNIlAMO+Q3XLvbNOU+XFCbvHcPILH3wX6jkIKd93xGtd08hp0lz1yr7rAuamF/hezem9LsCgXQqYJt8WnQTt1soKHcc3Wt7GnTFn/8CBCF6P6NQGlXeyixNcz4L42hkJAFfb+k0pBNu25eQloCirbAr3gEIXy/yYMYxtvRjKOo6X3JLgtZtMqZFLd8ygGgArlvi/c3PiBwgSLtl949ihRVmfPybclIb42enKCWDu4xRHl5mHDH4Cs6giWMURRQltl3bSRhb7IB3FVyVUitTXxV/pUSb8ywuVjla8KoJFsHOdFDKZrbDfWoQmCiYE7/KozlVjRdkajmEY00Uvgbvn+9NDuSItS8vzTtMmbiqIdMpdSCzBgeEkhe9k+F1zkdkeN40YOQsxVV4lT3Zh0=";
+        String defaultKey = "jZGcfDzRtoNpR6eCGWzQalY7udjOAIHrdIXwiQTFopkqjf9bh0nORhUoH/kS1Y28yDZNKKlM5kYjLCNuBx772wZbSQpyS+3AIqr10vEDMbOyJi3pzsAzim7o6zw6dT4rFDqN0BTAivKULfJol3sbJhyp+PWSjZKN/wLKoDzRspL24JTboYqJ1SXsseSTaoqDqdnrTZ2R0TKKciGlxYy3HB+Js8l9miRVGGk6p8Y0bkldc54gl5Bj2txesMqXhBE8nY1RKpVHZsmJxKEDntPjCvWYtZwNIlAMO+Q3XLvbNOU+XFCbvHcPILH3wX6jkIKd93xGtd08hp0lz1yr7rAuamF/hezem9LsCgXQqYJt8WnQTt1soKHcc3Wt7GnTFn/8CBCF6P6NQGlXeyixNcz4L42hkJAFfb+k0pBNu25eQloCirbAr3gEIXy/yYMYxtvRjKOo6X3JLgtZtMqZFLd8ygGgArlvi/c3PiBwgSLtl949ihRVmfPybclIb42enKCWDu4xRHl5mHDH4Cs6giWMURRQltl3bSRhb7IB3FVyVUitTXxV/pUSb8ywuVjla8KoJFsHOdFDKZrbDfWoQmCiYE7/KozlVjRdkajmEY00Uvgbvn+9NDuSItS8vzTtMmbiqIdMpdSCzBgeEkhe9k+F1zkdkeN40YOQsxVV4lT3Zh0=";
         ARAPIKey key = ARAPIKey.getInstance();
-        key.setAPIKey(skey);
+        key.setAPIKey(defaultKey);
     }
 
     @Override
     public void setup() {
         super.setup();
 
-        Log.d("MAIN_ACTIVITY", "Started !");
+        Log.d("AR_VIEW_ACTIVITY", "Started !");
 
         //TODO: Permission checking is not working at the moment. Make a popup show for enabling camera and location permission.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -44,7 +44,7 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
                     MY_PERMISSIONS_REQUEST_CAMERA);
         } //endif
 
-        //For debug purposes.
+        //For testing.
         gestureDetector = new GestureDetectorCompat(this, this);
 
         //Init a new world.
@@ -101,7 +101,7 @@ public class MainActivity extends ARActivity implements GestureDetector.OnGestur
 
     @Override
     public boolean onSingleTapUp(MotionEvent motionEvent) {
-        Log.d("MAINACTIVITY", "Tapped");
+        Log.d("AR_VIEW_ACTIVITY", "Tapped");
         //Useless, for testing only.
         GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
         return false;

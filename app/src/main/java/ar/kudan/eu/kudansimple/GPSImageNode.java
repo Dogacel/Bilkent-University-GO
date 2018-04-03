@@ -13,7 +13,7 @@ import eu.kudan.kudan.ARRenderer;
  * GPSNode class uses degrees for bearing and meters for device height.
  */
 
-class GPSImageNode extends ARImageNode {
+public class GPSImageNode extends ARImageNode {
 
     private Location gpsLocation; // Location of the object
 
@@ -66,7 +66,7 @@ class GPSImageNode extends ARImageNode {
     private void setGpsLocation(Location l, float bearing) {
         if (l != null)
             this.gpsLocation = l;
-        this.bearing = bearing;
+        this.bearing = bearing + GPSManager.getRealBearing();
     }
 
     /**
