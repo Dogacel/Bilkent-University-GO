@@ -31,8 +31,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     }
 
     @Override
-    public void setup() {
-        super.setup();
+    public void onStart() {
+        super.onStart();
 
         Log.d("AR_VIEW_ACTIVITY", "Started !");
 
