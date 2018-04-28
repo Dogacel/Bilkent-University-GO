@@ -2,6 +2,8 @@ package ar.kudan.eu.kudansimple;
 
 import android.location.Location;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -13,7 +15,7 @@ import eu.kudan.kudan.ARRenderer;
  * GPSNode class uses degrees for bearing and meters for device height.
  */
 
-public class GPSImageNode extends ARImageNode {
+public class GPSImageNode extends ARImageNode{
 
     private Location gpsLocation; // Location of the object
 
@@ -23,6 +25,8 @@ public class GPSImageNode extends ARImageNode {
     //Speed and direction of the movement. ( Between last two locations gathered from GPS )
     private float speed;
     private float direction;
+
+    private boolean isStatic;
 
     private long previousFrameTime; //Testing
 
@@ -36,6 +40,7 @@ public class GPSImageNode extends ARImageNode {
         super(photo);
 
         this.previousFrameTime = 0;
+        this.isStatic = false;
 
         this.setGpsLocation(location, bearing);
     }
@@ -84,6 +89,14 @@ public class GPSImageNode extends ARImageNode {
     public void setBearing(float bearing) {
         //TODO: Add an Option for image nodes which are always facing to us. Not to a static direction.
         this.bearing = bearing;
+    }
+
+    public void setStatic() {
+
+    }
+
+    public void setDynamic() {
+
     }
 
     /**

@@ -110,6 +110,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         west.setVisible(true);
 
 
+
         //East Node
         Location eastL = new Location("dummyprovider");
         eastL.setLatitude(39.863903);
