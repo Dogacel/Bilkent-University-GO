@@ -178,7 +178,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
      */
     public static void calculateNorthVector() {
 
-        //TODO: OPTIONAL Get bearing from NorthPole's Location. Tried but can't make it work.
         float bearing = bearingNorth.getDegrees();
         compass.destroy();
 

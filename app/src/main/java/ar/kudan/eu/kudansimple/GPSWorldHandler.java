@@ -13,12 +13,37 @@ public class GPSWorldHandler {
 
     private ArrayList<GPSImageNode> gpsObjectList;
 
-    public GPSWorldHandler() {
+    public GPSWorldHandler(GPSManager gpsManager) {
         gpsObjectList = new ArrayList<>();
     }
 
     public void addGPSObject(GPSImageNode gpsImageNode) {
         gpsObjectList.add(gpsImageNode);
+    }
+
+    public void showAll() {
+        for (GPSImageNode gpsImageNode : gpsObjectList) {
+            gpsImageNode.setVisible(true);
+        }
+    }
+
+    public void hideAll() {
+        for (GPSImageNode gpsImageNode : gpsObjectList) {
+            gpsImageNode.setVisible(false);
+        }
+    }
+
+    public void show(GPSImageNode gpsImageNode) {
+        gpsImageNode.setVisible(true);
+    }
+
+    public void hide(GPSImageNode gpsImageNode) {
+        gpsImageNode.setVisible(false);
+    }
+
+    public void showOnly(GPSImageNode gpsImageNode) {
+        hideAll();
+        gpsImageNode.setVisible(true);
     }
 
     public GPSImageNode getFocusedGPSObject() {

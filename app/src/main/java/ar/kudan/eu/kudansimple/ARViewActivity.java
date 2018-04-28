@@ -36,7 +36,6 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
         Log.d("AR_VIEW_ACTIVITY", "Started !");
 
-        //TODO: Permission checking is not working at the moment. Make a popup show for enabling camera and location permission.
         //Check and request camera permission.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -84,7 +83,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         Location northL = new Location("dummyprovider");
         northL.setLatitude(39.866699);
         northL.setLongitude(32.748784);
-        GPSImageNode north = new GPSImageNode("North.png", northL, 90);
+        GPSImageNode north = new GPSImageNode("north", "North.png", northL, 0, true);
         gpsManager.getArWorld().addChild(north);
         north.scaleByUniform(0.05f);
         north.setVisible(true);
@@ -94,7 +93,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         Location southL = new Location("dummyprovider");
         southL.setLatitude(39.861362);
         southL.setLongitude(32.748870);
-        GPSImageNode south = new GPSImageNode("South.png", southL, -90);
+        GPSImageNode south = new GPSImageNode("south", "South.png", southL, 90, true);
         gpsManager.getArWorld().addChild(south);
         south.scaleByUniform(0.05f);
         south.setVisible(true);
@@ -104,7 +103,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         Location westL = new Location("dummyprovider");
         westL.setLatitude(39.864003);
         westL.setLongitude(32.744766);
-        GPSImageNode west = new GPSImageNode("West.png", westL, 0);
+        GPSImageNode west = new GPSImageNode("west", "West.png", westL, 180, true);
         gpsManager.getArWorld().addChild(west);
         west.scaleByUniform(0.05f);
         west.setVisible(true);
@@ -115,10 +114,11 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         Location eastL = new Location("dummyprovider");
         eastL.setLatitude(39.863903);
         eastL.setLongitude(32.751890);
-        GPSImageNode east = new GPSImageNode("East.png", eastL, 180);
+        GPSImageNode east = new GPSImageNode("east", "East.png", eastL, 0, true);
         gpsManager.getArWorld().addChild(east);
         east.scaleByUniform(0.05f);
         east.setVisible(true);
+
     }
 
     //Testing
@@ -134,6 +134,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
+        Log.d("TOUCH_EVENT", "onTouchEvent: " + event.getX() + " : " + event.getY());
         return super.onTouchEvent(event);
     }
 

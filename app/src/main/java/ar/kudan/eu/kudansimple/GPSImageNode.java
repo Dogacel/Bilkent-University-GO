@@ -28,6 +28,8 @@ public class GPSImageNode extends ARImageNode{
 
     private boolean isStatic;
 
+    private String ID;
+
     private long previousFrameTime; //Testing
 
     /**
@@ -36,11 +38,13 @@ public class GPSImageNode extends ARImageNode{
      * @param location Location of the Node.
      * @param bearing Rotation of the photo. 0 Means picture is facing to East.
      */
-    public GPSImageNode(String photo, Location location, float bearing) {
+    public GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
         super(photo);
 
         this.previousFrameTime = 0;
-        this.isStatic = false;
+        this.isStatic = isStatic;
+
+        this.ID = id;
 
         this.setGpsLocation(location, bearing);
     }
@@ -50,8 +54,8 @@ public class GPSImageNode extends ARImageNode{
      * @param photo Picture that will be shown on the map.
      * @param l Location of the Node.
     */
-    public GPSImageNode(String photo, Location l) {
-        this(photo, l, 0);
+    public GPSImageNode(String id, String photo, Location l) {
+        this(id, photo, l, 0, true);
     }
 
     /**
@@ -87,16 +91,15 @@ public class GPSImageNode extends ARImageNode{
      * @param bearing Rotation from East.
      */
     public void setBearing(float bearing) {
-        //TODO: Add an Option for image nodes which are always facing to us. Not to a static direction.
         this.bearing = bearing;
     }
 
     public void setStatic() {
-
+        this.isStatic = true;
     }
 
     public void setDynamic() {
-
+        this.isStatic = false;
     }
 
     /**
@@ -144,7 +147,11 @@ public class GPSImageNode extends ARImageNode{
         this.setPosition(translationVector); //Change position to new position.
 
         Quaternion qt = new Quaternion();
-        this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0))); //Rotate Image according to it's bearing.
+
+        if (!isStatic)
+            this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0))); //Rotate Image according to it's bearing.
+        else
+            this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(180 + bearingToObject), new Vector3f(0, -1, 0)));
 
         Log.d("NODE_DEBUG", this.getPosition().toString());
     }
