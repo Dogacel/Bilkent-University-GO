@@ -10,6 +10,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
@@ -17,7 +18,7 @@ import eu.kudan.kudan.ARWorld;
 
 public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION = 100;
 
     private GestureDetectorCompat gestureDetector;
 
@@ -36,13 +37,35 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         Log.d("AR_VIEW_ACTIVITY", "Started !");
 
         //TODO: Permission checking is not working at the moment. Make a popup show for enabling camera and location permission.
+        //Check and request camera permission.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
+            Toast.makeText(getApplicationContext(), "Please Give Permission!", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } //endif
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void setup() {
+        super.setup();
+
+        //only attempt to setup if the permissions are granted!
+        if ( ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            setupARActivity();
+        }
+    }
+
+    /*
+     * Note: body of this method used to be the the body of the setup() method.
+     */
+    private void setupARActivity() {
+
+        Log.d("MAIN_ACTIVITY", "Started !");
 
         //For testing.
         gestureDetector = new GestureDetectorCompat(this, this);
@@ -138,5 +161,19 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         return false;
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION) {
+            if (grantResults.length > 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                //Permissions granted!
+                //We are recreating here because onCreate() method of ARActivity class checks for camera permission.
+                recreate();
+            } else {
+                //permission not granted close the activity.
+                Toast.makeText(getApplicationContext(), "Camera and Location permissions are needed for AR functionalities!", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return;
+        }
+    }
 }
