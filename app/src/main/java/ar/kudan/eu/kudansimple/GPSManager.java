@@ -179,7 +179,9 @@ public class GPSManager implements LocationListener, ARRendererListener{
     public static void calculateNorthVector() {
 
         float bearing = bearingNorth.getDegrees();
-        compass.destroy();
+
+        //Continue to use compass for focused click
+        //compass.destroy();
 
         Log.d("GPS_DEBUG", "Bearing : " + bearing);
 
@@ -189,6 +191,10 @@ public class GPSManager implements LocationListener, ARRendererListener{
         Log.d("GPS_DEBUG", "North vector : " + northVector);
     }
 
+    public float getBearingToNorth() {
+        return compass.getActiveBearing();
+    }
+
     /**
      * Gets bearing to north.
      * @return bearing to north in degrees.
@@ -196,6 +202,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     public static float getRealBearing() {
         return bearingNorth.getDegrees();
     }
+
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {

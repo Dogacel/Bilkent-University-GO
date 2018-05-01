@@ -14,6 +14,7 @@ public class Compass implements SensorEventListener {
     private Sensor mAccelerometer;
     private Sensor mMagnetometer;
     private Bearing bearing;
+    private Bearing activeBearing;
     private float[] mLastAccelerometer = new float[3];
     private float[] mLastMagnetometer = new float[3];
     private boolean mLastAccelerometerSet = false;
@@ -29,6 +30,8 @@ public class Compass implements SensorEventListener {
      */
     public Compass(Activity activity, Bearing bearing) {
         this.bearing = bearing;
+        activeBearing = new Bearing();
+
         mSensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
@@ -69,15 +72,25 @@ public class Compass implements SensorEventListener {
                 bearing.setDegrees(mCurrentDegree);
                 Log.d("COMPASS", "Set bearing to " + bearing);
             }
+            //TODO: Change degrees with device orientation. Currently not working properly when device is lift up.
+            activeBearing.setDegrees(-mCurrentDegree - 180);
         }
     }
 
     /**
-     * Get current bearing to north.
-     * @return
+     * Get current bearing to north fixed.
+     * @return fixed bearing to north
      */
     public float getBearing() {
         return mCurrentDegree;
+    }
+
+    /**
+     * Returns current bearing to north.
+     * @return bearing in degrees
+     */
+    public float getActiveBearing() {
+        return activeBearing.getDegrees();
     }
 
     @Override

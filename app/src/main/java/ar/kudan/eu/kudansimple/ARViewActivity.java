@@ -22,6 +22,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
     private GestureDetectorCompat gestureDetector;
 
+    private GPSWorldHandler gpsWorldHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,12 +81,14 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         //Add current world to our camera.
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
+        gpsWorldHandler = new GPSWorldHandler(gpsManager);
+
         //North Node
         Location northL = new Location("dummyprovider");
         northL.setLatitude(39.866699);
         northL.setLongitude(32.748784);
         GPSImageNode north = new GPSImageNode("north", "North.png", northL, 0, true);
-        gpsManager.getArWorld().addChild(north);
+        gpsWorldHandler.addGPSObjectCumilative(north);
         north.scaleByUniform(0.05f);
         north.setVisible(true);
 
@@ -94,7 +98,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         southL.setLatitude(39.861362);
         southL.setLongitude(32.748870);
         GPSImageNode south = new GPSImageNode("south", "South.png", southL, 90, true);
-        gpsManager.getArWorld().addChild(south);
+        gpsWorldHandler.addGPSObjectCumilative(south);
         south.scaleByUniform(0.05f);
         south.setVisible(true);
 
@@ -104,7 +108,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         westL.setLatitude(39.864003);
         westL.setLongitude(32.744766);
         GPSImageNode west = new GPSImageNode("west", "West.png", westL, 180, true);
-        gpsManager.getArWorld().addChild(west);
+        gpsWorldHandler.addGPSObjectCumilative(west);
         west.scaleByUniform(0.05f);
         west.setVisible(true);
 
@@ -115,7 +119,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         eastL.setLatitude(39.863903);
         eastL.setLongitude(32.751890);
         GPSImageNode east = new GPSImageNode("east", "East.png", eastL, 0, true);
-        gpsManager.getArWorld().addChild(east);
+        gpsWorldHandler.addGPSObjectCumilative(east);
         east.scaleByUniform(0.05f);
         east.setVisible(true);
 
@@ -127,7 +131,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     public boolean onSingleTapUp(MotionEvent motionEvent) {
         Log.d("AR_VIEW_ACTIVITY", "Tapped");
         //Useless, for testing only.
-        GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
+        //GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
         return false;
     }
 
@@ -135,6 +139,13 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
         Log.d("TOUCH_EVENT", "onTouchEvent: " + event.getX() + " : " + event.getY());
+
+        String id = gpsWorldHandler.getFocusedGPSObject().getID();
+        Log.d("TOUCH_EVENT", id);
+
+        //For testing purposes, when tapped, only the focused node will be shown.
+        //gpsWorldHandler.showOnly(id);
+
         return super.onTouchEvent(event);
     }
 

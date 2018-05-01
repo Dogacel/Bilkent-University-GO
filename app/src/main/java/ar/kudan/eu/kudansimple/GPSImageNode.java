@@ -25,6 +25,7 @@ public class GPSImageNode extends ARImageNode{
     //Speed and direction of the movement. ( Between last two locations gathered from GPS )
     private float speed;
     private float direction;
+    private float lastBearing;
 
     private boolean isStatic;
 
@@ -41,12 +42,17 @@ public class GPSImageNode extends ARImageNode{
     public GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
         super(photo);
 
+        this.lastBearing = 0;
         this.previousFrameTime = 0;
         this.isStatic = isStatic;
 
         this.ID = id;
 
         this.setGpsLocation(location, bearing);
+    }
+
+    public String getID() {
+        return ID;
     }
 
     /**
@@ -102,6 +108,10 @@ public class GPSImageNode extends ARImageNode{
         this.isStatic = false;
     }
 
+    public float getLastBearing() {
+        return lastBearing;
+    }
+
     /**
      * Calculates translation vector with given angle and distance from node A to node B.
      * A and B are not parameters for this function.
@@ -133,6 +143,8 @@ public class GPSImageNode extends ARImageNode{
 
         float distanceToObject = gpsLocation.distanceTo(currentLocation); //In meters
         float bearingToObject = GPSManager.bearingFrom(gpsLocation, currentLocation); //In degrees
+
+        this.lastBearing = bearingToObject;
 
         Log.d("NODE_DEBUG", "Bearing : " + bearingToObject);
         Log.d("NODE_DEBUG", "Distance : " + distanceToObject);
