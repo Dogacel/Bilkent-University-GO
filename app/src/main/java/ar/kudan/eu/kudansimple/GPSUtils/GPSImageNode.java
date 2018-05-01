@@ -1,9 +1,7 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.GPSUtils;
 
 import android.location.Location;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -40,7 +38,7 @@ public class GPSImageNode extends ARImageNode {
      * @param location Location of the Node.
      * @param bearing  Rotation of the photo. 0 Means picture is facing to East.
      */
-    GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
+    public GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
         super(photo);
 
         this.lastBearing = 0;
@@ -66,7 +64,7 @@ public class GPSImageNode extends ARImageNode {
      * Returns the ID of the node
      * @return ID
      */
-    String getID() {
+    public String getID() {
         return ID;
     }
 

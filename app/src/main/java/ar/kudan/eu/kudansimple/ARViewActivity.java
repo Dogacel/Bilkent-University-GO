@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
@@ -12,6 +13,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
+import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
+import ar.kudan.eu.kudansimple.GPSUtils.GPSWorldHandler;
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARWorld;
@@ -175,7 +179,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION) {
             if (grantResults.length > 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 //Permissions granted!
@@ -186,7 +190,6 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
                 Toast.makeText(getApplicationContext(), "Camera and Location permissions are needed for AR functionalities!", Toast.LENGTH_LONG).show();
                 finish();
             }
-            return;
         }
     }
 }

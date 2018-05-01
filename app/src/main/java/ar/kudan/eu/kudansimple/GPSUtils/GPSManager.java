@@ -1,8 +1,7 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.GPSUtils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.hardware.GeomagneticField;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,6 +12,8 @@ import android.util.Log;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
+import ar.kudan.eu.kudansimple.SensorUtils.Bearing;
+import ar.kudan.eu.kudansimple.SensorUtils.Compass;
 import eu.kudan.kudan.ARGyroManager;
 import eu.kudan.kudan.ARNode;
 import eu.kudan.kudan.ARRenderer;
@@ -42,7 +43,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
      * @param world ARWorld for displaying GPSNode objects.
      * @param activity Current activity for getting location service.
     */
-    GPSManager (ARWorld world, Activity activity) {
+    public GPSManager (ARWorld world, Activity activity) {
 
         this.arWorld = world;
 
@@ -106,7 +107,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     /**
      * Starts the GPSManager
      */
-    void start() {
+    public void start() {
         this.startLocationUpdates();
 
         ARGyroManager.getInstance().start();

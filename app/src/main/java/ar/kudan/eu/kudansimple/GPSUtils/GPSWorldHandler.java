@@ -1,9 +1,12 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.GPSUtils;
 
 
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
+import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
 
 /**
  * This class handles the GPS objects around the world;
@@ -18,7 +21,7 @@ public class GPSWorldHandler {
      *
      * @param gpsManager for managing children objects.
      */
-    GPSWorldHandler(GPSManager gpsManager) {
+    public GPSWorldHandler(GPSManager gpsManager) {
         gpsObjectList = new ArrayList<>();
         this.gpsManager = gpsManager;
     }
@@ -37,7 +40,7 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    void addGPSObjectCumilative(GPSImageNode gpsImageNode) {
+    public void addGPSObjectCumilative(GPSImageNode gpsImageNode) {
         addGPSObject(gpsImageNode);
         gpsManager.getArWorld().addChild(gpsImageNode);
     }
@@ -54,7 +57,7 @@ public class GPSWorldHandler {
     /**
      * Hides all objects in the list.
      */
-    void hideAll() {
+    public void hideAll() {
         for (GPSImageNode gpsImageNode : gpsObjectList) {
             gpsImageNode.setVisible(false);
         }
@@ -65,7 +68,7 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    void show(GPSImageNode gpsImageNode) {
+    public void show(GPSImageNode gpsImageNode) {
         gpsImageNode.setVisible(true);
     }
 
@@ -87,7 +90,7 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    void hide(GPSImageNode gpsImageNode) {
+    public void hide(GPSImageNode gpsImageNode) {
         gpsImageNode.setVisible(false);
     }
 
@@ -133,7 +136,7 @@ public class GPSWorldHandler {
      *
      * @return focused gps object
      */
-    GPSImageNode getFocusedGPSObject() {
+    public GPSImageNode getFocusedGPSObject() {
         if (gpsObjectList.size() == 0)
             return null;
 

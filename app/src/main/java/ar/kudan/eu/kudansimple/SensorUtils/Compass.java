@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.SensorUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
+
+import ar.kudan.eu.kudansimple.SensorUtils.Bearing;
 
 public class Compass implements SensorEventListener {
 
@@ -33,11 +35,17 @@ public class Compass implements SensorEventListener {
         activeBearing = new Bearing();
 
         mSensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if (mSensorManager != null) {
+            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
-        mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_GAME);
+
+            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+            mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_GAME);
+        } else {
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(-1);
+        }
     }
 
     /**
@@ -68,7 +76,7 @@ public class Compass implements SensorEventListener {
             float azimuthInDegress = (float)(Math.toDegrees(azimuthInRadians)+360)%360;
             mCurrentDegree = -azimuthInDegress;
             if (!bearing.isSet()) {
-                bearing.setSet(true);
+                bearing.setSet();
                 bearing.setDegrees(mCurrentDegree);
                 Log.d("COMPASS", "Set bearing to " + bearing);
             }

@@ -1,16 +1,16 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.SensorUtils;
 
 /**
  * Bearing wrapper class for adjusting ARWorld's translation vector to true north.
  */
-class Bearing {
+public class Bearing {
     private float degrees;
     private boolean isSet;
 
     /**
      * Constructor for bearing object.
      */
-    Bearing() {
+    public Bearing() {
         isSet = false;
     }
 
@@ -23,18 +23,17 @@ class Bearing {
     }
 
     /**
-     * Sets whether degrees is set or not.
-     * @param set set
+     * Sets whether degrees is set or not to true.
      */
-    void setSet(boolean set) {
-        this.isSet = set;
+    void setSet() {
+        this.isSet = true;
     }
 
     /**
      * Returns bearing in degrees.
      * @return bearing to north in degrees.
      */
-    float getDegrees() {
+    public float getDegrees() {
         return degrees;
     }
 
