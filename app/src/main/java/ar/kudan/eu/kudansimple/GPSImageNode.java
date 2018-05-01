@@ -15,12 +15,11 @@ import eu.kudan.kudan.ARRenderer;
  * GPSNode class uses degrees for bearing and meters for device height.
  */
 
-public class GPSImageNode extends ARImageNode{
+public class GPSImageNode extends ARImageNode {
 
-    private Location gpsLocation; // Location of the object
-
-    private float bearing; // In degrees
     private final float DEVICE_HEIGHT = 1.5f; // Height of the device.
+    private Location gpsLocation; // Location of the object
+    private float bearing; // In degrees
 
     //Speed and direction of the movement. ( Between last two locations gathered from GPS )
     private float speed;
@@ -33,13 +32,15 @@ public class GPSImageNode extends ARImageNode{
 
     private long previousFrameTime; //Testing
 
+
     /**
      * Initializes a new GPSNode
-     * @param photo Picture that will be shown on the map.
+     *
+     * @param photo    Picture that will be shown on the map.
      * @param location Location of the Node.
-     * @param bearing Rotation of the photo. 0 Means picture is facing to East.
+     * @param bearing  Rotation of the photo. 0 Means picture is facing to East.
      */
-    public GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
+    GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
         super(photo);
 
         this.lastBearing = 0;
@@ -51,21 +52,27 @@ public class GPSImageNode extends ARImageNode{
         this.setGpsLocation(location, bearing);
     }
 
-    public String getID() {
-        return ID;
-    }
-
     /**
      * Initializes a new GPSNode facing to East.
+     *
      * @param photo Picture that will be shown on the map.
-     * @param l Location of the Node.
-    */
+     * @param l     Location of the Node.
+     */
     public GPSImageNode(String id, String photo, Location l) {
         this(id, photo, l, 0, true);
     }
 
     /**
+     * Returns the ID of the node
+     * @return ID
+     */
+    String getID() {
+        return ID;
+    }
+
+    /**
      * Get location of the ImageNode.
+     *
      * @return Location of the node
      */
     public Location getGpsLocation() {
@@ -75,7 +82,17 @@ public class GPSImageNode extends ARImageNode{
 
     /**
      * Sets location of the ImageNode.
+     *
      * @param l Desired location.
+     */
+    public void setGpsLocation(Location l) {
+        this.gpsLocation = l;
+    }
+
+    /**
+     * Sets location of the ImageNode.
+     *
+     * @param l       Desired location.
      * @param bearing Rotation from East.
      */
     private void setGpsLocation(Location l, float bearing) {
@@ -85,37 +102,41 @@ public class GPSImageNode extends ARImageNode{
     }
 
     /**
-     * Sets location of the ImageNode.
-     * @param l Desired location.
-     */
-    public void setGpsLocation(Location l) {
-        this.gpsLocation = l;
-    }
-
-    /**
      * Sets bearing of the object. 0 bearing means object is looking to East, 90 means South, 180 means West, 270 or -90 means North.
+     *
      * @param bearing Rotation from East.
      */
     public void setBearing(float bearing) {
         this.bearing = bearing;
     }
 
+    /**
+     * Sets node to statically drawn.
+     */
     public void setStatic() {
         this.isStatic = true;
     }
 
+    /**
+     * Sets node to dynamically drawn.
+     */
     public void setDynamic() {
         this.isStatic = false;
     }
 
-    public float getLastBearing() {
+    /**
+     * Gets the last bearing value from node
+     * @return bearing in degrees
+     */
+    float getLastBearing() {
         return lastBearing;
     }
 
     /**
      * Calculates translation vector with given angle and distance from node A to node B.
      * A and B are not parameters for this function.
-     * @param bearing Bearing of the node from destination point to target point in degrees.
+     *
+     * @param bearing  Bearing of the node from destination point to target point in degrees.
      * @param distance Distance between two nodes.
      * @return Translation vector. If this vector is applied to node A, It's new position will be the same as node B's position.
      */
@@ -136,9 +157,9 @@ public class GPSImageNode extends ARImageNode{
     /**
      * Updates the ARWorld position of the ImageNode.
      */
-    public void updateWorldPosition(Location currentLocation) {
+    void updateWorldPosition(Location currentLocation) {
 
-        Log.d("NODE_DEBUG", "This Location : " +  gpsLocation);
+        Log.d("NODE_DEBUG", "This Location : " + gpsLocation);
         Log.d("NODE_DEBUG", "Current Location : " + currentLocation);
 
         float distanceToObject = gpsLocation.distanceTo(currentLocation); //In meters
@@ -174,8 +195,8 @@ public class GPSImageNode extends ARImageNode{
     @Override
     public void preRender() {
         //TODO: Fix for smoothing nodes while moving.
-        if(GPSManager.interpolateMotionUsingHeading) {
-            Log.d("NODE_DEBUG", this.speed + " : " +  this.direction);
+        if (GPSManager.interpolateMotionUsingHeading) {
+            Log.d("NODE_DEBUG", this.speed + " : " + this.direction);
             if (this.speed > 0 && this.direction > 0) {
                 long currentTime = ARRenderer.getInstance().getRenderTime();
                 long timeDelta = currentTime - this.previousFrameTime;

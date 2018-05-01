@@ -25,27 +25,24 @@ import eu.kudan.kudan.ARWorld;
 public class GPSManager implements LocationListener, ARRendererListener{
 
 
-    private ARWorld arWorld; //Current world.
+    static boolean interpolateMotionUsingHeading; //Testing
+    static Vector3f northVector;
 
-    private Location previousLocation; //Last location retrieved.
-    private LocationManager locationManager; //LocationManager object for handling location requests.
-
-    private String provider; //Location provider.
-
-    public static boolean interpolateMotionUsingHeading; //Testing
-
-    public static Vector3f northVector;
     private static Bearing bearingNorth;
     private static Compass compass;
-
     private static Location previousStaticLocation;
+    private ARWorld arWorld; //Current world.
+    private Location previousLocation; //Last location retrieved.
+    private LocationManager locationManager; //LocationManager object for handling location requests.
+    private String provider; //Location provider.
+
 
     /**
      * Constructor for GPSManager
      * @param world ARWorld for displaying GPSNode objects.
      * @param activity Current activity for getting location service.
     */
-    public GPSManager (ARWorld world, Activity activity) {
+    GPSManager (ARWorld world, Activity activity) {
 
         this.arWorld = world;
 
@@ -70,11 +67,46 @@ public class GPSManager implements LocationListener, ARRendererListener{
         compass = new Compass(activity, bearingNorth);
     }
 
+    /**
+     * Gets angle between two position vectors.
+     * @param source Source location
+     * @param destination Destination location
+     * @return Angle between two locations in degrees.
+     */
+    static float bearingFrom(Location source, Location destination) {
+        return source.bearingTo(destination);
+    }
+
+    /**
+     * Calculates the north vector according to ARWorld position, device position and real north.
+     */
+    private static void calculateNorthVector() {
+
+        float bearing = bearingNorth.getDegrees();
+
+        //Continue to use compass for focused click
+        //compass.destroy();
+
+        Log.d("GPS_DEBUG", "Bearing : " + bearing);
+
+        Quaternion qt = new Quaternion();
+        northVector = qt.fromAngleAxis((float) Math.toRadians(180 + bearing), new Vector3f(0, -1, 0)).mult(new Vector3f(-1, 0, 0));
+
+        Log.d("GPS_DEBUG", "North vector : " + northVector);
+    }
+
+    /**
+     * Gets bearing to north.
+     * @return bearing to north in degrees.
+     */
+    static float getRealBearing() {
+        return bearingNorth.getDegrees();
+    }
 
     /**
      * Starts the GPSManager
      */
-    public void start() {
+    void start() {
         this.startLocationUpdates();
 
         ARGyroManager.getInstance().start();
@@ -110,7 +142,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
      * Returns current ARWorld.
      * @return current ARWorld.
      */
-    public ARWorld getArWorld() {
+    ARWorld getArWorld() {
         return this.arWorld;
     }
 
@@ -135,8 +167,8 @@ public class GPSManager implements LocationListener, ARRendererListener{
             previousStaticLocation = this.previousLocation;
 
             if (getCurrentLocation() != null) {
-                if (this.northVector == null) {
-                    this.calculateNorthVector();
+                if (GPSManager.northVector == null) {
+                    GPSManager.calculateNorthVector();
                 }
                 for (ARNode node : this.getArWorld().getChildren()) { //Update each children's Position according to the new location data.
                     if (node instanceof GPSImageNode) {
@@ -163,46 +195,9 @@ public class GPSManager implements LocationListener, ARRendererListener{
         this.updateNode();
     }
 
-    /**
-     * Gets angle between two position vectors.
-     * @param source Source location
-     * @param destination Destination location
-     * @return Angle between two locations in degrees.
-     */
-    public static float bearingFrom(Location source, Location destination) {
-        return source.bearingTo(destination);
-    }
-
-    /**
-     * Calculates the north vector according to ARWorld position, device position and real north.
-     */
-    public static void calculateNorthVector() {
-
-        float bearing = bearingNorth.getDegrees();
-
-        //Continue to use compass for focused click
-        //compass.destroy();
-
-        Log.d("GPS_DEBUG", "Bearing : " + bearing);
-
-        Quaternion qt = new Quaternion();
-        northVector = qt.fromAngleAxis((float) Math.toRadians(180 + bearing), new Vector3f(0, -1, 0)).mult(new Vector3f(-1, 0, 0));
-
-        Log.d("GPS_DEBUG", "North vector : " + northVector);
-    }
-
-    public float getBearingToNorth() {
+    float getBearingToNorth() {
         return compass.getActiveBearing();
     }
-
-    /**
-     * Gets bearing to north.
-     * @return bearing to north in degrees.
-     */
-    public static float getRealBearing() {
-        return bearingNorth.getDegrees();
-    }
-
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
