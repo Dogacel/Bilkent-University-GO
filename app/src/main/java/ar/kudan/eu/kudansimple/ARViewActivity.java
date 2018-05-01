@@ -13,12 +13,16 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import com.hoan.dsensor_master.*;
+import com.hoan.dsensor_master.interfaces.DProcessedEventListener;
+
 import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
 import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
 import ar.kudan.eu.kudansimple.GPSUtils.GPSWorldHandler;
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARWorld;
+
 
 public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
@@ -27,6 +31,19 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     private GestureDetectorCompat gestureDetector;
 
     private GPSWorldHandler gpsWorldHandler;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +159,6 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
-        Log.d("TOUCH_EVENT", "onTouchEvent: " + event.getX() + " : " + event.getY());
 
         String id = gpsWorldHandler.getFocusedGPSObject().getID();
         Log.d("TOUCH_EVENT", id);

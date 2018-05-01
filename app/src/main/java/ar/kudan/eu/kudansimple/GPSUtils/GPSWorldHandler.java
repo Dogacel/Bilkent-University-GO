@@ -148,7 +148,11 @@ public class GPSWorldHandler {
 
         for (GPSImageNode gin : gpsObjectList) {
             Log.d("TOUCH_EVENT", gin.getID() + ": " + gin.getLastBearing());
-            if (Math.abs(activeBearing - gin.getLastBearing()) < Math.abs(activeBearing - tmp.getLastBearing())) {
+
+            float shortestAngleCurrent = Math.min(Math.abs(activeBearing - gin.getLastBearing()), Math.abs(360 - (activeBearing - gin.getLastBearing())));
+            float shortestAnglePast    = Math.min(Math.abs(activeBearing - tmp.getLastBearing()), Math.abs(360 - (activeBearing - tmp.getLastBearing())));
+
+            if (shortestAngleCurrent < shortestAnglePast) {
                 tmp = gin;
             }
         }
@@ -165,7 +169,7 @@ public class GPSWorldHandler {
         if (gpsObjectList.size() == 0)
             return null;
 
-        float activeBearing = gpsManager.getBearingToNorth();
+        float activeBearing = -gpsManager.getBearingToNorth();
 
         GPSImageNode tmp = null;
 
@@ -183,8 +187,13 @@ public class GPSWorldHandler {
 
         for (GPSImageNode gin : gpsObjectList) {
             if (gin.getVisible()) {
+
                 Log.d("TOUCH_EVENT", gin.getID() + ": " + gin.getLastBearing());
-                if (Math.abs(activeBearing - gin.getLastBearing()) < Math.abs(activeBearing - tmp.getLastBearing())) {
+
+                float shortestAngleCurrent = Math.min(Math.abs(activeBearing - gin.getLastBearing()), Math.abs(360 - (activeBearing - gin.getLastBearing())));
+                float shortestAnglePast    = Math.min(Math.abs(activeBearing - tmp.getLastBearing()), Math.abs(360 - (activeBearing - tmp.getLastBearing())));
+
+                if (shortestAngleCurrent < shortestAnglePast) {
                     tmp = gin;
                 }
             }

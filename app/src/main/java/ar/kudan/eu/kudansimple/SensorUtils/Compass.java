@@ -8,6 +8,11 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
+import com.hoan.dsensor_master.DProcessedSensor;
+import com.hoan.dsensor_master.DSensorEvent;
+import com.hoan.dsensor_master.DSensorManager;
+import com.hoan.dsensor_master.interfaces.DProcessedEventListener;
+
 import ar.kudan.eu.kudansimple.SensorUtils.Bearing;
 
 public class Compass implements SensorEventListener {
@@ -46,6 +51,16 @@ public class Compass implements SensorEventListener {
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(-1);
         }
+
+        DSensorManager.startDProcessedSensor(activity.getApplicationContext(), DProcessedSensor.TYPE_3D_COMPASS,
+                new DProcessedEventListener() {
+                    @Override
+                    public void onProcessedValueChanged(DSensorEvent dSensorEvent) {
+                        activeBearing.setDegrees((float) Math.toDegrees(dSensorEvent.values[0]));
+                        Log.d("COMPASS", "3D : " + activeBearing.getDegrees());
+                    }
+                });
+
     }
 
     /**
@@ -54,6 +69,7 @@ public class Compass implements SensorEventListener {
     public void destroy() {
         mSensorManager.unregisterListener(this, mAccelerometer);
         mSensorManager.unregisterListener(this, mMagnetometer);
+        DSensorManager.stopDSensor();
     }
 
     /**
@@ -81,7 +97,8 @@ public class Compass implements SensorEventListener {
                 Log.d("COMPASS", "Set bearing to " + bearing);
             }
             //TODO: Change degrees with device orientation. Currently not working properly when device is lift up.
-            activeBearing.setDegrees(-mCurrentDegree - 180);
+            Log.d("COMPASS", "OLD :" + (-mCurrentDegree));
+
         }
     }
 
