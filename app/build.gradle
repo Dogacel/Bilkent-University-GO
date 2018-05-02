@@ -33,4 +33,5 @@ dependencies {
     implementation project(':KudanAR')
     implementation 'com.google.android.gms:play-services-maps:12.0.1'
     implementation project(':dsensor')
+    implementation 'com.google.android.gms:play-services:12.0.1'
 }

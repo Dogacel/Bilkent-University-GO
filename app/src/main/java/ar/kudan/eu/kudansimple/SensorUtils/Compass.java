@@ -35,7 +35,7 @@ public class Compass implements SensorEventListener {
      * @param activity Current activity working.
      * @param bearing A bearing object for storing bearing to north in the beginning..
      */
-    public Compass(Activity activity, Bearing bearing) {
+    public Compass(Activity activity, final Bearing bearing) {
         this.bearing = bearing;
         activeBearing = new Bearing();
 
@@ -56,8 +56,16 @@ public class Compass implements SensorEventListener {
                 new DProcessedEventListener() {
                     @Override
                     public void onProcessedValueChanged(DSensorEvent dSensorEvent) {
-                        activeBearing.setDegrees((float) Math.toDegrees(dSensorEvent.values[0]));
+                        float degrees =  (float) Math.toDegrees(dSensorEvent.values[0]);
+                        activeBearing.setDegrees(degrees > 0 ? degrees : 360 + degrees);
                         Log.d("COMPASS", "3D : " + activeBearing.getDegrees());
+                        Log.d("COMPASS", "OLD :" + (mCurrentDegree));
+
+                        if (!bearing.isSet()) {
+                            bearing.setSet();
+                            bearing.setDegrees(-activeBearing.getDegrees());
+                            Log.d("COMPASS", "Set bearing to " + bearing);
+                        }
                     }
                 });
 
@@ -97,7 +105,7 @@ public class Compass implements SensorEventListener {
                 Log.d("COMPASS", "Set bearing to " + bearing);
             }
             //TODO: Change degrees with device orientation. Currently not working properly when device is lift up.
-            Log.d("COMPASS", "OLD :" + (-mCurrentDegree));
+
 
         }
     }

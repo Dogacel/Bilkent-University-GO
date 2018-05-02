@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
@@ -29,6 +30,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     static boolean interpolateMotionUsingHeading; //Testing
     static Vector3f northVector;
 
+    private Activity activity;
     private static Bearing bearingNorth;
     private static Compass compass;
     private static Location previousStaticLocation;
@@ -37,6 +39,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     private LocationManager locationManager; //LocationManager object for handling location requests.
     private String provider; //Location provider.
 
+    private GoogleApiClient mGoogleApiClient;
 
     /**
      * Constructor for GPSManager
@@ -45,6 +48,8 @@ public class GPSManager implements LocationListener, ARRendererListener{
     */
     public GPSManager (ARWorld world, Activity activity) {
 
+        this.activity = activity;
+
         this.arWorld = world;
 
         this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
@@ -52,6 +57,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
         Criteria fineAccuracyCriteria = new Criteria();
         fineAccuracyCriteria.setAccuracy(Criteria.ACCURACY_FINE); // set preferred provider based on the best accuracy possible
         this.provider = locationManager.getBestProvider(fineAccuracyCriteria, true);
+
 
         this.previousLocation = null;
         previousStaticLocation = null;
