@@ -10,14 +10,13 @@ import com.hoan.dsensor_master.interfaces.DProcessedEventListener;
 
 public class Compass {
 
-
     private Bearing fixedNorthBearing;
     private Bearing currentBearing;
 
     /**
      * Constructor for compass class.
      * @param activity Current activity working.
-     * @param fixedNorthBearing A fixedNorthBearing object for storing fixedNorthBearing to north in the beginning..
+     * @param fixedNorthBearing A fixedNorthBearing object for storing fixedNorthBearing to north in the beginning.
      */
     public Compass(Activity activity, final Bearing fixedNorthBearing) {
         this.fixedNorthBearing = fixedNorthBearing;

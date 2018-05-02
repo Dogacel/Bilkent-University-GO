@@ -30,15 +30,6 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
     private GPSWorldHandler gpsWorldHandler;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

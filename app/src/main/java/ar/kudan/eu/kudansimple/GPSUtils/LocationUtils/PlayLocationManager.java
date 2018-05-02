@@ -3,7 +3,6 @@ package ar.kudan.eu.kudansimple.GPSUtils.LocationUtils;
 
 import android.app.Activity;
 import android.location.Location;
-import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -12,7 +11,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class PlayLocationManager {
 
@@ -26,20 +24,36 @@ public class PlayLocationManager {
     private Activity activity;
     private PlayLocationListener listener;
 
+    /**
+     * Constructor for {@link PlayLocationManager}
+     * @param activity Current activity
+     * @param listener Location listener for parsing updates.
+     */
     public PlayLocationManager(Activity activity, PlayLocationListener listener) {
         this.activity = activity;
         this.listener = listener;
     }
 
+    /**
+     * Start method for starting the location updates.
+     */
     public void start() {
         if (createClient())
             startLocationUpdates();
     }
 
+    /**
+     * Checks if googlePlayAPI is available or not
+     * @return is it available ?
+     */
     private boolean googlePlayAPIAvailable() {
         return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity.getApplicationContext()) == ConnectionResult.SUCCESS;
     }
 
+    /**
+     * Creates the client for location updates
+     * @return creation successful.
+     */
     private boolean createClient() {
         if (googlePlayAPIAvailable()) {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
@@ -59,8 +73,7 @@ public class PlayLocationManager {
                         listener.parseUpdate(location);
                     }
                 }
-
-                ;
+                
             };
         } else {
             return false;
@@ -69,7 +82,10 @@ public class PlayLocationManager {
         return true;
     }
 
-
+    /**
+     * Starts location updates
+     * @throws SecurityException exception
+     */
     private void startLocationUpdates() throws  SecurityException {
         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
             mLocationCallback,
