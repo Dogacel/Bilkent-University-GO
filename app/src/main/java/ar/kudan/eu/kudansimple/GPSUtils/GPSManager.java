@@ -83,7 +83,6 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
     @Override
     public void parseUpdate(Location l) throws SecurityException {
 
-        //TODO: GPS Provider takes a while to initialise so we can use Network provider until GPS Provider is ready or atleast there can be a popup saying waiting for GPS.
         this.previousLocation = l;
 
         if (getCurrentLocation() != null) {

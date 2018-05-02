@@ -73,7 +73,7 @@ public class PlayLocationManager {
                         listener.parseUpdate(location);
                     }
                 }
-                
+
             };
         } else {
             return false;
