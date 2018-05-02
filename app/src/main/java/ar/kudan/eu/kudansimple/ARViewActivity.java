@@ -13,8 +13,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-import com.hoan.dsensor_master.*;
-import com.hoan.dsensor_master.interfaces.DProcessedEventListener;
 
 import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
 import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
@@ -32,18 +30,6 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
     private GPSWorldHandler gpsWorldHandler;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
-
-    @Override
-    protected void onPause() {
-
-        super.onPause();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
