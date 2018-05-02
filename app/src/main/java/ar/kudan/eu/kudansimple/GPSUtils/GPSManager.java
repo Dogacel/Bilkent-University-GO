@@ -1,18 +1,14 @@
 package ar.kudan.eu.kudansimple.GPSUtils;
 
 import android.app.Activity;
-import android.content.Context;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
+import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationListener;
+import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationManager;
 import ar.kudan.eu.kudansimple.SensorUtils.Bearing;
 import ar.kudan.eu.kudansimple.SensorUtils.Compass;
 import eu.kudan.kudan.ARGyroManager;
@@ -24,20 +20,19 @@ import eu.kudan.kudan.ARWorld;
 /**
  * GPSManager class for handling GPSNodes on an ARWorld.
  */
-public class GPSManager implements LocationListener, ARRendererListener{
+public class GPSManager implements PlayLocationListener, ARRendererListener{
 
 
     static boolean interpolateMotionUsingHeading; //Testing
     static Vector3f northVector;
 
-    private Activity activity;
     private static Bearing bearingNorth;
     private static Compass compass;
     private static Location previousStaticLocation;
+
     private ARWorld arWorld; //Current world.
+    private PlayLocationManager playLocationManager;
     private Location previousLocation; //Last location retrieved.
-    private LocationManager locationManager; //LocationManager object for handling location requests.
-    private String provider; //Location provider.
 
 
     /**
@@ -47,16 +42,7 @@ public class GPSManager implements LocationListener, ARRendererListener{
     */
     public GPSManager (ARWorld world, Activity activity) {
 
-        this.activity = activity;
-
         this.arWorld = world;
-
-        this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
-        Criteria fineAccuracyCriteria = new Criteria();
-        fineAccuracyCriteria.setAccuracy(Criteria.ACCURACY_FINE); // set preferred provider based on the best accuracy possible
-        this.provider = locationManager.getBestProvider(fineAccuracyCriteria, true);
-
 
         this.previousLocation = null;
         previousStaticLocation = null;
@@ -68,9 +54,10 @@ public class GPSManager implements LocationListener, ARRendererListener{
         this.arWorld.setVisible(false);
         interpolateMotionUsingHeading = false;
 
-        //TODO: Tell user to put phone on the ground and wait until or add an option for calibration.
         bearingNorth = new Bearing();
         compass = new Compass(activity, bearingNorth);
+
+        playLocationManager = new PlayLocationManager(activity, this);
     }
 
     /**
@@ -113,7 +100,8 @@ public class GPSManager implements LocationListener, ARRendererListener{
      * Starts the GPSManager
      */
     public void start() {
-        this.startLocationUpdates();
+        playLocationManager.start();
+        this.arWorld.setVisible(true);
 
         ARGyroManager.getInstance().start();
         ARRenderer.getInstance().addListener(this);
@@ -125,24 +113,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
      */
     private Location getCurrentLocation() {return previousLocation;}
 
-    /**
-     * Gets location for determining relative positions of objects.
-     */
-    private void startLocationUpdates() {
-        this.arWorld.setVisible(true);
-
-        try {
-            locationManager.requestLocationUpdates(
-                    provider,
-                    0,
-                    0, this);
-
-            Log.d("GPS_DEBUG", "GPS Enabled");
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     /**
      * Returns current ARWorld.
@@ -165,30 +135,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
         return true;
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        try {
-            //TODO: GPS Provider takes a while to initialise so we can use Network provider until GPS Provider is ready or atleast there can be a popup saying waiting for GPS.
-            this.previousLocation = this.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            previousStaticLocation = this.previousLocation;
-
-            if (getCurrentLocation() != null) {
-                if (GPSManager.northVector == null) {
-                    GPSManager.calculateNorthVector();
-                }
-                for (ARNode node : this.getArWorld().getChildren()) { //Update each children's Position according to the new location data.
-                    if (node instanceof GPSImageNode) {
-                        GPSImageNode gpsImageNode = (GPSImageNode) node;
-                        gpsImageNode.updateWorldPosition(previousLocation);
-                    }
-                }
-                Log.d("GPS_DEBUG", previousLocation.toString());
-            }
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Updates the World orientation according to GyroManager's orientation.
      */
@@ -202,21 +148,28 @@ public class GPSManager implements LocationListener, ARRendererListener{
     }
 
     float getBearingToNorth() {
-        return compass.getActiveBearing();
+        return compass.getCurrentBearing();
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
+    public void parseUpdate(Location l) throws SecurityException {
 
-    }
+        //TODO: GPS Provider takes a while to initialise so we can use Network provider until GPS Provider is ready or atleast there can be a popup saying waiting for GPS.
+        this.previousLocation = l;
+        previousStaticLocation = this.previousLocation;
 
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
+        if (getCurrentLocation() != null) {
+            if (GPSManager.northVector == null) {
+                GPSManager.calculateNorthVector();
+            }
+            for (ARNode node : this.getArWorld().getChildren()) { //Update each children's Position according to the new location data.
+                if (node instanceof GPSImageNode) {
+                    GPSImageNode gpsImageNode = (GPSImageNode) node;
+                    gpsImageNode.updateWorldPosition(previousLocation);
+                }
+            }
+            Log.d("GPS_DEBUG", previousLocation.toString());
+        }
 
     }
 
@@ -234,4 +187,5 @@ public class GPSManager implements LocationListener, ARRendererListener{
     public void rendererDidResume() {
 
     }
+
 }

@@ -29,7 +29,9 @@ public class PlayLocationManager {
     public PlayLocationManager(Activity activity, PlayLocationListener listener) {
         this.activity = activity;
         this.listener = listener;
+    }
 
+    public void start() {
         if (createClient())
             startLocationUpdates();
     }
