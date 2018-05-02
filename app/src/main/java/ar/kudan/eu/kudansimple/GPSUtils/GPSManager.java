@@ -39,7 +39,6 @@ public class GPSManager implements LocationListener, ARRendererListener{
     private LocationManager locationManager; //LocationManager object for handling location requests.
     private String provider; //Location provider.
 
-    private GoogleApiClient mGoogleApiClient;
 
     /**
      * Constructor for GPSManager
