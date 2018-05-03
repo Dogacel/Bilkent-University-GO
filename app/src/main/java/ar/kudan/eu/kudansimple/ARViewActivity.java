@@ -90,6 +90,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
         gpsWorldHandler = new GPSWorldHandler(gpsManager);
 
+        /*
         //North Node
         Location northL = new Location("dummyprovider");
         northL.setLatitude(39.866699);
@@ -128,7 +129,58 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         GPSImageNode east = new GPSImageNode("east", "East.png", eastL, 0, true);
         gpsWorldHandler.addGPSObjectCumilative(east);
         east.scaleByUniform(0.05f);
-        east.setVisible(true);
+        east.setVisible(true); */
+
+        //Rektorluk
+        double lat = 39.871495;
+        double lon = 32.749671;
+        Location testL = new Location("dummyprovider");
+        testL.setLatitude(lat);
+        testL.setLongitude(lon);
+        GPSImageNode test = new GPSImageNode("r", "r.png", testL, 0, true);
+        gpsWorldHandler.addGPSObjectCumilative(test);
+        test.scaleByUniform(0.03f);
+        test.setVisible(true);
+
+        //Yemekhane
+        lat = 39.870578;
+        lon = 32.750563;
+
+        Location testL1 = new Location("dummyprovider");
+        testL1.setLatitude(lat);
+        testL1.setLongitude(lon);
+        GPSImageNode test1 = new GPSImageNode("y", "y.png", testL1, 0, true);
+        gpsWorldHandler.addGPSObjectCumilative(test1);
+        test1.scaleByUniform(0.03f);
+        test1.setVisible(true);
+
+
+
+
+        //Cafeinn
+        lat = 39.870002;
+        lon = 32.750496;
+
+        Location testL3 = new Location("dummyprovider");
+        testL3.setLatitude(lat);
+        testL3.setLongitude(lon);
+        GPSImageNode test3 = new GPSImageNode("c", "c.png", testL3, 0, true);
+        gpsWorldHandler.addGPSObjectCumilative(test3);
+        test3.scaleByUniform(0.03f);
+        test3.setVisible(true);
+
+
+        //Kutuphane
+        lat = 39.870316;
+        lon = 32.749557;
+
+        Location testL2 = new Location("dummyprovider");
+        testL2.setLatitude(lat);
+        testL2.setLongitude(lon);
+        GPSImageNode test2 = new GPSImageNode("l", "l.png", testL2, 0, true);
+        gpsWorldHandler.addGPSObjectCumilative(test2);
+        test2.scaleByUniform(0.03f);
+        test2.setVisible(true);
 
     }
 

@@ -15,7 +15,7 @@ import eu.kudan.kudan.ARRenderer;
 
 public class GPSImageNode extends ARImageNode {
 
-    private final float DEVICE_HEIGHT = 1.5f; // Height of the device.
+    private final float DEVICE_HEIGHT = 15f; // Height of the device.
     private Location gpsLocation; // Location of the object
     private float bearing; // In degrees
 
@@ -165,7 +165,8 @@ public class GPSImageNode extends ARImageNode {
 
         this.lastBearing = bearingToObject;
 
-        Log.d("NODE_DEBUG", "Bearing : " + bearingToObject);
+        Log.d("NODE_DEBUG", "North Bearing : " + GPSManager.getRealBearing());
+        Log.d("NODE_DEBUG", "Object Bearing : " + bearingToObject);
         Log.d("NODE_DEBUG", "Distance : " + distanceToObject);
 
         this.speed = currentLocation.getSpeed(); //TODO: Not working. Can use sensor or last position to calculate speed.
@@ -182,9 +183,9 @@ public class GPSImageNode extends ARImageNode {
         if (!isStatic)
             this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0))); //Rotate Image according to it's bearing.
         else
-            this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(180 + bearingToObject), new Vector3f(0, -1, 0)));
+            this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(180 + GPSManager.getRealBearing() - bearingToObject), new Vector3f(0, -1, 0)));
 
-        Log.d("NODE_DEBUG", this.getPosition().toString());
+        Log.d("NODE_DEBUG", this.getID() + " : " +  (180 + GPSManager.getRealBearing() - bearingToObject));
     }
 
     /**
