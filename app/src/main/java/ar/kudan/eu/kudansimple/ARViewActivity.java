@@ -131,6 +131,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         east.scaleByUniform(0.05f);
         east.setVisible(true); */
 
+        //https://hastebin.com/uxumovuhal.java
+        
         //Rektorluk
         double lat = 39.871495;
         double lon = 32.749671;
