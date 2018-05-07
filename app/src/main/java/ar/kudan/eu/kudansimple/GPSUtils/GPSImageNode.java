@@ -183,12 +183,14 @@ public class GPSImageNode extends ARImageNode {
         if (!isStatic) {
             this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0))); //Rotate Image according to it's bearing.
         } else {
-            float zcord = Math.abs(this.getPosition().getZ());
-            float xcord = Math.abs(this.getPosition().getX());
-            this.setOrientation(qt.fromAngleAxis((float) (Math.atan(xcord / zcord)), new Vector3f(0, -1, 0)));
+            float zcord = this.getPosition().getZ();
+            float xcord = this.getPosition().getX();
+            float angle =  xcord > 0 ? (float) (Math.atan(zcord / xcord) + Math.PI / 2) : (float) (Math.atan(zcord / xcord) - Math.PI / 2);
+
+            this.setOrientation(qt.fromAngleAxis(angle, new Vector3f(0, -1, 0)));
         }
 
-        Log.d("NODE_DEBUG", this.getID() + " : " +  (180 + GPSManager.getRealBearing() - bearingToObject));
+        Log.d("NODE_DEBUG", this.getID() + " : " +  this.getPosition());
     }
 
     /**

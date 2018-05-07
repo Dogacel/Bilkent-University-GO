@@ -78,10 +78,9 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
     /**
      * Parses the location update when the location is updated.
      * @param l new location
-     * @throws SecurityException exception
      */
     @Override
-    public void parseUpdate(Location l) throws SecurityException {
+    public void parseUpdate(Location l) {
 
         this.previousLocation = l;
 
