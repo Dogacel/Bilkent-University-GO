@@ -79,18 +79,20 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gestureDetector = new GestureDetectorCompat(this, this);
 
         //Init a new world.
-        ARWorld currentWorld = new ARWorld();
+        ARWorld currentWorld = new ARWorld();;
+        getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
         //Start GPSManager
         GPSManager gpsManager = new GPSManager(currentWorld, this);
+
         gpsManager.start();
 
         //Add current world to our camera.
-        getARView().getContentViewPort().getCamera().addChild(currentWorld);
+
 
         gpsWorldHandler = new GPSWorldHandler(gpsManager);
 
-        /*
+
         //North Node
         Location northL = new Location("dummyprovider");
         northL.setLatitude(39.866699);
@@ -129,8 +131,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         GPSImageNode east = new GPSImageNode("east", "East.png", eastL, 0, true);
         gpsWorldHandler.addGPSObjectCumilative(east);
         east.scaleByUniform(0.05f);
-        east.setVisible(true); */
-
+        east.setVisible(true);
+/*
         //https://hastebin.com/uxumovuhal.java
         
         //Rektorluk
@@ -183,7 +185,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gpsWorldHandler.addGPSObjectCumilative(test2);
         test2.scaleByUniform(0.03f);
         test2.setVisible(true);
-
+*/
     }
 
     //Testing

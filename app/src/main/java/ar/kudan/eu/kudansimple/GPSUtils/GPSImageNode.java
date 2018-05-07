@@ -180,10 +180,13 @@ public class GPSImageNode extends ARImageNode {
 
         Quaternion qt = new Quaternion();
 
-        if (!isStatic)
+        if (!isStatic) {
             this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(bearing), new Vector3f(0, -1, 0))); //Rotate Image according to it's bearing.
-        else
-            this.setOrientation(qt.fromAngleAxis((float) Math.toRadians(180 + GPSManager.getRealBearing() - bearingToObject), new Vector3f(0, -1, 0)));
+        } else {
+            float zcord = Math.abs(this.getPosition().getZ());
+            float xcord = Math.abs(this.getPosition().getX());
+            this.setOrientation(qt.fromAngleAxis((float) (Math.atan(xcord / zcord)), new Vector3f(0, -1, 0)));
+        }
 
         Log.d("NODE_DEBUG", this.getID() + " : " +  (180 + GPSManager.getRealBearing() - bearingToObject));
     }

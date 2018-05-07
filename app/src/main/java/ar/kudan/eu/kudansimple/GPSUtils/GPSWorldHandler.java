@@ -148,8 +148,8 @@ public class GPSWorldHandler {
 
         for (GPSImageNode gin : gpsObjectList) {
 
-            float ginBearing = gin.getLastBearing();
-            float tmpBearing = tmp.getLastBearing();
+            float ginBearing = gin.getLastBearing() < 0 ? 180 + gin.getLastBearing() : 360 - gin.getLastBearing();
+            float tmpBearing = tmp.getLastBearing() < 0 ? 180 + tmp.getLastBearing() : 360 - tmp.getLastBearing();
 
             Log.d("TOUCH_EVENT", gin.getID() + ": " + ginBearing);
 

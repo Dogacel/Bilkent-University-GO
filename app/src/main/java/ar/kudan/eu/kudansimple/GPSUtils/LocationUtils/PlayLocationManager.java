@@ -18,8 +18,8 @@ public class PlayLocationManager {
     private LocationCallback mLocationCallback;
     private LocationRequest mLocationRequest;
 
-    private final int INTERVAL = 10000; /* 10 seconds */
-    private final int FASTEST_INTERVAL = 5000; /* 5 seconds */
+    private final int INTERVAL = 4000; /* 10 seconds */
+    private final int FASTEST_INTERVAL = 2000; /* 5 seconds */
 
     private Activity activity;
     private PlayLocationListener listener;

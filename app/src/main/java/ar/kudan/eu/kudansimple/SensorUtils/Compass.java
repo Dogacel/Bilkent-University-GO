@@ -33,7 +33,7 @@ public class Compass {
                         if (!fixedNorthBearing.isSet()) {
                             fixedNorthBearing.setSet();
                             fixedNorthBearing.setDegrees(-currentBearing.getDegrees());
-                            Log.d("COMPASS", "Set fixedNorthBearing to " + fixedNorthBearing);
+                            Log.d("COMPASS", "Set fixedNorthBearing to " + fixedNorthBearing.getDegrees());
                         }
                     }
                 });
