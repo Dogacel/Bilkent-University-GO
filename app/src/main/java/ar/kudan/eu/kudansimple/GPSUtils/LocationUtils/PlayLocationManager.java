@@ -12,26 +12,49 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class PlayLocationManager {
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
     private LocationRequest mLocationRequest;
 
-    private final int INTERVAL = 4000; /* 10 seconds */
-    private final int FASTEST_INTERVAL = 2000; /* 5 seconds */
+    private int intervalMax = 4000; /* 10 seconds */
+    private int intervalFastest = 2000; /* 5 seconds */
 
     private Activity activity;
-    private PlayLocationListener listener;
+    private ArrayList<PlayLocationListener> listeners;
 
     /**
      * Constructor for {@link PlayLocationManager}
      * @param activity Current activity
-     * @param listener Location listener for parsing updates.
+     * @param listeners Location listeners for parsing updates.
      */
-    public PlayLocationManager(Activity activity, PlayLocationListener listener) {
+    public PlayLocationManager(Activity activity, PlayLocationListener... listeners) {
         this.activity = activity;
-        this.listener = listener;
+        this.listeners = new ArrayList<>(listeners.length);
+
+        this.listeners.addAll(Arrays.asList(listeners));
+    }
+
+    /**
+     * Sets the desired intervals.
+     * @param intervalMax Max interval between location requests.
+     * @param intervalFastest Fastest interval between two location requests.
+     */
+    public void setIntervals(int intervalMax, int intervalFastest) {
+        this.intervalFastest = intervalFastest;
+        this.intervalMax = intervalMax;
+    }
+
+    /**
+     * Adds a listener to the listeners list
+     * @param listener Listener to be added.
+     */
+    public void addListener(PlayLocationListener listener) {
+        this.listeners.add(listener);
     }
 
     /**
@@ -59,8 +82,8 @@ public class PlayLocationManager {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
             mLocationRequest = LocationRequest.create();
-            mLocationRequest.setInterval(INTERVAL);
-            mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+            mLocationRequest.setInterval(intervalMax);
+            mLocationRequest.setFastestInterval(intervalFastest);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
             mLocationCallback = new LocationCallback() {
@@ -70,7 +93,9 @@ public class PlayLocationManager {
                         return;
                     }
                     for (Location location : locationResult.getLocations()) {
-                        listener.parseUpdate(location);
+                        for (PlayLocationListener listener : listeners) {
+                            listener.parseUpdate(location);
+                        }
                     }
                 }
 

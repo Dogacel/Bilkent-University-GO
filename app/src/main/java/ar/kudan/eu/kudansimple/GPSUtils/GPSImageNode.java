@@ -15,7 +15,7 @@ import eu.kudan.kudan.ARRenderer;
 
 public class GPSImageNode extends ARImageNode {
 
-    private final float DEVICE_HEIGHT = 15f; // Height of the device.
+    private float objectHeight = -15f; // Height of the device.
     private Location gpsLocation; // Location of the object
     private float bearing; // In degrees
 
@@ -34,16 +34,20 @@ public class GPSImageNode extends ARImageNode {
     /**
      * Initializes a new GPSNode
      *
+     * @param id       ID of the node.
      * @param photo    Picture that will be shown on the map.
      * @param location Location of the Node.
+     * @param height   Height of the object from the ground.
      * @param bearing  Rotation of the photo. 0 Means picture is facing to East.
+     * @param isStatic Whether the image of the node is static or not.
      */
-    public GPSImageNode(String id, String photo, Location location, float bearing, boolean isStatic) {
+    public GPSImageNode(String id, String photo, Location location, float height, float bearing, boolean isStatic) {
         super(photo);
 
         this.lastBearing = 0;
         this.previousFrameTime = 0;
         this.isStatic = isStatic;
+        this.objectHeight = -height;
 
         this.ID = id;
 
@@ -53,11 +57,13 @@ public class GPSImageNode extends ARImageNode {
     /**
      * Initializes a new GPSNode facing to East.
      *
-     * @param photo Picture that will be shown on the map.
-     * @param l     Location of the Node.
+     * @param id     ID of the node.
+     * @param photo  Picture that will be shown on the map.
+     * @param l      Location of the Node.
+     * @param height Height of the node from the ground.
      */
-    public GPSImageNode(String id, String photo, Location l) {
-        this(id, photo, l, 0, true);
+    public GPSImageNode(String id, String photo, Location l, float height) {
+        this(id, photo, l, height, 0, true);
     }
 
     /**
@@ -154,6 +160,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Updates the ARWorld position of the ImageNode.
+     * @param currentLocation Current location of the user.
      */
     void updateWorldPosition(Location currentLocation) {
 
@@ -174,7 +181,7 @@ public class GPSImageNode extends ARImageNode {
 
         Vector3f translationVector = this.calculateTranslationVector(bearingToObject, distanceToObject); //For updating the position of the node at the new location of the user.
 
-        translationVector.y = -DEVICE_HEIGHT; //Set default node height as device's height.
+        translationVector.y = -objectHeight; //Set default node height as device's height.
 
         this.setPosition(translationVector); //Change position to new position.
 
