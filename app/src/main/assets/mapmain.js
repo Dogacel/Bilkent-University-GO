@@ -28,7 +28,7 @@ closer.onclick = function () {
 
 
 
-var geoURL = 'https://raw.githubusercontent.com/Dogacel/teamazm-cs102/Map_Geojson/map.geojson?token=AdZqbHi36cvA7JWfod6-3sBLzSn_HAjFks5a6H_lwA%3D%3D'
+var geoURL = 'https://raw.githubusercontent.com/Dogacel/teamazm-cs102/Map_Geojson/map.geojson?token=AdZqbJV8efmS1ZLn59QfaEH5-C8V-citks5a-uenwA%3D%3D';
 
 //request and take geoUrl json
 var request = new XMLHttpRequest();
@@ -175,10 +175,15 @@ var displayFeatureInfo = function (pixel, coordinate) {
         //alert('name : ' + feature.get('name'));
         //var hdms = ol.coordinate.toStringHDMS(ol.proj.transform( coordinate, 'EPSG:3857', 'EPSG:4326'));
         if(feature.get('name') != undefined){
+            
             selected = feature.get('name');
+            /*
             content.innerHTML = '<p>' + feature.get('name') + '</p>'
             + '<button onclick="panelButton()"> More Information </button>' ;
+            */
+            show(selected,"subtitle");
             overlay.setPosition(coordinate);
+            
         }
 
     } else {
@@ -189,12 +194,31 @@ var displayFeatureInfo = function (pixel, coordinate) {
 
 //--------------------------------------------------
 
+var imgHtml =  "<img width='30px' src='CloseWindowGr48.png' />";
+function show(buildingName, buildingSubTitle)
+{
+    document.getElementById('popup').style.display = "block";
+
+    var subHtml="";
+    if(buildingSubTitle!="")
+    {
+        subHtml="<br><span class='buildingSubTitle'>" + buildingSubTitle +  "</span>";
+    }
+    var html="<div class='buildingTitle'>"+ buildingName +  subHtml + "</div><div class='ol-popup-closer' onclick='hide()'>"+imgHtml+"</div>"+"<div  class='buildingButton' onclick='panelButton()'> More Information </div>";
+    
+    document.getElementById('popup-content').innerHTML =  html;
+}
+
 function panelButton(){
     console.log(selected);
+    Android.showToast(selected);
     Android.goPanel(selected);
 };
 
-
+function hide()
+{
+    document.getElementById('popup').style.display = "none";
+} 
 
 
 
@@ -239,7 +263,6 @@ function onChange() {
     console.log(buildingView);
 
     flyTo(buildingView, function () { }, 18);
-    locFeature.setGeometry( new ol.geom.Point(buildingView))
 
 };
 
