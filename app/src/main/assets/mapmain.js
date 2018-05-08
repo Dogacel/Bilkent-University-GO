@@ -28,7 +28,7 @@ closer.onclick = function () {
 
 
 
-var geoURL = 'https://raw.githubusercontent.com/Dogacel/teamazm-cs102/Map_Geojson/map.geojson?token=AdZqbJV8efmS1ZLn59QfaEH5-C8V-citks5a-uenwA%3D%3D';
+var geoURL = 'http://ata.yurtsever.ug.bilkent.edu.tr/map.geojson';
 
 //request and take geoUrl json
 var request = new XMLHttpRequest();
