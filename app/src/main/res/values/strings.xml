@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">KudanSimple</string>
     <string name="action_settings">Settings</string>
+    <string name="app_name">BuGO</string>
+    <string name="identify_buildings">Identify Buildings</string>
+    <string name="button_show_location">Show Me My Location</string>
+    <string name="button_give_directions">Give Me Directions</string>
+    <string name="credits">Credits</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

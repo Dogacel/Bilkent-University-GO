@@ -25,7 +25,7 @@ import eu.kudan.kudan.ARWorld;
 public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION = 100;
-
+    public static final String IS_SOURCE = "ARActivity is the source for this intent";
     private GestureDetectorCompat gestureDetector;
 
     private GPSWorldHandler gpsWorldHandler;
