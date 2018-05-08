@@ -32,6 +32,9 @@ public class GPSWorldHandler {
         this.gpsManager = gpsManager;
     }
 
+    /**
+     * Converts the node templates stored into GPSImageNodes.
+     */
     public void convertTemplates() {
         for (GPSImageTemplate template : templateList) {
             gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
@@ -39,6 +42,10 @@ public class GPSWorldHandler {
         templateList = new ArrayList<>();
     }
 
+    /**
+     * Dumps the templates into template list for further use.
+     * @param templates Templates to be dumped.
+     */
     public void dumpTemplates(GPSImageTemplate... templates) {
         templateList.addAll(Arrays.asList(templates));
     }
@@ -52,6 +59,10 @@ public class GPSWorldHandler {
         gpsObjectList.add(gpsImageNode);
     }
 
+    /**
+     * Sets GPSManager
+     * @param gpsManager new GPSManager
+     */
     public void setGpsManager(GPSManager gpsManager) {
         this.gpsManager = gpsManager;
     }

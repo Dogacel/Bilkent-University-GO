@@ -95,12 +95,11 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gpsManager.start();
 
 
-
+        //Initializes the world from the preloaded templates.
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
         gpsWorldHandler.setGpsManager(gpsManager);
         gpsWorldHandler.convertTemplates();
         gpsWorldHandler.dumpGPSObjects();
-
 
     }
 

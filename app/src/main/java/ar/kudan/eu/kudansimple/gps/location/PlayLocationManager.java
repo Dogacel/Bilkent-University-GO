@@ -66,6 +66,9 @@ public class PlayLocationManager {
             startLocationUpdates();
     }
 
+    /**
+     * Stop the client.
+     */
     public void stop() {
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }

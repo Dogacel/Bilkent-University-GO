@@ -22,6 +22,9 @@ public class Bearing {
         return isSet;
     }
 
+    /**
+     * Reset the bearing
+     */
     public void reSet() {
         this.isSet = false;
     }

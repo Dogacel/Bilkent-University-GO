@@ -7,6 +7,11 @@ import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
 
 public class TemplateARNodeManager {
 
+    /**
+     * Generates a node from the template.
+     * @param template Template to be converted.
+     * @return GPSImageNode generated from the node.
+     */
     public static GPSImageNode generateNodeFromTemplate(GPSImageTemplate template) {
         String ID = template.getID();
         String pic = template.getPhotoLocation();
