@@ -1,9 +1,13 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.Activities.Interfaces;
 
 import android.content.Context;
 import android.content.Intent;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
+
+import ar.kudan.eu.kudansimple.Activities.BuildingInfo;
+import ar.kudan.eu.kudansimple.Activities.MapActivity;
+import ar.kudan.eu.kudansimple.Constants;
 
 /**
  * Created by Mehmet Ata YURTSEVER on 31.03.2018.
@@ -13,7 +17,7 @@ public class WebAppInterface {
     Context mContext;
 
     /** Instantiate the interface and set the context */
-    WebAppInterface(Context c) {
+    public WebAppInterface(Context c) {
         mContext = c;
     }
 

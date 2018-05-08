@@ -31,18 +31,18 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    void addGPSObject(GPSImageNode gpsImageNode) {
+    public void addGPSObject(GPSImageNode gpsImageNode) {
         gpsObjectList.add(gpsImageNode);
     }
 
-    /**
-     * Adds object to both gpsmanager and the list.
-     *
-     * @param gpsImageNode node
-     */
-    public void addGPSObjectCumilative(GPSImageNode gpsImageNode) {
-        addGPSObject(gpsImageNode);
-        gpsManager.getArWorld().addChild(gpsImageNode);
+    public void setGpsManager(GPSManager gpsManager) {
+        this.gpsManager = gpsManager;
+    }
+
+    public void dumpGPSObjects() {
+        for (GPSImageNode gin : gpsObjectList) {
+            gpsManager.getArWorld().addChild(gin);
+        }
     }
 
     /**

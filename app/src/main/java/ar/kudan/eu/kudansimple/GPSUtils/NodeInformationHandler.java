@@ -16,8 +16,7 @@ import java.io.Writer;
 import ar.kudan.eu.kudansimple.R;
 
 /**
- * Created by Faruk Balcı on 7.5.2018.
- * Retrieves ARNode informtaion from json file.
+ * Retrieves ARNode information from json file.
  */
 
 public class NodeInformationHandler {
@@ -27,6 +26,7 @@ public class NodeInformationHandler {
 
     /**
      * gets JSON string from resources.
+     * @param context Desired context.
      */
     private String getJSONString( Context context) {
         InputStream is;

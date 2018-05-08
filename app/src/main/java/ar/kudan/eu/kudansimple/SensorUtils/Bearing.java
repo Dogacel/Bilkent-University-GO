@@ -22,6 +22,10 @@ public class Bearing {
         return isSet;
     }
 
+    void reSet() {
+        this.isSet = false;
+    }
+
     /**
      * Sets whether degrees is set or not to true.
      */

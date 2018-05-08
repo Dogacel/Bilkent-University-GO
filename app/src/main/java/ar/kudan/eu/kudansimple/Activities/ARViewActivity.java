@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.Activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 
+import ar.kudan.eu.kudansimple.ContainerManager;
 import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
 import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
 import ar.kudan.eu.kudansimple.GPSUtils.GPSWorldHandler;
@@ -29,6 +30,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     private GestureDetectorCompat gestureDetector;
 
     private GPSWorldHandler gpsWorldHandler;
+    private GPSManager gpsManager;
 
 
     @Override
@@ -37,6 +39,12 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         String defaultKey = "jZGcfDzRtoNpR6eCGWzQalY7udjOAIHrdIXwiQTFopkqjf9bh0nORhUoH/kS1Y28yDZNKKlM5kYjLCNuBx772wZbSQpyS+3AIqr10vEDMbOyJi3pzsAzim7o6zw6dT4rFDqN0BTAivKULfJol3sbJhyp+PWSjZKN/wLKoDzRspL24JTboYqJ1SXsseSTaoqDqdnrTZ2R0TKKciGlxYy3HB+Js8l9miRVGGk6p8Y0bkldc54gl5Bj2txesMqXhBE8nY1RKpVHZsmJxKEDntPjCvWYtZwNIlAMO+Q3XLvbNOU+XFCbvHcPILH3wX6jkIKd93xGtd08hp0lz1yr7rAuamF/hezem9LsCgXQqYJt8WnQTt1soKHcc3Wt7GnTFn/8CBCF6P6NQGlXeyixNcz4L42hkJAFfb+k0pBNu25eQloCirbAr3gEIXy/yYMYxtvRjKOo6X3JLgtZtMqZFLd8ygGgArlvi/c3PiBwgSLtl949ihRVmfPybclIb42enKCWDu4xRHl5mHDH4Cs6giWMURRQltl3bSRhb7IB3FVyVUitTXxV/pUSb8ywuVjla8KoJFsHOdFDKZrbDfWoQmCiYE7/KozlVjRdkajmEY00Uvgbvn+9NDuSItS8vzTtMmbiqIdMpdSCzBgeEkhe9k+F1zkdkeN40YOQsxVV4lT3Zh0=";
         ARAPIKey key = ARAPIKey.getInstance();
         //key.setAPIKey(defaultKey);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsManager.destroy();
     }
 
     @Override
@@ -83,58 +91,13 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
         //Start GPSManager
-        GPSManager gpsManager = new GPSManager(currentWorld, this);
-
+        gpsManager = new GPSManager(currentWorld, this);
         gpsManager.start();
 
-        //Add current world to our camera.
 
 
-        gpsWorldHandler = new GPSWorldHandler(gpsManager);
+        GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
 
-/*
-        //North Node
-        Location northL = new Location("dummyprovider");
-        northL.setLatitude(39.866699);
-        northL.setLongitude(32.748784);
-        GPSImageNode north = new GPSImageNode("north", "North.png", northL,5, 0, true);
-        gpsWorldHandler.addGPSObjectCumilative(north);
-        north.scaleByUniform(0.05f);
-        north.setVisible(true);
-
-
-        //South Node
-        Location southL = new Location("dummyprovider");
-        southL.setLatitude(39.861362);
-        southL.setLongitude(32.748870);
-        GPSImageNode south = new GPSImageNode("south", "South.png", southL, 5,90, true);
-        gpsWorldHandler.addGPSObjectCumilative(south);
-        south.scaleByUniform(0.05f);
-        south.setVisible(true);
-
-
-        //West Node
-        Location westL = new Location("dummyprovider");
-        westL.setLatitude(39.864003);
-        westL.setLongitude(32.744766);
-        GPSImageNode west = new GPSImageNode("west", "West.png", westL, 5, 180, true);
-        gpsWorldHandler.addGPSObjectCumilative(west);
-        west.scaleByUniform(0.05f);
-        west.setVisible(true);
-
-
-
-        //East Node
-        Location eastL = new Location("dummyprovider");
-        eastL.setLatitude(39.863903);
-        eastL.setLongitude(32.751890);
-        GPSImageNode east = new GPSImageNode("east", "East.png", eastL, 5, 0, true);
-        gpsWorldHandler.addGPSObjectCumilative(east);
-        east.scaleByUniform(0.05f);
-        east.setVisible(true);
-*/
-        //link to auto-generate marker : https://hastebin.com/uxumovuhal.java
-        
         //Rektorluk
         double lat = 39.871495;
         double lon = 32.749671;
@@ -142,7 +105,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         testL.setLatitude(lat);
         testL.setLongitude(lon);
         GPSImageNode test = new GPSImageNode("r", "r.png", testL, 15, 0, true);
-        gpsWorldHandler.addGPSObjectCumilative(test);
+        gpsWorldHandler.addGPSObject(test);
         test.scaleByUniform(0.03f);
         test.setVisible(true);
 
@@ -154,11 +117,9 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         testL1.setLatitude(lat);
         testL1.setLongitude(lon);
         GPSImageNode test1 = new GPSImageNode("y", "y.png", testL1, 15, 0, true);
-        gpsWorldHandler.addGPSObjectCumilative(test1);
+        gpsWorldHandler.addGPSObject(test1);
         test1.scaleByUniform(0.03f);
         test1.setVisible(true);
-
-
 
 
         //Cafeinn
@@ -169,7 +130,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         testL3.setLatitude(lat);
         testL3.setLongitude(lon);
         GPSImageNode test3 = new GPSImageNode("c", "c.png", testL3, 15, 0, true);
-        gpsWorldHandler.addGPSObjectCumilative(test3);
+        gpsWorldHandler.addGPSObject(test3);
         test3.scaleByUniform(0.03f);
         test3.setVisible(true);
 
@@ -182,9 +143,15 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         testL2.setLatitude(lat);
         testL2.setLongitude(lon);
         GPSImageNode test2 = new GPSImageNode("l", "l.png", testL2, 15, 0, true);
-        gpsWorldHandler.addGPSObjectCumilative(test2);
+        gpsWorldHandler.addGPSObject(test2);
         test2.scaleByUniform(0.03f);
         test2.setVisible(true);
+
+        gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
+        gpsWorldHandler.setGpsManager(gpsManager);
+        gpsWorldHandler.dumpGPSObjects();
+
+
 
     }
 

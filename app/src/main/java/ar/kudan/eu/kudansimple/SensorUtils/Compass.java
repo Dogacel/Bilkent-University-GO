@@ -13,13 +13,14 @@ public class Compass {
     private Bearing fixedNorthBearing;
     private Bearing currentBearing;
 
+
     /**
      * Constructor for compass class.
      * @param activity Current activity working.
-     * @param fixedNorthBearing A fixedNorthBearing object for storing fixedNorthBearing to north in the beginning.
+     * @param afixedNorthBearing A fixedNorthBearing object for storing fixedNorthBearing to north in the beginning.
      */
-    public Compass(Activity activity, final Bearing fixedNorthBearing) {
-        this.fixedNorthBearing = fixedNorthBearing;
+    public Compass(Activity activity, Bearing afixedNorthBearing) {
+        this.fixedNorthBearing = afixedNorthBearing;
         currentBearing = new Bearing();
 
         DSensorManager.startDProcessedSensor(activity.getApplicationContext(), DProcessedSensor.TYPE_3D_COMPASS,
@@ -45,6 +46,7 @@ public class Compass {
      */
     public void destroy() {
         DSensorManager.stopDSensor();
+        fixedNorthBearing.reSet();
     }
 
     /**

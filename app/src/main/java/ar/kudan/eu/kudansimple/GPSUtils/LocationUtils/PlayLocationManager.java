@@ -39,6 +39,7 @@ public class PlayLocationManager {
         this.listeners.addAll(Arrays.asList(listeners));
     }
 
+
     /**
      * Sets the desired intervals.
      * @param intervalMax Max interval between location requests.
@@ -63,6 +64,10 @@ public class PlayLocationManager {
     public void start() {
         if (createClient())
             startLocationUpdates();
+    }
+
+    public void stop() {
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
     /**

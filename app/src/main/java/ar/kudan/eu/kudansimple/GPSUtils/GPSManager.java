@@ -56,6 +56,10 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
         playLocationManager = new PlayLocationManager(activity, this);
     }
 
+    public void destroy() {
+        compass.destroy();
+    }
+
     /**
      * Starts the GPSManager
      */

@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+
+import ar.kudan.eu.kudansimple.Activities.BuildingInfo;
+import ar.kudan.eu.kudansimple.Constants;
+import ar.kudan.eu.kudansimple.R;
 
 public class BuildingList extends AppCompatActivity {
 
