@@ -1,0 +1,85 @@
+*{
+    box-sizing: border-box;
+
+}
+
+.Buildings{
+    border: 0px solid #56a8569f;
+    width: 100%;
+    height: 4vh;
+    padding-top: 0px;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #009933;
+    font-family: fantasy;
+    font: bold;
+
+
+}
+.Buildings select {
+    padding: 0px 0px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.Buildings select:focus {
+    outline: none;
+}
+.map {
+    padding: 0;
+    height: 94vh;
+    width: 100%;
+}
+
+.popup{
+    position: absolute;
+
+}
+
+
+.ol-popup {
+    position: absolute;
+    background-color: white;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 280px;
+  }
+  .ol-popup:after, .ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  .ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+  }
+  .ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+  }
+  .ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+  }
+  .ol-popup-closer:after {
+    content: "✖";
+  }
