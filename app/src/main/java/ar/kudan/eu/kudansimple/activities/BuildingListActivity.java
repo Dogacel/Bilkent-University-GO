@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.Activities;
+package ar.kudan.eu.kudansimple.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import ar.kudan.eu.kudansimple.Activities.BuildingInfo;
 import ar.kudan.eu.kudansimple.Constants;
 import ar.kudan.eu.kudansimple.R;
 
-public class BuildingList extends AppCompatActivity {
+public class BuildingListActivity extends AppCompatActivity {
 
-    public static final String IS_SOURCE = "BuildingList is the source for this intent";
+    public static final String IS_SOURCE = "BuildingListActivity is the source for this intent";
     private Button[] buttons;
 
     @Override
@@ -39,7 +38,7 @@ public class BuildingList extends AppCompatActivity {
 
 
     public void openInfoScreen(int building){
-        Intent intent = new Intent(this, BuildingInfo.class);
+        Intent intent = new Intent(this, BuildingInfoActivity.class);
         intent.putExtra( Constants.EXTRA_MESSAGE_BUILDING, building);
         intent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
         startActivity( intent);

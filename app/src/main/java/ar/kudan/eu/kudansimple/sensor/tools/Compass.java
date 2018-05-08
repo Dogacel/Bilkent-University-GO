@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.SensorUtils;
+package ar.kudan.eu.kudansimple.sensor.tools;
 
 import android.app.Activity;
 import android.util.Log;
@@ -7,6 +7,8 @@ import com.hoan.dsensor_master.DProcessedSensor;
 import com.hoan.dsensor_master.DSensorEvent;
 import com.hoan.dsensor_master.DSensorManager;
 import com.hoan.dsensor_master.interfaces.DProcessedEventListener;
+
+import ar.kudan.eu.kudansimple.sensor.Bearing;
 
 public class Compass {
 

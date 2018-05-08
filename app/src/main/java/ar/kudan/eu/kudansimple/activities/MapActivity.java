@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.Activities;
+package ar.kudan.eu.kudansimple.activities;
 
 
 import android.Manifest;
@@ -13,10 +13,10 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import ar.kudan.eu.kudansimple.ContainerManager;
-import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationListener;
-import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationManager;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationListener;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationManager;
 import ar.kudan.eu.kudansimple.R;
-import ar.kudan.eu.kudansimple.Activities.Interfaces.WebAppInterface;
+import ar.kudan.eu.kudansimple.activities.interfaces.WebAppInterface;
 
 
 public class MapActivity extends AppCompatActivity {

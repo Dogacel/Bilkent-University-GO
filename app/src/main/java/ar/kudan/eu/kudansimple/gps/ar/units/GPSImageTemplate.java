@@ -1,20 +1,34 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.units;
 
 import android.location.Location;
 
 public class GPSImageTemplate {
 
-    private float bearing;
+    private float bearing, height;
     private String ID, photoLocation;
     private Location location;
     private boolean isStatic;
 
-    public GPSImageTemplate(String ID, String photoLocation, Location location, float bearing, boolean isStatic) {
+    private float scale;
+    private boolean visible;
+
+    public GPSImageTemplate(String ID, String photoLocation, Location location, float height, float bearing, boolean isStatic) {
         this.ID = ID;
         this.photoLocation = photoLocation;
         this.location = location;
+        this.height = height;
         this.bearing = bearing;
         this.isStatic = isStatic;
+        scale = 1;
+        visible = true;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
     }
 
     public float getBearing() {
@@ -55,5 +69,21 @@ public class GPSImageTemplate {
 
     public void setStatic(boolean aStatic) {
         isStatic = aStatic;
+    }
+
+    public float getScale() {
+        return scale;
+    }
+
+    public void scaleByUniform(float scale) {
+        this.scale = scale;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

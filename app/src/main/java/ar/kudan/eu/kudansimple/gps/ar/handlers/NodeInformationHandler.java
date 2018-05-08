@@ -1,11 +1,9 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.handlers;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

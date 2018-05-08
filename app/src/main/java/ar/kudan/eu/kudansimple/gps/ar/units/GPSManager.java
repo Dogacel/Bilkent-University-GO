@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.units;
 
 import android.app.Activity;
 import android.location.Location;
@@ -7,10 +7,10 @@ import android.util.Log;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
-import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationListener;
-import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationManager;
-import ar.kudan.eu.kudansimple.SensorUtils.Bearing;
-import ar.kudan.eu.kudansimple.SensorUtils.Compass;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationListener;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationManager;
+import ar.kudan.eu.kudansimple.sensor.Bearing;
+import ar.kudan.eu.kudansimple.sensor.tools.Compass;
 import eu.kudan.kudan.ARGyroManager;
 import eu.kudan.kudan.ARNode;
 import eu.kudan.kudan.ARRenderer;
@@ -109,7 +109,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
      * @param destination Destination location
      * @return Angle between two locations in degrees.
      */
-    static float bearingFrom(Location source, Location destination) {
+    public static float bearingFrom(Location source, Location destination) {
         return source.bearingTo(destination);
     }
 
@@ -117,7 +117,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
      * Gets bearing to north.
      * @return bearing to north in degrees.
      */
-    static float getRealBearing() {
+    public static float getRealBearing() {
         return bearingNorth.getDegrees();
     }
 
@@ -125,7 +125,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
      * returns bearing to north actively.
      * @return bearing to north in degrees.
      */
-    float getBearingToNorth() {
+    public float getBearingToNorth() {
         return compass.getCurrentBearing();
     }
 
@@ -158,7 +158,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
      * Returns current ARWorld.
      * @return current ARWorld.
      */
-    ARWorld getArWorld() {
+    public ARWorld getArWorld() {
         return this.arWorld;
     }
 

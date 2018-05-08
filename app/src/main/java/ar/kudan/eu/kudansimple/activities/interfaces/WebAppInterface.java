@@ -1,12 +1,12 @@
-package ar.kudan.eu.kudansimple.Activities.Interfaces;
+package ar.kudan.eu.kudansimple.activities.interfaces;
 
 import android.content.Context;
 import android.content.Intent;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
-import ar.kudan.eu.kudansimple.Activities.BuildingInfo;
-import ar.kudan.eu.kudansimple.Activities.MapActivity;
+import ar.kudan.eu.kudansimple.activities.BuildingInfoActivity;
+import ar.kudan.eu.kudansimple.activities.MapActivity;
 import ar.kudan.eu.kudansimple.Constants;
 
 /**
@@ -28,7 +28,7 @@ public class WebAppInterface {
     }
 
     public void goPanel(String building){
-        Intent intent = new Intent( mContext, BuildingInfo.class);
+        Intent intent = new Intent( mContext, BuildingInfoActivity.class);
         intent.putExtra( Constants.EXTRA_MESSAGE_BUILDING, buildingNameToNumber( building));
         intent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, MapActivity.IS_SOURCE);
     }

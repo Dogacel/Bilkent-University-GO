@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.GPSUtils.LocationUtils;
+package ar.kudan.eu.kudansimple.gps.location;
 
 
 import android.location.Location;

@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.MainMenu"
+            android:name=".activities.MainMenuActivity"
             android:label="BuGO"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -30,10 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.BuildingInfo" />
-        <activity android:name=".Activities.BuildingList" />
-        <activity android:name=".Activities.MapActivity" />
-        <activity android:name=".Activities.ARViewActivity" />
+        <activity android:name=".activities.BuildingInfoActivity" />
+        <activity android:name=".activities.BuildingListActivity" />
+        <activity android:name=".activities.MapActivity" />
+        <activity android:name=".activities.ARViewActivity" />
 
     </application>
 

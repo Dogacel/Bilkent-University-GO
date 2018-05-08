@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.Activities;
+package ar.kudan.eu.kudansimple.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 
 import ar.kudan.eu.kudansimple.ContainerManager;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSWorldHandler;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARWorld;
@@ -97,60 +97,9 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
 
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
-
-        //Rektorluk
-        double lat = 39.871495;
-        double lon = 32.749671;
-        Location testL = new Location("dummyprovider");
-        testL.setLatitude(lat);
-        testL.setLongitude(lon);
-        GPSImageNode test = new GPSImageNode("r", "r.png", testL, 15, 0, true);
-        gpsWorldHandler.addGPSObject(test);
-        test.scaleByUniform(0.03f);
-        test.setVisible(true);
-
-        //Yemekhane
-        lat = 39.870578;
-        lon = 32.750563;
-
-        Location testL1 = new Location("dummyprovider");
-        testL1.setLatitude(lat);
-        testL1.setLongitude(lon);
-        GPSImageNode test1 = new GPSImageNode("y", "y.png", testL1, 15, 0, true);
-        gpsWorldHandler.addGPSObject(test1);
-        test1.scaleByUniform(0.03f);
-        test1.setVisible(true);
-
-
-        //Cafeinn
-        lat = 39.870002;
-        lon = 32.750496;
-
-        Location testL3 = new Location("dummyprovider");
-        testL3.setLatitude(lat);
-        testL3.setLongitude(lon);
-        GPSImageNode test3 = new GPSImageNode("c", "c.png", testL3, 15, 0, true);
-        gpsWorldHandler.addGPSObject(test3);
-        test3.scaleByUniform(0.03f);
-        test3.setVisible(true);
-
-
-        //Kutuphane
-        lat = 39.870316;
-        lon = 32.749557;
-
-        Location testL2 = new Location("dummyprovider");
-        testL2.setLatitude(lat);
-        testL2.setLongitude(lon);
-        GPSImageNode test2 = new GPSImageNode("l", "l.png", testL2, 15, 0, true);
-        gpsWorldHandler.addGPSObject(test2);
-        test2.scaleByUniform(0.03f);
-        test2.setVisible(true);
-
-        gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
         gpsWorldHandler.setGpsManager(gpsManager);
+        gpsWorldHandler.convertTemplates();
         gpsWorldHandler.dumpGPSObjects();
-
 
 
     }

@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.Activities;
+package ar.kudan.eu.kudansimple.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ar.kudan.eu.kudansimple.Activities.ARViewActivity;
 import ar.kudan.eu.kudansimple.Constants;
 import ar.kudan.eu.kudansimple.R;
 
-public class BuildingInfo extends AppCompatActivity {
+public class BuildingInfoActivity extends AppCompatActivity {
     public static final String IS_SOURCE = "Building info is the source for this intent";
 
     int[] images;

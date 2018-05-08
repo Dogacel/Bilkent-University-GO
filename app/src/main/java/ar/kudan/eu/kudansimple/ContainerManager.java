@@ -1,11 +1,8 @@
 package ar.kudan.eu.kudansimple;
 
 
-import android.app.Activity;
-
-import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSWorldHandler;
-import ar.kudan.eu.kudansimple.GPSUtils.LocationUtils.PlayLocationManager;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationManager;
 
 public class ContainerManager {
 

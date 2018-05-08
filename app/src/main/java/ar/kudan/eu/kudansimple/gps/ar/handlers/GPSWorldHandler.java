@@ -1,12 +1,16 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.handlers;
 
 
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Queue;
 
-import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
+import ar.kudan.eu.kudansimple.gps.ar.tools.TemplateARNodeManager;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
 
 /**
  * This class handles the GPS objects around the world;
@@ -14,6 +18,7 @@ import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
 public class GPSWorldHandler {
 
     private ArrayList<GPSImageNode> gpsObjectList;
+    private ArrayList<GPSImageTemplate> templateList;
     private GPSManager gpsManager;
 
     /**
@@ -23,7 +28,19 @@ public class GPSWorldHandler {
      */
     public GPSWorldHandler(GPSManager gpsManager) {
         gpsObjectList = new ArrayList<>();
+        templateList = new ArrayList<>();
         this.gpsManager = gpsManager;
+    }
+
+    public void convertTemplates() {
+        for (GPSImageTemplate template : templateList) {
+            gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
+        }
+        templateList = new ArrayList<>();
+    }
+
+    public void dumpTemplates(GPSImageTemplate... templates) {
+        templateList.addAll(Arrays.asList(templates));
     }
 
     /**

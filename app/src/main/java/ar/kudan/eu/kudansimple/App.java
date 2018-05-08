@@ -4,8 +4,9 @@ package ar.kudan.eu.kudansimple;
 import android.app.Application;
 import android.location.Location;
 
-import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSWorldHandler;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
 
 public class App extends Application {
 
@@ -15,6 +16,60 @@ public class App extends Application {
         ContainerManager.initialise();
 
         ContainerManager cm = ContainerManager.getInstance();
+
+        GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
+
+        //Rektorluk
+        double lat = 39.871495;
+        double lon = 32.749671;
+        Location testL = new Location("dummyprovider");
+        testL.setLatitude(lat);
+        testL.setLongitude(lon);
+        GPSImageTemplate test = new GPSImageTemplate("r", "r.png", testL, 15, 0, true);
+        gpsWorldHandler.dumpTemplates(test);
+        test.scaleByUniform(0.03f);
+        test.setVisible(true);
+
+        //Yemekhane
+        lat = 39.870578;
+        lon = 32.750563;
+
+        Location testL1 = new Location("dummyprovider");
+        testL1.setLatitude(lat);
+        testL1.setLongitude(lon);
+        GPSImageTemplate test1 = new GPSImageTemplate("y", "y.png", testL1, 15, 0, true);
+        gpsWorldHandler.dumpTemplates(test1);
+        test1.scaleByUniform(0.03f);
+        test1.setVisible(true);
+
+
+        //Cafeinn
+        lat = 39.870002;
+        lon = 32.750496;
+
+        Location testL3 = new Location("dummyprovider");
+        testL3.setLatitude(lat);
+        testL3.setLongitude(lon);
+        GPSImageTemplate test3 = new GPSImageTemplate("c", "c.png", testL3, 15, 0, true);
+        gpsWorldHandler.dumpTemplates(test3);
+        test3.scaleByUniform(0.03f);
+        test3.setVisible(true);
+
+
+        //Kutuphane
+        lat = 39.870316;
+        lon = 32.749557;
+
+        Location testL2 = new Location("dummyprovider");
+        testL2.setLatitude(lat);
+        testL2.setLongitude(lon);
+        GPSImageTemplate test2 = new GPSImageTemplate("l", "l.png", testL2, 15, 0, true);
+        gpsWorldHandler.dumpTemplates(test2);
+        test2.scaleByUniform(0.03f);
+        test2.setVisible(true);
+
+        gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
+
 
     }
 }
