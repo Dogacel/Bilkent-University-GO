@@ -100,6 +100,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gpsWorldHandler.setGpsManager(gpsManager);
         gpsWorldHandler.convertTemplates();
         gpsWorldHandler.dumpGPSObjects();
+        gpsWorldHandler.showAll();
 
     }
 
@@ -117,6 +118,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
 
+        //TODO: Open the view.
         String id = gpsWorldHandler.getFocusedGPSObject().getID();
         Log.d("TOUCH_EVENT", id);
 

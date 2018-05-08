@@ -20,7 +20,7 @@ public class App extends Application {
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
 
         /* Initialize objects around*/
-        
+
         //Rektorluk
         double lat = 39.871495;
         double lon = 32.749671;

@@ -39,7 +39,7 @@ public class GPSWorldHandler {
         for (GPSImageTemplate template : templateList) {
             gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
         }
-        templateList = new ArrayList<>();
+        //templateList = new ArrayList<>();
     }
 
     /**
