@@ -1,12 +1,16 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.handlers;
 
 
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Queue;
 
-import ar.kudan.eu.kudansimple.GPSUtils.GPSImageNode;
-import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
+import ar.kudan.eu.kudansimple.gps.ar.tools.TemplateARNodeManager;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
 
 /**
  * This class handles the GPS objects around the world;
@@ -14,6 +18,7 @@ import ar.kudan.eu.kudansimple.GPSUtils.GPSManager;
 public class GPSWorldHandler {
 
     private ArrayList<GPSImageNode> gpsObjectList;
+    private ArrayList<GPSImageTemplate> templateList;
     private GPSManager gpsManager;
 
     /**
@@ -23,7 +28,26 @@ public class GPSWorldHandler {
      */
     public GPSWorldHandler(GPSManager gpsManager) {
         gpsObjectList = new ArrayList<>();
+        templateList = new ArrayList<>();
         this.gpsManager = gpsManager;
+    }
+
+    /**
+     * Converts the node templates stored into GPSImageNodes.
+     */
+    public void convertTemplates() {
+        for (GPSImageTemplate template : templateList) {
+            gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
+        }
+        //templateList = new ArrayList<>();
+    }
+
+    /**
+     * Dumps the templates into template list for further use.
+     * @param templates Templates to be dumped.
+     */
+    public void dumpTemplates(GPSImageTemplate... templates) {
+        templateList.addAll(Arrays.asList(templates));
     }
 
     /**
@@ -31,18 +55,22 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    void addGPSObject(GPSImageNode gpsImageNode) {
+    public void addGPSObject(GPSImageNode gpsImageNode) {
         gpsObjectList.add(gpsImageNode);
     }
 
     /**
-     * Adds object to both gpsmanager and the list.
-     *
-     * @param gpsImageNode node
+     * Sets GPSManager
+     * @param gpsManager new GPSManager
      */
-    public void addGPSObjectCumilative(GPSImageNode gpsImageNode) {
-        addGPSObject(gpsImageNode);
-        gpsManager.getArWorld().addChild(gpsImageNode);
+    public void setGpsManager(GPSManager gpsManager) {
+        this.gpsManager = gpsManager;
+    }
+
+    public void dumpGPSObjects() {
+        for (GPSImageNode gin : gpsObjectList) {
+            gpsManager.getArWorld().addChild(gin);
+        }
     }
 
     /**

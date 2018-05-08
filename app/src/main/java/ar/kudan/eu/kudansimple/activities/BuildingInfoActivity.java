@@ -1,8 +1,7 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.SyncStateContract;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class BuildingInfo extends AppCompatActivity {
+import ar.kudan.eu.kudansimple.Constants;
+import ar.kudan.eu.kudansimple.R;
+
+public class BuildingInfoActivity extends AppCompatActivity {
     public static final String IS_SOURCE = "Building info is the source for this intent";
 
     int[] images;

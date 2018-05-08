@@ -1,4 +1,4 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.units;
 
 import android.location.Location;
 import android.util.Log;
@@ -132,7 +132,7 @@ public class GPSImageNode extends ARImageNode {
      * Gets the last bearing value from node
      * @return bearing in degrees
      */
-    float getLastBearing() {
+    public float getLastBearing() {
         return lastBearing;
     }
 

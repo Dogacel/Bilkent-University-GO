@@ -1,7 +1,6 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.ar.handlers;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,8 +19,7 @@ import java.util.ArrayList;
 import ar.kudan.eu.kudansimple.R;
 
 /**
- * Created by Faruk Balcı on 7.5.2018.
- * Retrieves ARNode informtaion from json file.
+ * Retrieves ARNode information from json file.
  */
 
 public class NodeInformationHandler {
@@ -32,6 +29,7 @@ public class NodeInformationHandler {
 
     /**
      * gets JSON string from resources.
+     * @param context Desired context.
      */
     private static String getJSONString( Context context) {
         InputStream is;

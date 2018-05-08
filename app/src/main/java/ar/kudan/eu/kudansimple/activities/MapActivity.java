@@ -1,18 +1,22 @@
-package ar.kudan.eu.kudansimple;
+package ar.kudan.eu.kudansimple.activities;
 
 
 import android.Manifest;
+import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.test.mock.MockPackageManager;
-import android.view.View;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.Toast;
 
-import android.webkit.JavascriptInterface;
+import ar.kudan.eu.kudansimple.ContainerManager;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationListener;
+import ar.kudan.eu.kudansimple.gps.location.PlayLocationManager;
+import ar.kudan.eu.kudansimple.R;
+import ar.kudan.eu.kudansimple.activities.interfaces.WebAppInterface;
 
 
 public class MapActivity extends AppCompatActivity {
@@ -21,13 +25,14 @@ public class MapActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
-
-    GPSTracker gps;
-
+    private PlayLocationManager plm;
     WebView myView;
 
-    private boolean loaded = false;
-    private static MapActivity instance;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        plm.stop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +47,14 @@ public class MapActivity extends AppCompatActivity {
         myView.loadUrl("file:///android_asset/map.html");
         WebSettings myViewSettings = myView.getSettings();
         myViewSettings.setJavaScriptEnabled(true);
-        loaded = true;
 
+        ContainerManager.getInstance().setMapPlayLocationManager(plm);
 
-        myView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        plm = new PlayLocationManager(this, new MapLocationListener());
+        plm.start();
+
+        WebAppInterface wai = new WebAppInterface(this);
+        myView.addJavascriptInterface(wai, "Android");
 
         //mContentView = findViewById(R.id.fullscreen_content);
 
@@ -104,22 +113,15 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
-    public void updateLoc(){
-        if (loaded) {
+    private class MapLocationListener implements PlayLocationListener {
+        public void parseUpdate(Location l) {
 
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-
+            double latitude = l.getLatitude();
+            double longitude = l.getLongitude();
             myView.loadUrl("javascript:updateFromAndroid("+ longitude +","+ latitude +")");
+            Log.d("GPS_DEBUG" , l.toString());
         }
     }
 
-    static public void init(){
-        instance = new MapActivity();
-    }
-
-    static public MapActivity getInstance(){
-        return instance;
-    }
 
 }
