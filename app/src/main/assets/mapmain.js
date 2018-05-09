@@ -29,7 +29,6 @@ closer.onclick = function () {
 
 
 var geoURL = 'http://ata.yurtsever.ug.bilkent.edu.tr/map.geojson';
-
 //request and take geoUrl json
 var request = new XMLHttpRequest();
 request.open('GET', geoURL);
@@ -151,7 +150,6 @@ map.getInteractions().extend([selectInteraction]);
 var selected;
 var selectedId;
 
-
 map.on('pointermove', function (evt) {
     if (evt.dragging) {
         return;
@@ -179,12 +177,14 @@ var displayFeatureInfo = function (pixel, coordinate) {
         if(feature.get('name') != undefined){
             
             selected = feature.get('name');
+
             selectedId = feature.get('id');
+            var selectedInfo = feature.get('Information');
             /*
             content.innerHTML = '<p>' + feature.get('name') + '</p>'
             + '<button onclick="panelButton()"> More Information </button>' ;
             */
-            show(selected,"subtitle");
+            show(selected, selectedInfo);
             overlay.setPosition(coordinate);
             
         }
@@ -214,7 +214,7 @@ function show(buildingName, buildingSubTitle)
 
 function panelButton(){
     console.log(selectedId + '==' + selected);
-    Android.showToast(selected + '==' selectedId);
+    Android.showToast(selectedId);
     Android.goPanel(selectedId);
 };
 
@@ -266,7 +266,7 @@ function onChange() {
     console.log(buildingView);
 
     flyTo(buildingView, function () { }, 18);
-
+    //locFeature.setGeometry(new ol.geom.Point(buildingView));
 };
 
 // to Bilkent button interaction
@@ -279,7 +279,7 @@ function onChange() {
 function updateFromAndroid(lon, lat) {
     var coor = [parseFloat(lon),parseFloat(lat)];
     var point = new ol.proj.fromLonLat(coor);
-    flyTo(point, function(){}, 16);
+    //flyTo(point, function(){}, 16);
 
     Android.showToast(lon + "==Hello==" + lat);
     locFeature.setGeometry( new ol.geom.Point(point));
