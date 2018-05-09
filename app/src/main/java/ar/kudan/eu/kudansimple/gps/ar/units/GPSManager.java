@@ -20,7 +20,7 @@ import eu.kudan.kudan.ARWorld;
 /**
  * GPSManager class for handling GPSNodes on an ARWorld.
  */
-public class GPSManager implements PlayLocationListener, ARRendererListener{
+public class GPSManager implements PlayLocationListener, ARRendererListener {
 
     static boolean interpolateMotionUsingHeading; //Testing
     static Vector3f northVector;
@@ -34,10 +34,11 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
 
     /**
      * Constructor for GPSManager
-     * @param world ARWorld for displaying GPSNode objects.
+     *
+     * @param world    ARWorld for displaying GPSNode objects.
      * @param activity Current activity for getting location service.
-    */
-    public GPSManager (ARWorld world, Activity activity) {
+     */
+    public GPSManager(ARWorld world, Activity activity) {
 
         this.arWorld = world;
 
@@ -55,6 +56,26 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
 
         if (playLocationManager == null)
             playLocationManager = new PlayLocationManager(activity, this);
+    }
+
+    /**
+     * Gets angle between two position vectors.
+     *
+     * @param source      Source location
+     * @param destination Destination location
+     * @return Angle between two locations in degrees.
+     */
+    public static float bearingFrom(Location source, Location destination) {
+        return source.bearingTo(destination);
+    }
+
+    /**
+     * Gets bearing to north.
+     *
+     * @return bearing to north in degrees.
+     */
+    public static float getRealBearing() {
+        return bearingNorth.getDegrees();
     }
 
     /**
@@ -78,6 +99,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
 
     /**
      * Get current location
+     *
      * @return previous location retrieved.
      */
     private Location getCurrentLocation() {
@@ -86,6 +108,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
 
     /**
      * Parses the location update when the location is updated.
+     *
      * @param l new location
      */
     @Override
@@ -109,25 +132,8 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
     }
 
     /**
-     * Gets angle between two position vectors.
-     * @param source Source location
-     * @param destination Destination location
-     * @return Angle between two locations in degrees.
-     */
-    public static float bearingFrom(Location source, Location destination) {
-        return source.bearingTo(destination);
-    }
-
-    /**
-     * Gets bearing to north.
-     * @return bearing to north in degrees.
-     */
-    public static float getRealBearing() {
-        return bearingNorth.getDegrees();
-    }
-
-    /**
      * returns bearing to north actively.
+     *
      * @return bearing to north in degrees.
      */
     public float getBearingToNorth() {
@@ -161,6 +167,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
 
     /**
      * Returns current ARWorld.
+     *
      * @return current ARWorld.
      */
     public ARWorld getArWorld() {
@@ -169,6 +176,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
 
     /**
      * Sets current ARWorld to world
+     *
      * @param world Current World.
      * @return success.
      */

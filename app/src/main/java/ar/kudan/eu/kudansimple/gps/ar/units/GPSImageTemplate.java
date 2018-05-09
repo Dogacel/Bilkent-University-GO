@@ -16,13 +16,14 @@ public class GPSImageTemplate {
     private boolean visible;
 
     /**
-     * GPSImageNode template for initiliasing in the ARView.
-     * @param ID ID of the node.
+     * GPSImageNode template for initilaising in the ARView.
+     *
+     * @param ID            ID of the node.
      * @param photoLocation Image location of the node.
-     * @param location GPS location of the world.
-     * @param height Height of the node.
-     * @param bearing Bearing of the node.
-     * @param isStatic Is the image static ?
+     * @param location      GPS location of the world.
+     * @param height        Height of the node.
+     * @param bearing       Bearing of the node.
+     * @param isStatic      Is the image static ?
      */
     public GPSImageTemplate(String ID, String photoLocation, Location location, float height, float bearing, boolean isStatic) {
         this.ID = ID;
@@ -37,6 +38,7 @@ public class GPSImageTemplate {
 
     /**
      * Gets height of the object.
+     *
      * @return Height of the object
      */
     public float getHeight() {
@@ -45,6 +47,7 @@ public class GPSImageTemplate {
 
     /**
      * Set height of the object.
+     *
      * @param height height.
      */
     public void setHeight(float height) {
@@ -53,6 +56,7 @@ public class GPSImageTemplate {
 
     /**
      * Get bearing of the object's image to the north.
+     *
      * @return bearing in degrees.
      */
     public float getBearing() {
@@ -61,6 +65,7 @@ public class GPSImageTemplate {
 
     /**
      * Sets image's bearing
+     *
      * @param bearing bearing in degrees.
      */
     public void setBearing(float bearing) {
@@ -69,6 +74,7 @@ public class GPSImageTemplate {
 
     /**
      * Gets ID for the node.
+     *
      * @return ID
      */
     public String getID() {
@@ -77,6 +83,7 @@ public class GPSImageTemplate {
 
     /**
      * Set ID of the node.
+     *
      * @param ID ID
      */
     public void setID(String ID) {
@@ -85,6 +92,7 @@ public class GPSImageTemplate {
 
     /**
      * Returns the location of the photo.
+     *
      * @return photo location.
      */
     public String getPhotoLocation() {
@@ -93,6 +101,7 @@ public class GPSImageTemplate {
 
     /**
      * Sets photo location
+     *
      * @param photoLocation new photo location.
      */
     public void setPhotoLocation(String photoLocation) {
@@ -101,6 +110,7 @@ public class GPSImageTemplate {
 
     /**
      * Get the location of the node.
+     *
      * @return location
      */
     public Location getLocation() {
@@ -109,6 +119,7 @@ public class GPSImageTemplate {
 
     /**
      * Set location of the node.
+     *
      * @param location new location of the node.
      */
     public void setLocation(Location location) {
@@ -117,6 +128,7 @@ public class GPSImageTemplate {
 
     /**
      * Get whether the node image is static or not.
+     *
      * @return static
      */
     public boolean isStatic() {
@@ -125,6 +137,7 @@ public class GPSImageTemplate {
 
     /**
      * Set whether an image of the node is static or not.
+     *
      * @param aStatic static
      */
     public void setStatic(boolean aStatic) {
@@ -133,6 +146,7 @@ public class GPSImageTemplate {
 
     /**
      * Return scale of the image
+     *
      * @return scale
      */
     public float getScale() {
@@ -141,6 +155,7 @@ public class GPSImageTemplate {
 
     /**
      * Scale the node
+     *
      * @param scale scale in float.
      */
     public void scaleByUniform(float scale) {
@@ -149,6 +164,7 @@ public class GPSImageTemplate {
 
     /**
      * Is the node visible ?
+     *
      * @return is visible
      */
     public boolean isVisible() {
@@ -157,6 +173,7 @@ public class GPSImageTemplate {
 
     /**
      * Set node's visibility.
+     *
      * @param visible new visibility.
      */
     public void show(boolean visible) {

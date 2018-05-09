@@ -1,7 +1,7 @@
 package ar.kudan.eu.kudansimple.gps.information;
 
 /*
- * Contains infornation needed for AR purposes.
+ * Contains information needed for AR purposes.
  */
 
 public class NodeARInformation {
@@ -10,7 +10,7 @@ public class NodeARInformation {
     private double x;
     private double y;
 
-    public NodeARInformation( String label, double xPos, double yPos) {
+    public NodeARInformation(String label, double xPos, double yPos) {
         this.label = label;
         x = xPos;
         y = yPos;
@@ -39,7 +39,6 @@ public class NodeARInformation {
     public void setY(double y) {
         this.y = y;
     }
-
 
 
 }

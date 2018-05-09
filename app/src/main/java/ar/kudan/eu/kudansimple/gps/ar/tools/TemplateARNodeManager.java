@@ -10,6 +10,7 @@ public class TemplateARNodeManager {
 
     /**
      * Generates a node from the template.
+     *
      * @param template Template to be converted.
      * @return GPSImageNode generated from the node.
      */
@@ -31,6 +32,7 @@ public class TemplateARNodeManager {
 
     /**
      * Generates a GPSImageTemplate from node.
+     *
      * @param template node to be saved
      * @return saved template.
      */

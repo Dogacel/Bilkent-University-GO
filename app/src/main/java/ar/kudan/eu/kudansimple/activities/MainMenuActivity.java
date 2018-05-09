@@ -1,6 +1,5 @@
 package ar.kudan.eu.kudansimple.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,25 +21,25 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
     }
 
-    public void openList( View v) { //linked to button_give_directions
-        Intent intent = new Intent( this, BuildingListActivity.class);
-        intent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, BuildingListActivity.IS_SOURCE);
-        startActivity( intent);
+    public void openList(View v) { //linked to button_give_directions
+        Intent intent = new Intent(this, BuildingListActivity.class);
+        intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, BuildingListActivity.IS_SOURCE);
+        startActivity(intent);
     }
 
-    public void openMap( View v) { //linked to button_show_location
-        mapIntent = new Intent( this, MapActivity.class);
-        mapIntent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, MapActivity.IS_SOURCE);
-        startActivity( mapIntent);
+    public void openMap(View v) { //linked to button_show_location
+        mapIntent = new Intent(this, MapActivity.class);
+        mapIntent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, MapActivity.IS_SOURCE);
+        startActivity(mapIntent);
     }
 
-    public void openAR( View v) { //linked to button_identify_buildings
+    public void openAR(View v) { //linked to button_identify_buildings
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
         gpsWorldHandler.showAll();
 
-        arIntent = new Intent( this, ARViewActivity.class);
-        arIntent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
-        startActivity( arIntent);
+        arIntent = new Intent(this, ARViewActivity.class);
+        arIntent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
+        startActivity(arIntent);
 
 
     }

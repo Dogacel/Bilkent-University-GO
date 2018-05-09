@@ -16,6 +16,7 @@ public class Bearing {
 
     /**
      * Returns if Bearing is set or not.
+     *
      * @return is it set ?
      */
     public boolean isSet() {
@@ -38,6 +39,7 @@ public class Bearing {
 
     /**
      * Returns bearing in degrees.
+     *
      * @return bearing to north in degrees.
      */
     public float getDegrees() {
@@ -46,6 +48,7 @@ public class Bearing {
 
     /**
      * Set degrees of bearing.
+     *
      * @param degrees bearing to north in degrees.
      */
     public void setDegrees(float degrees) {

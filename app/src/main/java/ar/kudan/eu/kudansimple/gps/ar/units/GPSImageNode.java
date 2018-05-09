@@ -15,8 +15,8 @@ import eu.kudan.kudan.ARRenderer;
 
 public class GPSImageNode extends ARImageNode {
 
-    private String ID;
-    private String photo;
+    private final String ID;
+    private final String photo;
 
     private Location gpsLocation; // Location of the object
 
@@ -33,12 +33,6 @@ public class GPSImageNode extends ARImageNode {
     private float speed;
     private float direction;
     private long previousFrameTime; //Testing
-
-    @Override
-    public void scaleByUniform(float scale) {
-        super.scaleByUniform(scale);
-        this.scale = scale;
-    }
 
     /**
      * Initializes a new GPSNode
@@ -78,8 +72,15 @@ public class GPSImageNode extends ARImageNode {
         this(id, photo, l, height, 0, true);
     }
 
+    @Override
+    public void scaleByUniform(float scale) {
+        super.scaleByUniform(scale);
+        this.scale = scale;
+    }
+
     /**
      * Returns the ID of the node
+     *
      * @return ID
      */
     public String getID() {
@@ -88,6 +89,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Get Photo location of the node.
+     *
      * @return location of the photo
      */
     public String getPhoto() {
@@ -96,6 +98,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Get scale of the node.
+     *
      * @return scale in float.
      */
     public float getLastScale() {
@@ -104,6 +107,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Whether node is static imaged or not.
+     *
      * @return is static
      */
     public boolean isStatic() {
@@ -126,6 +130,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Bearing of the object's photo.
+     *
      * @return bearing in degrees.
      */
     public float getBearing() {
@@ -143,6 +148,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Get object's height.
+     *
      * @return height in meters.
      */
     public float getObjectHeight() {
@@ -181,19 +187,21 @@ public class GPSImageNode extends ARImageNode {
     }
 
     /**
-     * Changes the static visibility for seperating the visibility from AR classes and App classes.
-     * @param visibility New visibility value
-     */
-    public void setStaticVisibility(boolean visibility) {
-        this.staticVisibility = visibility;
-    }
-
-    /**
      * Returns the static state of the object's visibility.
+     *
      * @return static visibility
      */
     public boolean getStaticVisibility() {
         return this.staticVisibility;
+    }
+
+    /**
+     * Changes the static visibility for separating the visibility from AR classes and App classes.
+     *
+     * @param visibility New visibility value
+     */
+    public void setStaticVisibility(boolean visibility) {
+        this.staticVisibility = visibility;
     }
 
     /**
@@ -202,7 +210,7 @@ public class GPSImageNode extends ARImageNode {
     public void applyStaticVisibility() {
         setVisible(this.staticVisibility);
         Log.d("TEST_CLICK", ID + " : " + staticVisibility);
-}
+    }
 
     @Override
     public void setVisible(boolean a) {
@@ -212,6 +220,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Shows or hides the object in AR and adjusts booleans
+     *
      * @param visible visibility
      */
     public void show(boolean visible) {
@@ -221,6 +230,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Gets the last bearing value from node
+     *
      * @return bearing in degrees
      */
     public float getLastBearing() {
@@ -251,6 +261,7 @@ public class GPSImageNode extends ARImageNode {
 
     /**
      * Updates the ARWorld position of the ImageNode.
+     *
      * @param currentLocation Current location of the user.
      */
     void updateWorldPosition(Location currentLocation) {
@@ -287,12 +298,12 @@ public class GPSImageNode extends ARImageNode {
         } else {
             float zcord = this.getPosition().getZ();
             float xcord = this.getPosition().getX();
-            float angle =  xcord > 0 ? (float) (Math.atan(zcord / xcord) + Math.PI / 2) : (float) (Math.atan(zcord / xcord) - Math.PI / 2);
+            float angle = xcord > 0 ? (float) (Math.atan(zcord / xcord) + Math.PI / 2) : (float) (Math.atan(zcord / xcord) - Math.PI / 2);
 
             this.setOrientation(qt.fromAngleAxis(angle, new Vector3f(0, -1, 0)));
         }
 
-        Log.d("NODE_DEBUG", this.getID() + " : " +  this.getPosition());
+        Log.d("NODE_DEBUG", this.getID() + " : " + this.getPosition());
     }
 
     /**

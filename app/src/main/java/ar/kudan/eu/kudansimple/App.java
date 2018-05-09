@@ -10,6 +10,7 @@ import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
 /**
  * App class for executing tasks while app is starting.
  */
+
 public class App extends Application {
 
     @Override
@@ -17,7 +18,7 @@ public class App extends Application {
         super.onCreate();
         ContainerManager.initialise();
 
-        ContainerManager cm = ContainerManager.getInstance();
+        //ContainerManager cm = ContainerManager.getInstance();
 
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
 
@@ -79,7 +80,7 @@ public class App extends Application {
         Location northL = new Location("dummyprovider");
         northL.setLatitude(39.866699);
         northL.setLongitude(32.748784);
-        GPSImageTemplate north = new GPSImageTemplate("north", "North.png", northL,5, 0, true);
+        GPSImageTemplate north = new GPSImageTemplate("north", "North.png", northL, 5, 0, true);
         gpsWorldHandler.dumpTemplates(north);
         north.scaleByUniform(0.05f);
         north.show(true);
@@ -89,7 +90,7 @@ public class App extends Application {
         Location southL = new Location("dummyprovider");
         southL.setLatitude(39.861362);
         southL.setLongitude(32.748870);
-        GPSImageTemplate south = new GPSImageTemplate("south", "South.png", southL, 5,90, true);
+        GPSImageTemplate south = new GPSImageTemplate("south", "South.png", southL, 5, 90, true);
         gpsWorldHandler.dumpTemplates(south);
         south.scaleByUniform(0.05f);
         south.show(true);
@@ -105,7 +106,6 @@ public class App extends Application {
         west.show(true);
 
 
-
         //East Node
         Location eastL = new Location("dummyprovider");
         eastL.setLatitude(39.863903);
@@ -114,7 +114,6 @@ public class App extends Application {
         gpsWorldHandler.dumpTemplates(east);
         east.scaleByUniform(0.05f);
         east.show(true);
-
 
 
     }

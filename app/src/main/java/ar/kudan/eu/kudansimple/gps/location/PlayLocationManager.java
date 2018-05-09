@@ -29,7 +29,8 @@ public class PlayLocationManager {
 
     /**
      * Constructor for {@link PlayLocationManager}
-     * @param activity Current activity
+     *
+     * @param activity  Current activity
      * @param listeners Location listeners for parsing updates.
      */
     public PlayLocationManager(Activity activity, PlayLocationListener... listeners) {
@@ -44,7 +45,8 @@ public class PlayLocationManager {
 
     /**
      * Sets the desired intervals.
-     * @param intervalMax Max interval between location requests.
+     *
+     * @param intervalMax     Max interval between location requests.
      * @param intervalFastest Fastest interval between two location requests.
      */
     public void setIntervals(int intervalMax, int intervalFastest) {
@@ -54,6 +56,7 @@ public class PlayLocationManager {
 
     /**
      * Adds a listener to the listeners list
+     *
      * @param listener Listener to be added.
      */
     public void addListener(PlayLocationListener listener) {
@@ -78,6 +81,7 @@ public class PlayLocationManager {
 
     /**
      * Checks if googlePlayAPI is available or not
+     *
      * @return is it available ?
      */
     private boolean googlePlayAPIAvailable() {
@@ -86,6 +90,7 @@ public class PlayLocationManager {
 
     /**
      * Creates the client for location updates
+     *
      * @return creation successful.
      */
     private boolean createClient() {
@@ -120,12 +125,13 @@ public class PlayLocationManager {
 
     /**
      * Starts location updates
+     *
      * @throws SecurityException exception
      */
-    private void startLocationUpdates() throws  SecurityException {
+    private void startLocationUpdates() throws SecurityException {
         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-            mLocationCallback,
-            null);
+                mLocationCallback,
+                null);
     }
 
 }

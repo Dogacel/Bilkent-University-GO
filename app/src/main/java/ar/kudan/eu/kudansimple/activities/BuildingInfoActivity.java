@@ -22,9 +22,9 @@ import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 public class BuildingInfoActivity extends AppCompatActivity {
     public static final String IS_SOURCE = "Building info is the source for this intent";
 
-    int[] images;
-    String[] infoTexts;
-    int building;
+    private int[] images;
+    private String[] infoTexts;
+    private int building;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class BuildingInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_building_info);
 
         Intent intent = getIntent();
-        building = intent.getIntExtra( Constants.EXTRA_MESSAGE_BUILDING,0);//not sure about the default value
+        building = intent.getIntExtra(Constants.EXTRA_MESSAGE_BUILDING, 0);//not sure about the default value
         images = Constants.imageIDs[building];
         infoTexts = Constants.infoStrings[building];
         //setting the info texts
@@ -43,17 +43,17 @@ public class BuildingInfoActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.free_labs_info)).setText(infoTexts[3]);
         }
 
-        if ( intent.getStringExtra(Constants.EXTRA_MESSAGE_SOURCE ).equals( ARViewActivity.IS_SOURCE)) {
-            ((TextView) findViewById(R.id.take_there)).setVisibility( View.GONE);
+        if (intent.getStringExtra(Constants.EXTRA_MESSAGE_SOURCE).equals(ARViewActivity.IS_SOURCE)) {
+            findViewById(R.id.take_there).setVisibility(View.GONE);
         }
 
-        ViewPager infoPictures = (ViewPager) findViewById(R.id.infoPictures);
+        ViewPager infoPictures = findViewById(R.id.infoPictures);
         infoPictures.setAdapter(new CustomPagerAdapter(this));
 
 
     }
 
-    public void takeMeThere( View v) { // linked to take_there (Button)
+    public void takeMeThere(View v) { // linked to take_there (Button)
 
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
         String ID = "north";
@@ -67,9 +67,9 @@ public class BuildingInfoActivity extends AppCompatActivity {
         gpsWorldHandler.showOnly(ID);
         Log.d("TEST_CLICK", ID);
 
-        Intent intent = new Intent( this, ARViewActivity.class);
-        intent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
-        intent.putExtra( Constants.EXTRA_MESSAGE_BUILDING, building);
+        Intent intent = new Intent(this, ARViewActivity.class);
+        intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
+        intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, building);
         startActivity(intent);
     }
 
@@ -91,14 +91,14 @@ public class BuildingInfoActivity extends AppCompatActivity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == ((LinearLayout) object);
+            return view == object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
 
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            ImageView imageView = itemView.findViewById(R.id.imageView);
             imageView.setImageResource(images[position]);
 
             container.addView(itemView);

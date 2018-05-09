@@ -2,7 +2,7 @@ package ar.kudan.eu.kudansimple.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Location;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -15,10 +15,8 @@ import android.widget.Toast;
 
 
 import ar.kudan.eu.kudansimple.ContainerManager;
-import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
-import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARWorld;
 
@@ -27,8 +25,8 @@ import eu.kudan.kudan.ARWorld;
  */
 public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION = 100;
     public static final String IS_SOURCE = "ARActivity is the source for this intent";
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION = 100;
     private GestureDetectorCompat gestureDetector;
 
     private GPSWorldHandler gpsWorldHandler;
@@ -38,9 +36,9 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String defaultKey = "jZGcfDzRtoNpR6eCGWzQalY7udjOAIHrdIXwiQTFopkqjf9bh0nORhUoH/kS1Y28yDZNKKlM5kYjLCNuBx772wZbSQpyS+3AIqr10vEDMbOyJi3pzsAzim7o6zw6dT4rFDqN0BTAivKULfJol3sbJhyp+PWSjZKN/wLKoDzRspL24JTboYqJ1SXsseSTaoqDqdnrTZ2R0TKKciGlxYy3HB+Js8l9miRVGGk6p8Y0bkldc54gl5Bj2txesMqXhBE8nY1RKpVHZsmJxKEDntPjCvWYtZwNIlAMO+Q3XLvbNOU+XFCbvHcPILH3wX6jkIKd93xGtd08hp0lz1yr7rAuamF/hezem9LsCgXQqYJt8WnQTt1soKHcc3Wt7GnTFn/8CBCF6P6NQGlXeyixNcz4L42hkJAFfb+k0pBNu25eQloCirbAr3gEIXy/yYMYxtvRjKOo6X3JLgtZtMqZFLd8ygGgArlvi/c3PiBwgSLtl949ihRVmfPybclIb42enKCWDu4xRHl5mHDH4Cs6giWMURRQltl3bSRhb7IB3FVyVUitTXxV/pUSb8ywuVjla8KoJFsHOdFDKZrbDfWoQmCiYE7/KozlVjRdkajmEY00Uvgbvn+9NDuSItS8vzTtMmbiqIdMpdSCzBgeEkhe9k+F1zkdkeN40YOQsxVV4lT3Zh0=";
+        /*String defaultKey = "jZGcfDzRtoNpR6eCGWzQalY7udjOAIHrdIXwiQTFopkqjf9bh0nORhUoH/kS1Y28yDZNKKlM5kYjLCNuBx772wZbSQpyS+3AIqr10vEDMbOyJi3pzsAzim7o6zw6dT4rFDqN0BTAivKULfJol3sbJhyp+PWSjZKN/wLKoDzRspL24JTboYqJ1SXsseSTaoqDqdnrTZ2R0TKKciGlxYy3HB+Js8l9miRVGGk6p8Y0bkldc54gl5Bj2txesMqXhBE8nY1RKpVHZsmJxKEDntPjCvWYtZwNIlAMO+Q3XLvbNOU+XFCbvHcPILH3wX6jkIKd93xGtd08hp0lz1yr7rAuamF/hezem9LsCgXQqYJt8WnQTt1soKHcc3Wt7GnTFn/8CBCF6P6NQGlXeyixNcz4L42hkJAFfb+k0pBNu25eQloCirbAr3gEIXy/yYMYxtvRjKOo6X3JLgtZtMqZFLd8ygGgArlvi/c3PiBwgSLtl949ihRVmfPybclIb42enKCWDu4xRHl5mHDH4Cs6giWMURRQltl3bSRhb7IB3FVyVUitTXxV/pUSb8ywuVjla8KoJFsHOdFDKZrbDfWoQmCiYE7/KozlVjRdkajmEY00Uvgbvn+9NDuSItS8vzTtMmbiqIdMpdSCzBgeEkhe9k+F1zkdkeN40YOQsxVV4lT3Zh0=";
         ARAPIKey key = ARAPIKey.getInstance();
-        //key.setAPIKey(defaultKey);
+        //key.setAPIKey(defaultKey); */
     }
 
     @Override
@@ -73,7 +71,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         super.setup();
 
         //only attempt to setup if the permissions are granted!
-        if ( ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             setupARActivity();
         }
@@ -90,7 +88,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gestureDetector = new GestureDetectorCompat(this, this);
 
         //Init a new world.
-        ARWorld currentWorld = new ARWorld();;
+        ARWorld currentWorld = new ARWorld();
+
         getARView().getContentViewPort().getCamera().addChild(currentWorld);
 
         //Start GPSManager
@@ -166,7 +165,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
                 recreate();
             } else {
                 //permission not granted close the activity.
-                Toast.makeText(getApplicationContext(), "Camera and Location permissions are needed for AR functionalities!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Camera and Location permissions are needed for AR functions!", Toast.LENGTH_LONG).show();
                 finish();
             }
         }

@@ -276,7 +276,7 @@ function onChange() {
 function updateFromAndroid(lon, lat) {
     var coor = [parseFloat(lon),parseFloat(lat)];
     var point = new ol.proj.fromLonLat(coor);
-    //flyTo(point, function(){}, 16);
+    flyTo(point, function(){}, 16);
 
     Android.showToast(lon + "==Hello==" + lat);
     locFeature.setGeometry( point)

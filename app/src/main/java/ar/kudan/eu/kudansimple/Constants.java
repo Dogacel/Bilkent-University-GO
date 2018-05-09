@@ -14,15 +14,15 @@ public abstract class Constants {
 
 
     public static final int[][] imageIDs = new int[][]{ // buildings have to be in alphabetical order in here and the
-                                                            //building list to keep the program consistent & working
-            new int[]{ R.drawable.a_building, R.drawable.a_first_floor, R.drawable.a_second_floor}, // A Building
-            new int[]{ R.drawable.blank_photo}, // B Building
-            new int[]{ R.drawable.ff_building, R.drawable.ff_first_floor}, // FF Building
+            //building list to keep the program consistent & working
+            new int[]{R.drawable.a_building, R.drawable.a_first_floor, R.drawable.a_second_floor}, // A Building
+            new int[]{R.drawable.blank_photo}, // B Building
+            new int[]{R.drawable.ff_building, R.drawable.ff_first_floor}, // FF Building
     };
 
     public static final String[][] infoStrings = new String[][]{ // building name , departments, num_floors, free labs
-            new String[]{ "A Building", "not specified","not specified","not specified"},
-            new String[]{ "B Building", "Law, BCC", "3", "3rd and basement floor"},
+            new String[]{"A Building", "not specified", "not specified", "not specified"},
+            new String[]{"B Building", "Law, BCC", "3", "3rd and basement floor"},
             new String[1]
     };
 

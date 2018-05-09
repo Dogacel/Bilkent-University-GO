@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Queue;
 
 import ar.kudan.eu.kudansimple.gps.ar.tools.TemplateARNodeManager;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
@@ -34,6 +33,7 @@ public class GPSWorldHandler {
 
     /**
      * Sets GPSManager
+     *
      * @param gpsManager new GPSManager
      */
     public void setGpsManager(GPSManager gpsManager) {
@@ -51,6 +51,7 @@ public class GPSWorldHandler {
 
     /**
      * Dumps the templates into template list for further use.
+     *
      * @param templates Templates to be dumped.
      */
     public void dumpTemplates(GPSImageTemplate... templates) {
@@ -205,7 +206,7 @@ public class GPSWorldHandler {
             Log.d("TOUCH_EVENT", gin.getID() + ": " + ginBearing);
 
             float shortestAngleCurrent = Math.min(Math.abs(activeBearing - ginBearing), Math.abs(360 - (activeBearing - ginBearing)));
-            float shortestAnglePast    = Math.min(Math.abs(activeBearing - tmpBearing), Math.abs(360 - (activeBearing - tmpBearing)));
+            float shortestAnglePast = Math.min(Math.abs(activeBearing - tmpBearing), Math.abs(360 - (activeBearing - tmpBearing)));
 
             if (shortestAngleCurrent < shortestAnglePast) {
                 tmp = gin;
@@ -248,7 +249,7 @@ public class GPSWorldHandler {
                 Log.d("TOUCH_EVENT", gin.getID() + ": " + ginBearing);
 
                 float shortestAngleCurrent = Math.min(Math.abs(activeBearing - ginBearing), Math.abs(360 - (activeBearing - ginBearing)));
-                float shortestAnglePast    = Math.min(Math.abs(activeBearing - tmpBearing), Math.abs(360 - (activeBearing - tmpBearing)));
+                float shortestAnglePast = Math.min(Math.abs(activeBearing - tmpBearing), Math.abs(360 - (activeBearing - tmpBearing)));
 
                 if (shortestAngleCurrent < shortestAnglePast) {
                     tmp = gin;

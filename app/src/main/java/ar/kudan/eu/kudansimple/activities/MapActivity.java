@@ -24,9 +24,9 @@ public class MapActivity extends AppCompatActivity {
 
 
     private static final int REQUEST_CODE_PERMISSION = 2;
-    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+    private String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
     private PlayLocationManager plm;
-    WebView myView;
+    private WebView myView;
 
     @Override
     protected void onDestroy() {
@@ -43,12 +43,15 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
 
         //Button button = findViewById(R.id.button);
-        myView = (WebView) findViewById(R.id.webview);
+        myView = findViewById(R.id.webview);
         String URL = "file:///android_asset/map.html";
-        URL = "http://ata.yurtsever.ug.bilkent.edu.tr/";
+        //URL = "http://ata.yurtsever.ug.bilkent.edu.tr/";
+
         myView.loadUrl("file:///android_asset/map.html");
         WebSettings myViewSettings = myView.getSettings();
+
         myViewSettings.setJavaScriptEnabled(true);
+        myViewSettings.setAllowUniversalAccessFromFileURLs(true);
 
         ContainerManager.getInstance().setMapPlayLocationManager(plm);
 
@@ -120,7 +123,7 @@ public class MapActivity extends AppCompatActivity {
 
             double latitude = l.getLatitude();
             double longitude = l.getLongitude();
-            myView.loadUrl("javascript:updateFromAndroid("+ longitude +","+ latitude +")");
+           // myView.loadUrl("javascript:updateFromAndroid("+ longitude +","+ latitude +")");
             Log.d("GPS_DEBUG" , l.toString());
         }
     }
