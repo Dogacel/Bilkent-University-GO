@@ -279,7 +279,7 @@ function updateFromAndroid(lon, lat) {
     flyTo(point, function(){}, 16);
 
     Android.showToast(lon + "==Hello==" + lat);
-    locFeature.setGeometry( point)
+    locFeature.setGeometry( new ol.geom.Point(point));
 }
 
 
