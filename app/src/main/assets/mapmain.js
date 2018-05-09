@@ -149,6 +149,8 @@ map.getInteractions().extend([selectInteraction]);
 
 //------------------------------------------------Select
 var selected;
+var selectedId;
+
 
 map.on('pointermove', function (evt) {
     if (evt.dragging) {
@@ -177,6 +179,7 @@ var displayFeatureInfo = function (pixel, coordinate) {
         if(feature.get('name') != undefined){
             
             selected = feature.get('name');
+            selectedId = feature.get('id');
             /*
             content.innerHTML = '<p>' + feature.get('name') + '</p>'
             + '<button onclick="panelButton()"> More Information </button>' ;
@@ -210,9 +213,9 @@ function show(buildingName, buildingSubTitle)
 }
 
 function panelButton(){
-    console.log(selected);
-    Android.showToast(selected);
-    Android.goPanel(selected);
+    console.log(selectedId + '==' + selected);
+    Android.showToast(selected + '==' selectedId);
+    Android.goPanel(selectedId);
 };
 
 function hide()
