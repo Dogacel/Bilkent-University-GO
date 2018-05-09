@@ -1,7 +1,6 @@
-package ar.kudan.eu.kudansimple.GPSUtils;
+package ar.kudan.eu.kudansimple.gps.information;
 
-/**
- * Created by Faruk Balcı on 8.5.2018.
+/*
  * Contains infornation needed for AR purposes.
  */
 

@@ -10,7 +10,7 @@ import ar.kudan.eu.kudansimple.activities.MapActivity;
 import ar.kudan.eu.kudansimple.Constants;
 
 /**
- * Created by Mehmet Ata YURTSEVER on 31.03.2018.
+ * Simple WebApp Interface
  */
 
 public class WebAppInterface {

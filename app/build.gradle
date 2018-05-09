@@ -1,9 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'config'
+            keyPassword 'config'
+        }
+    }
     aaptOptions {
-                noCompress 'KARMarker'
-                noCompress 'armodel'
+        noCompress 'KARMarker'
+        noCompress 'armodel'
     }
     compileSdkVersion 26
     defaultConfig {

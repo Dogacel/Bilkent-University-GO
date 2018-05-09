@@ -1,12 +1,15 @@
 package ar.kudan.eu.kudansimple.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import ar.kudan.eu.kudansimple.Constants;
+import ar.kudan.eu.kudansimple.ContainerManager;
 import ar.kudan.eu.kudansimple.R;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 
 public class MainMenuActivity extends AppCompatActivity {
     public static final String IS_SOURCE = "MainMenuActivity is the source for this intent";
@@ -32,8 +35,13 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void openAR( View v) { //linked to button_identify_buildings
+        GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
+        gpsWorldHandler.showAll();
+
         arIntent = new Intent( this, ARViewActivity.class);
         arIntent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
         startActivity( arIntent);
+
+
     }
 }

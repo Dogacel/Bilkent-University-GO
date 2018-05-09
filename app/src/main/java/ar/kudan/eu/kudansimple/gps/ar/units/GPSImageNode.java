@@ -15,9 +15,16 @@ import eu.kudan.kudan.ARRenderer;
 
 public class GPSImageNode extends ARImageNode {
 
-    private float objectHeight = -15f; // Height of the device.
+    private float objectHeight; // Height of the device.
+    public float getObjectHeight() { return objectHeight; }
+
     private Location gpsLocation; // Location of the object
+
     private float bearing; // In degrees
+    public float getBearing() { return bearing; }
+
+    private String photo;
+    public String getPhoto() {return photo; }
 
     //Speed and direction of the movement. ( Between last two locations gathered from GPS )
     private float speed;
@@ -25,11 +32,21 @@ public class GPSImageNode extends ARImageNode {
     private float lastBearing;
 
     private boolean isStatic;
+    public boolean isStatic() { return isStatic; }
+
+    private boolean staticVisibility;
 
     private String ID;
 
     private long previousFrameTime; //Testing
 
+    private float scale;
+    @Override
+    public void scaleByUniform(float scale) {
+        super.scaleByUniform(scale);
+        this.scale = scale;
+    }
+    public float getLastScale() {return scale; }
 
     /**
      * Initializes a new GPSNode
@@ -44,12 +61,15 @@ public class GPSImageNode extends ARImageNode {
     public GPSImageNode(String id, String photo, Location location, float height, float bearing, boolean isStatic) {
         super(photo);
 
+        this.photo = photo;
+
         this.lastBearing = 0;
         this.previousFrameTime = 0;
         this.isStatic = isStatic;
         this.objectHeight = -height;
 
         this.ID = id;
+        this.staticVisibility = true;
 
         this.setGpsLocation(location, bearing);
     }
@@ -129,6 +149,45 @@ public class GPSImageNode extends ARImageNode {
     }
 
     /**
+     * Changes the static visibility for seperating the visibility from AR classes and App classes.
+     * @param visibility New visibility value
+     */
+    public void setStaticVisibility(boolean visibility) {
+        this.staticVisibility = visibility;
+    }
+
+    /**
+     * Returns the static state of the object's visibility.
+     * @return static visibility
+     */
+    public boolean getStaticVisibility() {
+        return this.staticVisibility;
+    }
+
+    /**
+     * Changes object's visibility on ARView to it's static visibility.
+     */
+    public void applyStaticVisibility() {
+        setVisible(this.staticVisibility);
+        Log.d("TEST_CLICK", ID + " : " + staticVisibility);
+}
+
+    @Override
+    public void setVisible(boolean a) {
+        super.setVisible(a);
+        Log.d("TEST_CLICK", ID + " : " + a);
+    }
+
+    /**
+     * Shows or hides the object in AR and adjusts booleans
+     * @param visible visibility
+     */
+    public void show(boolean visible) {
+        setVisible(visible);
+        this.staticVisibility = visible;
+    }
+
+    /**
      * Gets the last bearing value from node
      * @return bearing in degrees
      */
@@ -168,6 +227,10 @@ public class GPSImageNode extends ARImageNode {
         Log.d("NODE_DEBUG", "Current Location : " + currentLocation);
 
         float distanceToObject = gpsLocation.distanceTo(currentLocation); //In meters
+
+        if (distanceToObject >= 350)
+            distanceToObject = 1000000;
+
         float bearingToObject = GPSManager.bearingFrom(gpsLocation, currentLocation); //In degrees
 
         this.lastBearing = bearingToObject;

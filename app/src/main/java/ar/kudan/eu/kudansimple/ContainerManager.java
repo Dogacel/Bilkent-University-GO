@@ -4,6 +4,11 @@ package ar.kudan.eu.kudansimple;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 import ar.kudan.eu.kudansimple.gps.location.PlayLocationManager;
 
+/**
+ * ContainerManager is for organising some structures across couple activities
+ * Most importantly it has gpsWorldHandler and this is used to show certain buildings with certain actions.
+ * Please refer to @{@link GPSWorldHandler} for further info.
+ */
 public class ContainerManager {
 
     private static ContainerManager instance;

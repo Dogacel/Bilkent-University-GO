@@ -2,6 +2,9 @@ package ar.kudan.eu.kudansimple.gps.ar.units;
 
 import android.location.Location;
 
+/**
+ * Template class for the GPSImageNode's
+ */
 public class GPSImageTemplate {
 
     private float bearing, height;
@@ -156,7 +159,7 @@ public class GPSImageTemplate {
      * Set node's visibility.
      * @param visible new visibility.
      */
-    public void setVisible(boolean visible) {
+    public void show(boolean visible) {
         this.visible = visible;
     }
 }

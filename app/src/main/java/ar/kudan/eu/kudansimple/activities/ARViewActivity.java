@@ -22,7 +22,9 @@ import eu.kudan.kudan.ARAPIKey;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARWorld;
 
-
+/**
+ * ARView for showing objects around the world using camera.
+ */
 public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION = 100;
@@ -45,6 +47,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     protected void onDestroy() {
         super.onDestroy();
         gpsManager.destroy();
+        gpsWorldHandler.saveState();
     }
 
     @Override
@@ -96,11 +99,12 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
 
         //Initializes the world from the preloaded templates.
-        GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
+        gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
         gpsWorldHandler.setGpsManager(gpsManager);
         gpsWorldHandler.convertTemplates();
         gpsWorldHandler.dumpGPSObjects();
-        gpsWorldHandler.showAll();
+        gpsWorldHandler.convertStates();
+
 
     }
 

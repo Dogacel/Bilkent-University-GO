@@ -39,7 +39,14 @@ public class GPSWorldHandler {
         for (GPSImageTemplate template : templateList) {
             gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
         }
-        //templateList = new ArrayList<>();
+        templateList = new ArrayList<>();
+    }
+
+    public void saveState() {
+        for (GPSImageNode gin : gpsObjectList) {
+            templateList.add(TemplateARNodeManager.generateTemplateFromNode(gin));
+        }
+        gpsObjectList = new ArrayList<>();
     }
 
     /**
@@ -49,6 +56,8 @@ public class GPSWorldHandler {
     public void dumpTemplates(GPSImageTemplate... templates) {
         templateList.addAll(Arrays.asList(templates));
     }
+
+
 
     /**
      * addsGPSObject only to list.
@@ -67,6 +76,9 @@ public class GPSWorldHandler {
         this.gpsManager = gpsManager;
     }
 
+    /**
+     * Dumps gps objects to world.
+     */
     public void dumpGPSObjects() {
         for (GPSImageNode gin : gpsObjectList) {
             gpsManager.getArWorld().addChild(gin);
@@ -74,11 +86,21 @@ public class GPSWorldHandler {
     }
 
     /**
+     * Converts states of the image nodes into static visibilities.
+     */
+    public void convertStates() {
+        for (GPSImageNode gin : gpsObjectList) {
+            gin.applyStaticVisibility();
+        }
+    }
+
+
+    /**
      * Shows all objects in the list
      */
     public void showAll() {
-        for (GPSImageNode gpsImageNode : gpsObjectList) {
-            gpsImageNode.setVisible(true);
+        for (GPSImageTemplate gpsImageNode : templateList) {
+            gpsImageNode.show(true);
         }
     }
 
@@ -86,8 +108,8 @@ public class GPSWorldHandler {
      * Hides all objects in the list.
      */
     public void hideAll() {
-        for (GPSImageNode gpsImageNode : gpsObjectList) {
-            gpsImageNode.setVisible(false);
+        for (GPSImageTemplate gpsImageNode : templateList) {
+            gpsImageNode.show(false);
         }
     }
 
@@ -96,8 +118,8 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    public void show(GPSImageNode gpsImageNode) {
-        gpsImageNode.setVisible(true);
+    public void show(GPSImageTemplate gpsImageNode) {
+        gpsImageNode.show(true);
     }
 
     /**
@@ -106,9 +128,9 @@ public class GPSWorldHandler {
      * @param ID id of the node
      */
     public void show(String ID) {
-        for (GPSImageNode gin : gpsObjectList) {
-            if (gin.getID().equals(ID)) {
-                show(gin);
+        for (GPSImageTemplate gpsImageNode : templateList) {
+            if (gpsImageNode.getID().equals(ID)) {
+                show(gpsImageNode);
             }
         }
     }
@@ -118,8 +140,8 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    public void hide(GPSImageNode gpsImageNode) {
-        gpsImageNode.setVisible(false);
+    public void hide(GPSImageTemplate gpsImageNode) {
+        gpsImageNode.show(false);
     }
 
     /**
@@ -128,7 +150,7 @@ public class GPSWorldHandler {
      * @param ID id of the node
      */
     public void hide(String ID) {
-        for (GPSImageNode gin : gpsObjectList) {
+        for (GPSImageTemplate gin : templateList) {
             if (gin.getID().equals(ID)) {
                 hide(gin);
             }
@@ -140,9 +162,9 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    public void showOnly(GPSImageNode gpsImageNode) {
+    public void showOnly(GPSImageTemplate gpsImageNode) {
         hideAll();
-        gpsImageNode.setVisible(true);
+        gpsImageNode.show(true);
     }
 
     /**
@@ -152,7 +174,7 @@ public class GPSWorldHandler {
      */
     public void showOnly(String ID) {
         hideAll();
-        for (GPSImageNode gin : gpsObjectList) {
+        for (GPSImageTemplate gin : templateList) {
             if (gin.getID().equals(ID)) {
                 show(gin);
             }

@@ -53,11 +53,13 @@ public class GPSManager implements PlayLocationListener, ARRendererListener{
         bearingNorth = new Bearing();
         compass = new Compass(activity, bearingNorth);
 
-        playLocationManager = new PlayLocationManager(activity, this);
+        if (playLocationManager == null)
+            playLocationManager = new PlayLocationManager(activity, this);
     }
 
     public void destroy() {
         compass.destroy();
+        playLocationManager.stop();
     }
 
     /**

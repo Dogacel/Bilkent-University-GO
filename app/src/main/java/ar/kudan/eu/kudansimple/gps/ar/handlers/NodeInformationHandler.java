@@ -17,6 +17,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 
 import ar.kudan.eu.kudansimple.R;
+import ar.kudan.eu.kudansimple.gps.information.NodeARInformation;
 
 /**
  * Retrieves ARNode information from json file.

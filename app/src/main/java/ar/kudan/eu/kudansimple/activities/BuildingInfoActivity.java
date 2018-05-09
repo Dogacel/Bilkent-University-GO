@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ar.kudan.eu.kudansimple.Constants;
+import ar.kudan.eu.kudansimple.ContainerManager;
 import ar.kudan.eu.kudansimple.R;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 
 public class BuildingInfoActivity extends AppCompatActivity {
     public static final String IS_SOURCE = "Building info is the source for this intent";
@@ -51,6 +54,19 @@ public class BuildingInfoActivity extends AppCompatActivity {
     }
 
     public void takeMeThere( View v) { // linked to take_there (Button)
+
+        GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
+        String ID = "north";
+        if (building == 1) {
+            ID = "east";
+        } else if (building == 2) {
+            ID = "south";
+        } else if (building == 3) {
+            ID = "west";
+        }
+        gpsWorldHandler.showOnly(ID);
+        Log.d("TEST_CLICK", ID);
+
         Intent intent = new Intent( this, ARViewActivity.class);
         intent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
         intent.putExtra( Constants.EXTRA_MESSAGE_BUILDING, building);

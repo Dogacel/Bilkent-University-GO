@@ -3,12 +3,15 @@ package ar.kudan.eu.kudansimple.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import ar.kudan.eu.kudansimple.Constants;
+import ar.kudan.eu.kudansimple.ContainerManager;
 import ar.kudan.eu.kudansimple.R;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 
 public class BuildingListActivity extends AppCompatActivity {
 
@@ -39,9 +42,13 @@ public class BuildingListActivity extends AppCompatActivity {
 
     public void openInfoScreen(int building){
         Intent intent = new Intent(this, BuildingInfoActivity.class);
+
+
         intent.putExtra( Constants.EXTRA_MESSAGE_BUILDING, building);
         intent.putExtra( Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
         startActivity( intent);
+
+
     }
 
 }

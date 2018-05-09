@@ -36,6 +36,8 @@ public class PlayLocationManager {
         this.activity = activity;
         this.listeners = new ArrayList<>(listeners.length);
 
+        this.mFusedLocationClient = null;
+
         this.listeners.addAll(Arrays.asList(listeners));
     }
 
@@ -71,6 +73,7 @@ public class PlayLocationManager {
      */
     public void stop() {
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+        mFusedLocationClient = null;
     }
 
     /**
@@ -86,7 +89,7 @@ public class PlayLocationManager {
      * @return creation successful.
      */
     private boolean createClient() {
-        if (googlePlayAPIAvailable()) {
+        if (googlePlayAPIAvailable() && mFusedLocationClient == null) {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
             mLocationRequest = LocationRequest.create();
