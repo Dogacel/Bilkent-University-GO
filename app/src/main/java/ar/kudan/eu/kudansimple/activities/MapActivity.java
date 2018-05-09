@@ -44,6 +44,8 @@ public class MapActivity extends AppCompatActivity {
 
         //Button button = findViewById(R.id.button);
         myView = (WebView) findViewById(R.id.webview);
+        String URL = "file:///android_asset/map.html";
+        URL = "http://ata.yurtsever.ug.bilkent.edu.tr/";
         myView.loadUrl("file:///android_asset/map.html");
         WebSettings myViewSettings = myView.getSettings();
         myViewSettings.setJavaScriptEnabled(true);

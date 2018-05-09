@@ -33,31 +33,12 @@ public class GPSWorldHandler {
     }
 
     /**
-     * Converts the node templates stored into GPSImageNodes.
+     * Sets GPSManager
+     * @param gpsManager new GPSManager
      */
-    public void convertTemplates() {
-        for (GPSImageTemplate template : templateList) {
-            gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
-        }
-        templateList = new ArrayList<>();
+    public void setGpsManager(GPSManager gpsManager) {
+        this.gpsManager = gpsManager;
     }
-
-    public void saveState() {
-        for (GPSImageNode gin : gpsObjectList) {
-            templateList.add(TemplateARNodeManager.generateTemplateFromNode(gin));
-        }
-        gpsObjectList = new ArrayList<>();
-    }
-
-    /**
-     * Dumps the templates into template list for further use.
-     * @param templates Templates to be dumped.
-     */
-    public void dumpTemplates(GPSImageTemplate... templates) {
-        templateList.addAll(Arrays.asList(templates));
-    }
-
-
 
     /**
      * addsGPSObject only to list.
@@ -69,11 +50,22 @@ public class GPSWorldHandler {
     }
 
     /**
-     * Sets GPSManager
-     * @param gpsManager new GPSManager
+     * Dumps the templates into template list for further use.
+     * @param templates Templates to be dumped.
      */
-    public void setGpsManager(GPSManager gpsManager) {
-        this.gpsManager = gpsManager;
+    public void dumpTemplates(GPSImageTemplate... templates) {
+        templateList.addAll(Arrays.asList(templates));
+    }
+
+
+    /**
+     * Converts the node templates stored into GPSImageNodes.
+     */
+    public void convertTemplates() {
+        for (GPSImageTemplate template : templateList) {
+            gpsObjectList.add(TemplateARNodeManager.generateNodeFromTemplate(template));
+        }
+        templateList = new ArrayList<>();
     }
 
     /**
@@ -86,6 +78,16 @@ public class GPSWorldHandler {
     }
 
     /**
+     * Saves states of the nodes on the world.
+     */
+    public void saveState() {
+        for (GPSImageNode gin : gpsObjectList) {
+            templateList.add(TemplateARNodeManager.generateTemplateFromNode(gin));
+        }
+        gpsObjectList = new ArrayList<>();
+    }
+
+    /**
      * Converts states of the image nodes into static visibilities.
      */
     public void convertStates() {
@@ -94,31 +96,12 @@ public class GPSWorldHandler {
         }
     }
 
-
-    /**
-     * Shows all objects in the list
-     */
-    public void showAll() {
-        for (GPSImageTemplate gpsImageNode : templateList) {
-            gpsImageNode.show(true);
-        }
-    }
-
-    /**
-     * Hides all objects in the list.
-     */
-    public void hideAll() {
-        for (GPSImageTemplate gpsImageNode : templateList) {
-            gpsImageNode.show(false);
-        }
-    }
-
     /**
      * Shows a specific node in the list
      *
      * @param gpsImageNode node
      */
-    public void show(GPSImageTemplate gpsImageNode) {
+    private void show(GPSImageTemplate gpsImageNode) {
         gpsImageNode.show(true);
     }
 
@@ -140,7 +123,7 @@ public class GPSWorldHandler {
      *
      * @param gpsImageNode node
      */
-    public void hide(GPSImageTemplate gpsImageNode) {
+    private void hide(GPSImageTemplate gpsImageNode) {
         gpsImageNode.show(false);
     }
 
@@ -158,11 +141,29 @@ public class GPSWorldHandler {
     }
 
     /**
+     * Shows all objects in the list
+     */
+    public void showAll() {
+        for (GPSImageTemplate gpsImageNode : templateList) {
+            gpsImageNode.show(true);
+        }
+    }
+
+    /**
+     * Hides all objects in the list.
+     */
+    private void hideAll() {
+        for (GPSImageTemplate gpsImageNode : templateList) {
+            gpsImageNode.show(false);
+        }
+    }
+
+    /**
      * Shows only a node in the list
      *
      * @param gpsImageNode node
      */
-    public void showOnly(GPSImageTemplate gpsImageNode) {
+    private void showOnly(GPSImageTemplate gpsImageNode) {
         hideAll();
         gpsImageNode.show(true);
     }

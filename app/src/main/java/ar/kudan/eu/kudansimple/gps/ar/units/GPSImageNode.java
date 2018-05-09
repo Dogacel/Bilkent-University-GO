@@ -15,38 +15,30 @@ import eu.kudan.kudan.ARRenderer;
 
 public class GPSImageNode extends ARImageNode {
 
-    private float objectHeight; // Height of the device.
-    public float getObjectHeight() { return objectHeight; }
+    private String ID;
+    private String photo;
 
     private Location gpsLocation; // Location of the object
 
-    private float bearing; // In degrees
-    public float getBearing() { return bearing; }
+    private float objectHeight; // Height of the device.
 
-    private String photo;
-    public String getPhoto() {return photo; }
+    private boolean isStatic;
+    private float bearing; // In degrees
+
+    private float scale;
+    private float lastBearing;
+    private boolean staticVisibility;
 
     //Speed and direction of the movement. ( Between last two locations gathered from GPS )
     private float speed;
     private float direction;
-    private float lastBearing;
-
-    private boolean isStatic;
-    public boolean isStatic() { return isStatic; }
-
-    private boolean staticVisibility;
-
-    private String ID;
-
     private long previousFrameTime; //Testing
 
-    private float scale;
     @Override
     public void scaleByUniform(float scale) {
         super.scaleByUniform(scale);
         this.scale = scale;
     }
-    public float getLastScale() {return scale; }
 
     /**
      * Initializes a new GPSNode
@@ -95,6 +87,69 @@ public class GPSImageNode extends ARImageNode {
     }
 
     /**
+     * Get Photo location of the node.
+     * @return location of the photo
+     */
+    public String getPhoto() {
+        return photo;
+    }
+
+    /**
+     * Get scale of the node.
+     * @return scale in float.
+     */
+    public float getLastScale() {
+        return scale;
+    }
+
+    /**
+     * Whether node is static imaged or not.
+     * @return is static
+     */
+    public boolean isStatic() {
+        return isStatic;
+    }
+
+    /**
+     * Sets node to statically drawn.
+     */
+    public void setStatic() {
+        this.isStatic = true;
+    }
+
+    /**
+     * Sets node to dynamically drawn.
+     */
+    public void setDynamic() {
+        this.isStatic = false;
+    }
+
+    /**
+     * Bearing of the object's photo.
+     * @return bearing in degrees.
+     */
+    public float getBearing() {
+        return bearing;
+    }
+
+    /**
+     * Sets bearing of the object. 0 bearing means object is looking to East, 90 means South, 180 means West, 270 or -90 means North.
+     *
+     * @param bearing Rotation from East.
+     */
+    public void setBearing(float bearing) {
+        this.bearing = bearing;
+    }
+
+    /**
+     * Get object's height.
+     * @return height in meters.
+     */
+    public float getObjectHeight() {
+        return objectHeight;
+    }
+
+    /**
      * Get location of the ImageNode.
      *
      * @return Location of the node
@@ -123,29 +178,6 @@ public class GPSImageNode extends ARImageNode {
         if (l != null)
             this.gpsLocation = l;
         this.bearing = bearing + GPSManager.getRealBearing();
-    }
-
-    /**
-     * Sets bearing of the object. 0 bearing means object is looking to East, 90 means South, 180 means West, 270 or -90 means North.
-     *
-     * @param bearing Rotation from East.
-     */
-    public void setBearing(float bearing) {
-        this.bearing = bearing;
-    }
-
-    /**
-     * Sets node to statically drawn.
-     */
-    public void setStatic() {
-        this.isStatic = true;
-    }
-
-    /**
-     * Sets node to dynamically drawn.
-     */
-    public void setDynamic() {
-        this.isStatic = false;
     }
 
     /**
