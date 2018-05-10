@@ -123,7 +123,7 @@ public class MapActivity extends AppCompatActivity {
 
             double latitude = l.getLatitude();
             double longitude = l.getLongitude();
-           // myView.loadUrl("javascript:updateFromAndroid("+ longitude +","+ latitude +")");
+            myView.loadUrl("javascript:updateFromAndroid("+ longitude +","+ latitude +")");
             Log.d("GPS_DEBUG" , l.toString());
         }
     }
