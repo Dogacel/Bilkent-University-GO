@@ -107,7 +107,7 @@ public class NodeInformationHandler {
         float[] position;
         position = getPosition(building);
 
-        return new NodeARInformation(building.getJSONObject("properties").getString("name"),
+        return new NodeARInformation(building.getJSONObject("properties").getString("id"),
                 position[1], position[0]);
     }
 
