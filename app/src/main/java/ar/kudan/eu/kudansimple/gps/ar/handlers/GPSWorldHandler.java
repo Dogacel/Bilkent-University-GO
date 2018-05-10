@@ -203,7 +203,7 @@ public class GPSWorldHandler {
         for (GPSImageNode node : list) {
             //Log.d("TOUCH_EVENT", );
             if (node.getVisible()) {
-                if (ARHelper.isNodeSelected(view, node, motionEvent, 10)) {
+                if (ARHelper.isNodeSelected(view, node, motionEvent, 12)) {
                     return node;
                 }
             }

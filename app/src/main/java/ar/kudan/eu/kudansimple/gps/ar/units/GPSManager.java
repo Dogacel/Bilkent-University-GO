@@ -58,6 +58,10 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
             playLocationManager = new PlayLocationManager(activity, this);
     }
 
+    public Compass getCompass() {
+        return compass;
+    }
+
     /**
      * Gets angle between two position vectors.
      *

@@ -9,13 +9,23 @@ import com.jme3.math.Vector4f;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
 import eu.kudan.kudan.ARView;
 
+/**
+ * Credits go to user wman @ kudan.ar help forums.
+ */
 public class ARHelper {
 
     static class Ray {
-        public Vector3f origin = new Vector3f();
-        public Vector3f direction = new Vector3f(0, 0, 1);
+        Vector3f origin = new Vector3f();
+        Vector3f direction = new Vector3f(0, 0, 1);
     }
 
+    /**
+     * Gets the touch ray on the ARWorld
+     * @param arView current View
+     * @param x touch coordinate x
+     * @param y touch coordinate y
+     * @return Ray of the touch.
+     */
     private static Ray getTouchRay(ARView arView, float x, float y) {
         int currentCamWidth = arView.getWidth();
         int currentCamHeight = arView.getHeight();
@@ -53,6 +63,14 @@ public class ARHelper {
         return ray;
     }
 
+    /**
+     * Check whether a node is selected or not
+     * @param arView current view
+     * @param node node to be checked.
+     * @param e motion event
+     * @param objectSize size of the object.
+     * @return is it clicked ?
+     */
     public static Boolean isNodeSelected(ARView arView, GPSImageNode node, MotionEvent e, int objectSize) {
         Ray ray = getTouchRay(arView, e.getRawX(), e.getRawY());
 

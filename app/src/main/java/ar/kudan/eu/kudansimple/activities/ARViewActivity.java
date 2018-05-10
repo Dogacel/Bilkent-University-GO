@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import ar.kudan.eu.kudansimple.ContainerManager;
 import ar.kudan.eu.kudansimple.gps.ar.tools.ARHelper;
+import ar.kudan.eu.kudansimple.gps.ar.tools.DirectionArrow;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
@@ -101,6 +102,13 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gpsManager = new GPSManager(currentWorld, this);
         gpsManager.start();
 
+        /*
+            DirectionArrow arrow = new DirectionArrow(gpsManager.getCompass());
+            arrow.setVisible(true);
+
+            currentWorld.addChild(arrow);
+
+         */
 
         //Initializes the world from the preloaded templates.
         gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
