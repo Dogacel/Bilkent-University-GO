@@ -2,14 +2,17 @@ package ar.kudan.eu.kudansimple.gps.ar.handlers;
 
 
 import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ar.kudan.eu.kudansimple.gps.ar.tools.ARHelper;
 import ar.kudan.eu.kudansimple.gps.ar.tools.TemplateARNodeManager;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
+import eu.kudan.kudan.ARView;
 
 /**
  * This class handles the GPS objects around the world;
@@ -29,6 +32,10 @@ public class GPSWorldHandler {
         gpsObjectList = new ArrayList<>();
         templateList = new ArrayList<>();
         this.gpsManager = gpsManager;
+    }
+
+    public ArrayList<GPSImageNode> getGpsObjectList() {
+        return this.gpsObjectList;
     }
 
     /**
@@ -183,82 +190,25 @@ public class GPSWorldHandler {
         }
     }
 
-    /**
-     * Gets the focused GPS Object in the list.
-     *
-     * @return focused gps object
-     */
-    public GPSImageNode getFocusedGPSObject() {
-        if (gpsObjectList.size() == 0)
-            return null;
-
-        float activeBearing = gpsManager.getBearingToNorth();
-
-        GPSImageNode tmp = gpsObjectList.get(0);
-
-        Log.d("TOUCH_EVENT", activeBearing + "");
-
-        for (GPSImageNode gin : gpsObjectList) {
-
-            float ginBearing = gin.getLastBearing() < 0 ? 180 + gin.getLastBearing() : 360 - gin.getLastBearing();
-            float tmpBearing = tmp.getLastBearing() < 0 ? 180 + tmp.getLastBearing() : 360 - tmp.getLastBearing();
-
-            Log.d("TOUCH_EVENT", gin.getID() + ": " + ginBearing);
-
-            float shortestAngleCurrent = Math.min(Math.abs(activeBearing - ginBearing), Math.abs(360 - (activeBearing - ginBearing)));
-            float shortestAnglePast = Math.min(Math.abs(activeBearing - tmpBearing), Math.abs(360 - (activeBearing - tmpBearing)));
-
-            if (shortestAngleCurrent < shortestAnglePast) {
-                tmp = gin;
-            }
-        }
-
-        return tmp;
-    }
 
     /**
      * Gets focused GPS object but it must be visible.
      *
      * @return Visible focused GPSObject
      */
-    public GPSImageNode getFocusedVisibleGPSObject() {
-        if (gpsObjectList.size() == 0)
-            return null;
+    public GPSImageNode getFocusedVisibleGPSObject(ARView view, MotionEvent motionEvent) {
 
-        float activeBearing = gpsManager.getBearingToNorth();
+        ArrayList<GPSImageNode> list = this.getGpsObjectList();
 
-        GPSImageNode tmp = null;
-
-        for (GPSImageNode gin : gpsObjectList) {
-            if (gin.getVisible()) {
-                tmp = gin;
-                break;
-            }
-        }
-
-        if (tmp == null)
-            return null;
-
-        //TODO: Not working.
-        Log.d("TOUCH_EVENT", activeBearing + "");
-
-        for (GPSImageNode gin : gpsObjectList) {
-            if (gin.getVisible()) {
-                float ginBearing = gin.getLastBearing() < 0 ? 180 + gin.getLastBearing() : 360 - gin.getLastBearing();
-                float tmpBearing = tmp.getLastBearing() < 0 ? 180 + tmp.getLastBearing() : 360 - tmp.getLastBearing();
-
-                Log.d("TOUCH_EVENT", gin.getID() + ": " + ginBearing);
-
-                float shortestAngleCurrent = Math.min(Math.abs(activeBearing - ginBearing), Math.abs(360 - (activeBearing - ginBearing)));
-                float shortestAnglePast = Math.min(Math.abs(activeBearing - tmpBearing), Math.abs(360 - (activeBearing - tmpBearing)));
-
-                if (shortestAngleCurrent < shortestAnglePast) {
-                    tmp = gin;
+        for (GPSImageNode node : list) {
+            //Log.d("TOUCH_EVENT", );
+            if (node.getVisible()) {
+                if (ARHelper.isNodeSelected(view, node, motionEvent, 10)) {
+                    return node;
                 }
-
             }
         }
 
-        return tmp;
+        return null;
     }
 }

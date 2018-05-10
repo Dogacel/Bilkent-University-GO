@@ -14,10 +14,15 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
+
 import ar.kudan.eu.kudansimple.ContainerManager;
+import ar.kudan.eu.kudansimple.gps.ar.tools.ARHelper;
+import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 import eu.kudan.kudan.ARActivity;
+import eu.kudan.kudan.ARView;
 import eu.kudan.kudan.ARWorld;
 
 /**
@@ -110,29 +115,32 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     //Testing
 
     @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        Log.d("AR_VIEW_ACTIVITY", "Tapped");
-        //Useless, for testing only.
-        //GPSManager.interpolateMotionUsingHeading = ! GPSManager.interpolateMotionUsingHeading;
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+
+        if (MotionEvent.ACTION_DOWN == motionEvent.getAction()) {
+            Log.d("TOUCH_EVENT", "TOUCH START -------");
+            gestureDetector.onTouchEvent(motionEvent);
+
+            //TODO: Open the view.
+            String id = gpsWorldHandler.getFocusedVisibleGPSObject(this.getARView(), motionEvent).getID();
+
+            Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+
+            Log.d("TOUCH_EVENT", "TOUCH END ----------");
+
+
+        }
         return false;
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        gestureDetector.onTouchEvent(event);
-
-        //TODO: Open the view.
-        String id = gpsWorldHandler.getFocusedVisibleGPSObject().getID();
-        Log.d("TOUCH_EVENT", id);
-
-        //For testing purposes, when tapped, only the focused node will be shown.
-        //gpsWorldHandler.showOnly(id);
-
-        return super.onTouchEvent(event);
+    public boolean onSingleTapUp(MotionEvent event) {
+        return false;
     }
 
     @Override
     public boolean onDown(MotionEvent motionEvent) {
+        Log.d("AR_VIEW_ACTIVITY", "Tapped");
         return false;
     }
 
