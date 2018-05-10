@@ -122,7 +122,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gestureDetector.onTouchEvent(event);
 
         //TODO: Open the view.
-        String id = gpsWorldHandler.getFocusedGPSObject().getID();
+        String id = gpsWorldHandler.getFocusedVisibleGPSObject().getID();
         Log.d("TOUCH_EVENT", id);
 
         //For testing purposes, when tapped, only the focused node will be shown.

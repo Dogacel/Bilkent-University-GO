@@ -23,7 +23,7 @@ import ar.kudan.eu.kudansimple.gps.information.NodeARInformation;
  * Retrieves ARNode information from json file.
  */
 
-class NodeInformationHandler {
+public class NodeInformationHandler {
 
     private static int BUFFER_SIZE = 1024;
     private static String TAG = "NODE_INFO";
@@ -104,11 +104,11 @@ class NodeInformationHandler {
      * @throws JSONException exception
      */
     private static NodeARInformation createNodeARInformation(JSONObject building) throws JSONException {
-        double[] position;
+        float[] position;
         position = getPosition(building);
 
         return new NodeARInformation(building.getJSONObject("properties").getString("name"),
-                position[0], position[1]);
+                position[1], position[0]);
     }
 
     /**
@@ -118,20 +118,22 @@ class NodeInformationHandler {
      * @return position
      * @throws JSONException exception
      */
-    private static double[] getPosition(JSONObject building) throws JSONException {
-        double[] output = {0, 0}; // output[0] is the x position and output[1] is the y position.
+    private static float[] getPosition(JSONObject building) throws JSONException {
+        float[] output = {0f, 0f}; // output[0] is the x position and output[1] is the y position.
         JSONArray pointArray;
 
-        int noOfPoints;
-
+        float noOfPoints;
 
         pointArray = building.getJSONObject("geometry").getJSONArray("coordinates").getJSONArray(0);
         noOfPoints = pointArray.length();
 
         for (int i = 0; i < noOfPoints; i++) {
-            output[0] = output[0] + (pointArray.getJSONArray(i).getDouble(0) / noOfPoints);
-            output[1] = output[1] + (pointArray.getJSONArray(i).getDouble(1) / noOfPoints);
+            output[0] = output[0] + (float) pointArray.getJSONArray(i).getDouble(0);
+            output[1] = output[1] + (float) pointArray.getJSONArray(i).getDouble(1);
         }
+
+        output[0] /= noOfPoints;
+        output[1] /= noOfPoints;
 
         return output;
 

@@ -22,6 +22,7 @@ public class GPSImageNode extends ARImageNode {
 
     private float objectHeight; // Height of the device.
 
+    private boolean tooFar, forceShow;
     private boolean isStatic;
     private float bearing; // In degrees
 
@@ -49,6 +50,8 @@ public class GPSImageNode extends ARImageNode {
 
         this.photo = photo;
 
+        this.tooFar = false;
+        this.forceShow = false;
         this.lastBearing = 0;
         this.previousFrameTime = 0;
         this.isStatic = isStatic;
@@ -224,7 +227,7 @@ public class GPSImageNode extends ARImageNode {
      * @param visible visibility
      */
     public void show(boolean visible) {
-        setVisible(visible);
+        setVisible(forceShow || (visible && !tooFar) );
         this.staticVisibility = visible;
     }
 
@@ -271,9 +274,12 @@ public class GPSImageNode extends ARImageNode {
 
         float distanceToObject = gpsLocation.distanceTo(currentLocation); //In meters
 
-        if (distanceToObject >= 350)
-            distanceToObject = 1000000;
+        if (distanceToObject >= 250)
+            tooFar = true;
+        else
+            tooFar = false;
 
+        show(true);
         float bearingToObject = GPSManager.bearingFrom(gpsLocation, currentLocation); //In degrees
 
         this.lastBearing = bearingToObject;

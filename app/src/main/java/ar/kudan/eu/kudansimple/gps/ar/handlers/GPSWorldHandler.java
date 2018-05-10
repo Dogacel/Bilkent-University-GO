@@ -239,6 +239,7 @@ public class GPSWorldHandler {
         if (tmp == null)
             return null;
 
+        //TODO: Not working.
         Log.d("TOUCH_EVENT", activeBearing + "");
 
         for (GPSImageNode gin : gpsObjectList) {

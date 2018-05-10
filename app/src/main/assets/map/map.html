@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuGo Map</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
+
+    <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+    </div>
+
+  </head>
+  <body>
+
+      
+
+    <!--<button class="Buildings" id="Bilkent">To Bilkent</button>-->
+    <select class="Buildings" id="Buildings" onchange="onChange()" ></select>
+    <div id="status"></div>
+    <div id="map" class="map">
+    <!--<div id="location" class="marker"><span class="icon-flag"></div>-->
+    <script src="mapmain.js"></script>
+    </div>
+  </body>
+</html>

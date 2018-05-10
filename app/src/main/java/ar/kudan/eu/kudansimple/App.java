@@ -3,9 +3,14 @@ package ar.kudan.eu.kudansimple;
 
 import android.app.Application;
 import android.location.Location;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
+import ar.kudan.eu.kudansimple.gps.ar.handlers.NodeInformationHandler;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
+import ar.kudan.eu.kudansimple.gps.information.NodeARInformation;
 
 /**
  * App class for executing tasks while app is starting.
@@ -27,54 +32,20 @@ public class App extends Application {
         *  NodeInformationHandler must initialise the nodes with the same protocol.
         * */
 
-        //Rektorluk
-        double lat = 39.871495;
-        double lon = 32.749671;
-        Location testL = new Location("dummyprovider");
-        testL.setLatitude(lat);
-        testL.setLongitude(lon);
-        GPSImageTemplate test = new GPSImageTemplate("r", "r.png", testL, 15, 0, true);
-        gpsWorldHandler.dumpTemplates(test);
-        test.scaleByUniform(0.03f);
-        test.show(true);
-
-        //Yemekhane
-        lat = 39.870578;
-        lon = 32.750563;
-
-        Location testL1 = new Location("dummyprovider");
-        testL1.setLatitude(lat);
-        testL1.setLongitude(lon);
-        GPSImageTemplate test1 = new GPSImageTemplate("y", "y.png", testL1, 15, 0, true);
-        gpsWorldHandler.dumpTemplates(test1);
-        test1.scaleByUniform(0.03f);
-        test1.show(true);
+        ArrayList<NodeARInformation> arr = NodeInformationHandler.getAllNodeARInformation(getBaseContext());
 
 
-        //Cafeinn
-        lat = 39.870002;
-        lon = 32.750496;
+        for (NodeARInformation inf : arr) {
+            Location loc = new Location("dummyprovider");
+            loc.setLatitude(inf.getLat());
+            loc.setLongitude(inf.getLon());
+            GPSImageTemplate temp = new GPSImageTemplate(inf.getLabel(), "labels/" + inf.getLabel() + ".png", loc, 5, 0, true);
+            gpsWorldHandler.dumpTemplates(temp);
+            temp.scaleByUniform(0.02f);
+            temp.show(true);
+            Log.d("TEST_NODES", inf.toString());
 
-        Location testL3 = new Location("dummyprovider");
-        testL3.setLatitude(lat);
-        testL3.setLongitude(lon);
-        GPSImageTemplate test3 = new GPSImageTemplate("c", "c.png", testL3, 15, 0, true);
-        gpsWorldHandler.dumpTemplates(test3);
-        test3.scaleByUniform(0.03f);
-        test3.show(true);
-
-
-        //Kutuphane
-        lat = 39.870316;
-        lon = 32.749557;
-
-        Location testL2 = new Location("dummyprovider");
-        testL2.setLatitude(lat);
-        testL2.setLongitude(lon);
-        GPSImageTemplate test2 = new GPSImageTemplate("l", "l.png", testL2, 15, 0, true);
-        gpsWorldHandler.dumpTemplates(test2);
-        test2.scaleByUniform(0.03f);
-        test2.show(true);
+        }
 
         //North Node
         Location northL = new Location("dummyprovider");

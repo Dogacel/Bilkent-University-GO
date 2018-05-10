@@ -7,13 +7,13 @@ package ar.kudan.eu.kudansimple.gps.information;
 public class NodeARInformation {
 
     private String label;
-    private double x;
-    private double y;
+    private float lat;
+    private float lon;
 
-    public NodeARInformation(String label, double xPos, double yPos) {
+    public NodeARInformation(String label, float xPos, float yPos) {
         this.label = label;
-        x = xPos;
-        y = yPos;
+        lat = xPos;
+        lon = yPos;
     }
 
     public String getLabel() {
@@ -24,21 +24,24 @@ public class NodeARInformation {
         this.label = label;
     }
 
-    public double getX() {
-        return x;
+    public float getLat() {
+        return lat;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setLat(float lat) {
+        this.lat = lat;
     }
 
-    public double getY() {
-        return y;
+    public float getLon() {
+        return lon;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setLon(float lon) {
+        this.lon = lon;
     }
 
+    public String toString() {
+        return label + " , { "  + lon + " , " + lat + " }\n";
+    }
 
 }
