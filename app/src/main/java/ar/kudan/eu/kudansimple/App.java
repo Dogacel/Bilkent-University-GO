@@ -11,6 +11,7 @@ import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.NodeInformationHandler;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
 import ar.kudan.eu.kudansimple.gps.information.NodeARInformation;
+import ar.kudan.eu.kudansimple.sensor.tools.Compass;
 
 /**
  * App class for executing tasks while app is starting.
@@ -22,6 +23,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         ContainerManager.initialise();
+
+        Compass.init(this.getApplicationContext());
+
 
         //ContainerManager cm = ContainerManager.getInstance();
 
@@ -39,7 +43,7 @@ public class App extends Application {
             Location loc = new Location("dummyprovider");
             loc.setLatitude(inf.getLat());
             loc.setLongitude(inf.getLon());
-            GPSImageTemplate temp = new GPSImageTemplate(inf.getLabel(), "labels/" + inf.getLabel() + ".png", loc, 50, 0, true);
+            GPSImageTemplate temp = new GPSImageTemplate(inf.getLabel(), "labels/" + inf.getLabel() + ".png", loc, 20, 0, true);
             gpsWorldHandler.dumpTemplates(temp);
             temp.scaleByUniform(0.02f);
             temp.show(true);
