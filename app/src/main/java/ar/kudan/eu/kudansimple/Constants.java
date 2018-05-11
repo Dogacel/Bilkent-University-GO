@@ -13,7 +13,7 @@ public abstract class Constants {
     public static final int[][] imageIDs = new int[][]{ // buildings have to be in alphabetical order in here and the
             //building list to keep the program consistent & working
             new int[]{R.drawable.a_building, R.drawable.a_first_floor, R.drawable.a_second_floor}, // A Building
-            new int[]{R.drawable.blank_photo}, // B Building
+            new int[]{R.drawable.building_b}, // B Building //taken from: http://www.hukuk.bilkent.edu.tr/img/1.jpg
             new int[]{R.drawable.blank_photo}, // CAFEIN
             new int[]{R.drawable.blank_photo}, // Dorm 50
             new int[]{R.drawable.blank_photo}, // Dorm 51
@@ -36,7 +36,7 @@ public abstract class Constants {
             new int[]{R.drawable.blank_photo}, // Dorm 77
             new int[]{R.drawable.blank_photo}, // Dorm 78
             new int[]{R.drawable.blank_photo}, // Dormitory GYM
-            new int[]{R.drawable.blank_photo}, // EA
+            new int[]{R.drawable.building_ea}, // EA //taken from: http://mf.bilkent.edu.tr/wp-content/uploads/2014/09/mf_bina-940x360.jpg
             new int[]{R.drawable.blank_photo}, // EE
             new int[]{R.drawable.blank_photo}, // FA / FC
             new int[]{R.drawable.blank_photo}, // FB
@@ -44,9 +44,9 @@ public abstract class Constants {
             new int[]{R.drawable.blank_photo}, // FOOD COURT
             new int[]{R.drawable.blank_photo}, // G
             new int[]{R.drawable.blank_photo}, // L
-            new int[]{R.drawable.blank_photo}, // Libarry
+            new int[]{R.drawable.blank_photo}, // Library
             new int[]{R.drawable.blank_photo}, // Main GYM
-            new int[]{R.drawable.blank_photo}, // Marmara
+            new int[]{R.drawable.building_marmara}, // Marmara //taken from: http://galeri3.arkitera.com/var/albums/Arkiv.com.tr/Proje/butuner-mimarlik/bilkent-universitesi-marmara-restoran/
             new int[]{R.drawable.blank_photo}, // Mayfest
             new int[]{R.drawable.blank_photo}, // Meteksan
             new int[]{R.drawable.blank_photo}, // Nanotam
@@ -55,7 +55,7 @@ public abstract class Constants {
             new int[]{R.drawable.blank_photo}, // SB
             new int[]{R.drawable.blank_photo}, // Student Council
             new int[]{R.drawable.blank_photo}, // UNAM
-            new int[]{R.drawable.blank_photo}, // V
+            new int[]{R.drawable.building_v}, // V taken from: http://oguzhantesisat.com/site/wp-content/uploads/2013/03/proje_1303731504.jpg
 
     };
 
