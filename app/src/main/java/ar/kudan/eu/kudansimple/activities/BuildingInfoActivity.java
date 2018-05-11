@@ -56,16 +56,7 @@ public class BuildingInfoActivity extends AppCompatActivity {
     public void takeMeThere(View v) { // linked to take_there (Button)
 
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
-        String ID = "north";
-        if (building == 1) {
-            ID = "east";
-        } else if (building == 2) {
-            ID = "south";
-        } else if (building == 3) {
-            ID = "west";
-        }
-        gpsWorldHandler.showOnly(ID);
-        Log.d("TEST_CLICK", ID);
+        gpsWorldHandler.showOnly(Integer.toString(building));
 
         Intent intent = new Intent(this, ARViewActivity.class);
         intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
