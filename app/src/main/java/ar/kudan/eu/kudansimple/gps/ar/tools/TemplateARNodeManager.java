@@ -46,7 +46,7 @@ public class TemplateARNodeManager {
         float bearing = template.getBearing();
         boolean isStatic = template.isStatic();
 
-        GPSImageTemplate gin = new GPSImageTemplate(ID, pic, location, height, bearing, isStatic);
+        GPSImageTemplate gin = new GPSImageTemplate(ID, pic, location, -height, bearing, isStatic);
         gin.scaleByUniform(template.getLastScale());
         gin.show(template.getStaticVisibility());
 

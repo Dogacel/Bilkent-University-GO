@@ -50,8 +50,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
         this.arWorld.setVisible(false);
         interpolateMotionUsingHeading = false;
 
-        bearingNorth = new Bearing();
-        bearingNorth.setDegrees(-Compass.getInstance().getCurrentBearing());
+        bearingNorth = Compass.getFixedNorthBearing();
 
         if (playLocationManager == null)
             playLocationManager = new PlayLocationManager(activity, this);
@@ -81,6 +80,8 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
      * Destroys the manager.
      */
     public void destroy() {
+
+        bearingNorth.reSet();
         playLocationManager.stop();
     }
 

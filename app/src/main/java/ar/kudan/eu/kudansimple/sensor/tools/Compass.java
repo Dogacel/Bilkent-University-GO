@@ -17,6 +17,7 @@ public class Compass {
     public static Compass instance;
 
     private Bearing currentBearing;
+    private static Bearing fixedNorthBearing;
 
 
     /**
@@ -26,6 +27,7 @@ public class Compass {
      */
     public Compass(Context activity) {
         currentBearing = new Bearing();
+        fixedNorthBearing = new Bearing();
 
         DSensorManager.startDProcessedSensor(activity.getApplicationContext(), DProcessedSensor.TYPE_3D_COMPASS,
                 new DProcessedEventListener() {
@@ -34,6 +36,10 @@ public class Compass {
                         float degrees = (float) Math.toDegrees(dSensorEvent.values[0]);
                         currentBearing.setDegrees(degrees > 0 ? degrees : 360 + degrees);
                         Log.d("COMPASS", "3D : " + currentBearing.getDegrees());
+                        if (!fixedNorthBearing.isSet() && currentBearing.getDegrees() != 0) {
+                            fixedNorthBearing.setDegrees(-currentBearing.getDegrees());
+                            fixedNorthBearing.setSet();
+                        }
                     }
                 });
 
@@ -52,6 +58,10 @@ public class Compass {
 
     public static Compass getInstance() {
         return instance;
+    }
+
+    public static Bearing getFixedNorthBearing() {
+        return fixedNorthBearing;
     }
 
     /**
