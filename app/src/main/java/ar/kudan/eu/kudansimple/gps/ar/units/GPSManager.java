@@ -26,7 +26,6 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
     static Vector3f northVector;
     private static Bearing bearingNorth;
 
-    private Compass compass;
     private ARWorld arWorld; //Current world.
     private PlayLocationManager playLocationManager;
     private Location previousLocation; //Last location retrieved.
@@ -52,14 +51,10 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
         interpolateMotionUsingHeading = false;
 
         bearingNorth = new Bearing();
-        compass = new Compass(activity, bearingNorth);
+        bearingNorth.setDegrees(Compass.getInstance().getCurrentBearing());
 
         if (playLocationManager == null)
             playLocationManager = new PlayLocationManager(activity, this);
-    }
-
-    public Compass getCompass() {
-        return compass;
     }
 
     /**
@@ -86,7 +81,6 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
      * Destroys the manager.
      */
     public void destroy() {
-        compass.destroy();
         playLocationManager.stop();
     }
 
@@ -141,7 +135,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
      * @return bearing to north in degrees.
      */
     public float getBearingToNorth() {
-        return compass.getCurrentBearing();
+        return Compass.getInstance().getCurrentBearing();
     }
 
     /**

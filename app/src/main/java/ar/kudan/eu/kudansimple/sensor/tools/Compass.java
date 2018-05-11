@@ -1,6 +1,7 @@
 package ar.kudan.eu.kudansimple.sensor.tools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.hoan.dsensor_master.DProcessedSensor;
@@ -8,22 +9,22 @@ import com.hoan.dsensor_master.DSensorEvent;
 import com.hoan.dsensor_master.DSensorManager;
 import com.hoan.dsensor_master.interfaces.DProcessedEventListener;
 
+import ar.kudan.eu.kudansimple.Constants;
 import ar.kudan.eu.kudansimple.sensor.Bearing;
 
 public class Compass {
 
-    private Bearing fixedNorthBearing;
+    public static Compass instance;
+
     private Bearing currentBearing;
 
 
     /**
      * Constructor for compass class.
      *
-     * @param activity           Current activity working.
-     * @param aBearing A fixedNorthBearing object for storing fixedNorthBearing to north in the beginning.
+     * @param activity           Current context working.
      */
-    public Compass(Activity activity, Bearing aBearing) {
-        this.fixedNorthBearing = aBearing;
+    public Compass(Context activity) {
         currentBearing = new Bearing();
 
         DSensorManager.startDProcessedSensor(activity.getApplicationContext(), DProcessedSensor.TYPE_3D_COMPASS,
@@ -33,12 +34,6 @@ public class Compass {
                         float degrees = (float) Math.toDegrees(dSensorEvent.values[0]);
                         currentBearing.setDegrees(degrees > 0 ? degrees : 360 + degrees);
                         Log.d("COMPASS", "3D : " + currentBearing.getDegrees());
-
-                        if (!fixedNorthBearing.isSet()) {
-                            fixedNorthBearing.setSet();
-                            fixedNorthBearing.setDegrees(-currentBearing.getDegrees());
-                            Log.d("COMPASS", "Set fixedNorthBearing to " + fixedNorthBearing.getDegrees());
-                        }
                     }
                 });
 
@@ -49,16 +44,14 @@ public class Compass {
      */
     public void destroy() {
         DSensorManager.stopDSensor();
-        fixedNorthBearing.reSet();
     }
 
-    /**
-     * Get current fixedNorthBearing to north fixed.
-     *
-     * @return fixed fixedNorthBearing to north
-     */
-    public float getFixedNorthBearing() {
-        return fixedNorthBearing.getDegrees();
+    public static void init(Context a) {
+        instance = new Compass(a);
+    }
+
+    public static Compass getInstance() {
+        return instance;
     }
 
     /**
