@@ -59,51 +59,51 @@ public abstract class Constants {
 
     };
 
-    public static final String[][] infoStrings = new String[][]{ // building name , departments, num_floors, free labs
-            new String[]{"A Building", "not specified", "not specified", "not specified"}, // A Building
-            new String[]{"B Building", "not specified", "not specified", "not specified"}, // B Building
-            new String[]{"CAFEIN", "not specified", "not specified", "not specified"}, // CAFEIN
-            new String[]{"Dorm 50", "not specified", "not specified", "not specified"}, // Dorm 50
-            new String[]{"Dorm 51", "not specified", "not specified", "not specified"}, // Dorm 51
-            new String[]{"Dorm 52", "not specified", "not specified", "not specified"}, // Dorm 52
-            new String[]{"Dorm 54", "not specified", "not specified", "not specified"}, // Dorm 54
-            new String[]{"Dorm 55", "not specified", "not specified", "not specified"}, // Dorm 55
-            new String[]{"Dorm 60", "not specified", "not specified", "not specified"}, // Dorm 60
-            new String[]{"Dorm 61", "not specified", "not specified", "not specified"}, // Dorm 61
-            new String[]{"Dorm 62", "not specified", "not specified", "not specified"}, // Dorm 62
-            new String[]{"Dorm 63", "not specified", "not specified", "not specified"}, // Dorm 63
-            new String[]{"Dorm 64", "not specified", "not specified", "not specified"}, // Dorm 64
-            new String[]{"Dorm 69", "not specified", "not specified", "not specified"}, // Dorm 69
-            new String[]{"Dorm 70", "not specified", "not specified", "not specified"}, // Dorm 70
-            new String[]{"Dorm 71", "not specified", "not specified", "not specified"}, // Dorm 71
-            new String[]{"Dorm 72", "not specified", "not specified", "not specified"}, // Dorm 72
-            new String[]{"Dorm 73", "not specified", "not specified", "not specified"}, // Dorm 73
-            new String[]{"Dorm 74", "not specified", "not specified", "not specified"}, // Dorm 74
-            new String[]{"Dorm 75", "not specified", "not specified", "not specified"}, // Dorm 75
-            new String[]{"Dorm 76", "not specified", "not specified", "not specified"}, // Dorm 76
-            new String[]{"Dorm 77", "not specified", "not specified", "not specified"}, // Dorm 77
-            new String[]{"Dorm 78", "not specified", "not specified", "not specified"}, // Dorm 78
-            new String[]{"Dormitory Sports Hall", "not specified", "not specified", "not specified"}, // Dormitory GYM
-            new String[]{"EA Building", "not specified", "not specified", "not specified"}, // EA
-            new String[]{"EE Building", "not specified", "not specified", "not specified"}, // EE
-            new String[]{"FA/FC Building", "not specified", "not specified", "not specified"}, // FA / FC
-            new String[]{"FB Building", "not specified", "not specified", "not specified"}, // FB
-            new String[]{"FF Building", "not specified", "not specified", "not specified"}, // FF
-            new String[]{"Food Court", "not specified", "not specified", "not specified"}, // FOOD COURT
-            new String[]{"G Building", "not specified", "not specified", "not specified"}, // G
-            new String[]{"L Building", "not specified", "not specified", "not specified"}, // L
-            new String[]{"Library", "not specified", "not specified", "not specified"},    // Library
-            new String[]{"Main Sports Hall", "not specified", "not specified", "not specified"}, // Main GYM
-            new String[]{"Maramara Table d'hote", "not specified", "not specified", "not specified"}, // Marmara
-            new String[]{"Mayfest", "not specified", "not specified", "not specified"}, // Mayfest
-            new String[]{"Meteksan Market", "not specified", "not specified", "not specified"}, // Meteksan
-            new String[]{"Nanotam", "not specified", "not specified", "not specified"}, // Nanotam
-            new String[]{"Prayer's Room", "not specified", "not specified", "not specified"}, // Prayer
-            new String[]{"SA Building", "not specified", "not specified", "not specified"}, // SA
-            new String[]{"SB Building", "not specified", "not specified", "not specified"}, // SB
-            new String[]{"Student Council", "not specified", "not specified", "not specified"}, // Student Council
-            new String[]{"UNAM", "not specified", "not specified", "not specified"}, // UNAM
-            new String[]{"V Building", "not specified", "not specified", "not specified"}, // V
+    public static final String[][] infoStrings = new String[][]{ // building name , departments, num_floors, studying spots
+            new String[]{"A Building", "Faculty of Social Sciences", "4", "desks on the first floor and second floor"}, // A Building
+            new String[]{"B Building", "Law Faculty", "4", "free labs 301-307, \ndesks behind the stairs on the first floor, \nfree lab next to Mozart Cafe"}, // B Building
+            new String[]{"CAFEIN", "-", "1", "-"}, // CAFEIN
+            new String[]{"Dorm 50", "dorm", "4", "study room"}, // Dorm 50
+            new String[]{"Dorm 51", "dorm", "4", "study room"}, // Dorm 51
+            new String[]{"Dorm 52", "dorm", "4", "study room"}, // Dorm 52
+            new String[]{"Dorm 54", "dorm", "6", "study room"}, // Dorm 54
+            new String[]{"Dorm 55", "dorm", "6", "study room"}, // Dorm 55
+            new String[]{"Dorm 60", "dorm", "4", "study room"}, // Dorm 60
+            new String[]{"Dorm 61", "dorm", "4", "study room"}, // Dorm 61
+            new String[]{"Dorm 62", "dorm", "4", "study room"}, // Dorm 62
+            new String[]{"Dorm 63", "dorm", "4", "study room"}, // Dorm 63
+            new String[]{"Dorm 64", "dorm", "4", "study room"}, // Dorm 64
+            new String[]{"Dorm 69", "dorm", "5", "study room"}, // Dorm 69
+            new String[]{"Dorm 70", "dorm", "5", "study room"}, // Dorm 70
+            new String[]{"Dorm 71", "dorm", "6", "study room"}, // Dorm 71
+            new String[]{"Dorm 72", "dorm", "6", "study room"}, // Dorm 72
+            new String[]{"Dorm 73", "dorm", "6", "study room"}, // Dorm 73
+            new String[]{"Dorm 74", "dorm", "6", "study room"}, // Dorm 74
+            new String[]{"Dorm 75", "dorm", "4", "study room"}, // Dorm 75
+            new String[]{"Dorm 76", "dorm", "4", "study room"}, // Dorm 76
+            new String[]{"Dorm 77", "dorm", "4", "study room"}, // Dorm 77
+            new String[]{"Dorm 78", "dorm", "4", "study room"}, // Dorm 78
+            new String[]{"Dormitory Sports Hall", "sports center for the dorms", "3", "-"}, // Dormitory GYM
+            new String[]{"EA Building", "Faculty of Engineering", "5", "desks on every floor"}, // EA
+            new String[]{"EE Building", "Faculty of Electrical and Electronics Engineering", "5", "desks on the second floor"}, // EE
+            new String[]{"FA/FC Building", "Faculty of Art", "4", "desks on the first floor, studios on every floor"}, // FA / FC
+            new String[]{"FB Building", "Faculty of Art", "3", "studios"}, // FB
+            new String[]{"FF Building", "Faculty of Architecture", "4", "studios"}, // FF
+            new String[]{"Food Court", "-", "-", "-"}, // FOOD COURT
+            new String[]{"G Building", "Faculty of Education", "3", "free labs, desks, reading room"}, // G
+            new String[]{"L Building", "Faculty of Languages", "2", "desks"}, // L
+            new String[]{"Library", "the library with two buildings connected with a bridge", "6", "individual or group desks on every floor"},    // Library
+            new String[]{"Main Sports Hall", "sports center for the main campus", "2", "-"}, // Main GYM
+            new String[]{"Maramara Table d'hote", "a cafeteria", "2", "-"}, // Marmara
+            new String[]{"Mayfest", "a grass field festival area", "-", "-"}, // Mayfest
+            new String[]{"Meteksan Market", "a grocery store for the campus", "1", "-"}, // Meteksan
+            new String[]{"Nanotam", "Bilkent University Nanotechnology Research Center", "3", "-"}, // Nanotam
+            new String[]{"Prayer's Room", "prayer's room of the campus", "1", "-"}, // Prayer
+            new String[]{"SA Building", "Faculty of Science A block", "3", "desks on every floor"}, // SA
+            new String[]{"SB Building", "Faculty of Science B block", "2", "-"}, // SB
+            new String[]{"Student Council", "Student Council containing every student club", "1", "-"}, // Student Council
+            new String[]{"UNAM", "National Nanotechnology Research Center", "5", "-"}, // UNAM
+            new String[]{"V Building", "a building containing large lecture halls", "3", "-"}, // V
     };
 
 }
