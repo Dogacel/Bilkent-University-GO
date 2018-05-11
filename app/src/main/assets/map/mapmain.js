@@ -35,13 +35,19 @@ request.open('GET', geoURL);
 request.responseType = 'json';
 request.send();
 
+/**
+ * onLoad function of the XMLHTTPRequest
+ */
 request.onload = function () {
     var geo = request.response;
     addSelectIndexes(geo);
 }
 
 
-//adds select indexes
+/**
+ * adds select indexes from given array
+ * @param {json} arr 
+ */
 function addSelectIndexes(arr) {
     html = '';
     html += "<option value=[\"32.748428\",\"39.86800\"] > Bilkent </option>";
@@ -54,6 +60,10 @@ function addSelectIndexes(arr) {
 }
 
 
+/**
+ * returns middle point of given coordinates
+ * @param {String array} arrr 
+ */
 function middlePointArray(arrr) {
     //returns as string solved it a month ago but cant remember how it works maybe solve it in the future
     //look at the point where I define all building it solution is there
@@ -101,7 +111,7 @@ var selectLayer = new ol.style.Style({
     })
 })
 
-var selectInteraction = new ol.interaction.Select({
+var selectInteraction = new ol.interaction.Select({//Select Interaction
     condition: ol.events.condition.singleClick,
     toggleCondition: ol.events.condition.never,
     layers: function (layer) {
@@ -150,6 +160,10 @@ map.getInteractions().extend([selectInteraction]);
 var selected;
 var selectedId;
 
+
+/**
+ * map on click function highlights buildings
+ */
 map.on('pointermove', function (evt) {
     if (evt.dragging) {
         return;
@@ -159,12 +173,19 @@ map.on('pointermove', function (evt) {
 });
 
 
+/**
+ * map on click function gets the building info
+ */
 map.on('singleclick', function (evt) {
     var coordinate = evt.coordinate;
     displayFeatureInfo(evt.pixel, coordinate);
 });
 
-
+/**
+ * displays feature info
+ * @param {given pixe} pixel 
+ * @param {coordinate array} coordinate 
+ */
 var displayFeatureInfo = function (pixel, coordinate) {
     var feature = map.forEachFeatureAtPixel(pixel, function (feature) {
         return feature;
@@ -198,6 +219,11 @@ var displayFeatureInfo = function (pixel, coordinate) {
 //--------------------------------------------------
 
 var imgHtml =  "<img width='30px' src='CloseWindowGr48.png' />";
+/**
+ * updates popup
+ * @param {string} buildingName 
+ * @param {string} buildingSubTitle 
+ */
 function show(buildingName, buildingSubTitle)
 {
     document.getElementById('popup').style.display = "block";
@@ -212,12 +238,18 @@ function show(buildingName, buildingSubTitle)
     document.getElementById('popup-content').innerHTML =  html;
 }
 
+/**
+ * popup buttons
+ */
 function panelButton(){
     console.log(selectedId + '==' + selected);
     Android.showToast(selectedId);
     Android.goPanel(selectedId);
 };
 
+/**
+ * hides the popup
+ */
 function hide()
 {
     document.getElementById('popup').style.display = "none";
