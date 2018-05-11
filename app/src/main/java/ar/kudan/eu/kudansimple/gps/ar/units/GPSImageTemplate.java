@@ -13,7 +13,7 @@ public class GPSImageTemplate {
     private boolean isStatic;
 
     private float scale;
-    private boolean visible;
+    private boolean visible, isForceShow;
 
     /**
      * GPSImageNode template for initilaising in the ARView.
@@ -34,6 +34,14 @@ public class GPSImageTemplate {
         this.isStatic = isStatic;
         scale = 1;
         visible = true;
+    }
+
+    public boolean isForceShow() {
+        return isForceShow;
+    }
+
+    public void forceShow() {
+        isForceShow = true;
     }
 
     /**

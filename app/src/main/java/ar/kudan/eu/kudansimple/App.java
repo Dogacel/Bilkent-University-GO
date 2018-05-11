@@ -24,8 +24,6 @@ public class App extends Application {
         super.onCreate();
         ContainerManager.initialise();
 
-        Compass.init(this.getApplicationContext());
-
 
         //ContainerManager cm = ContainerManager.getInstance();
 

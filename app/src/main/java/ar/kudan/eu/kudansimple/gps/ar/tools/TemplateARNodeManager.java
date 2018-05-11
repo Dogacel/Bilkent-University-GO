@@ -27,6 +27,8 @@ public class TemplateARNodeManager {
         gin.setStaticVisibility(template.isVisible());
         Log.d("TEST_CLICK", ID + template.isVisible());
 
+        if (template.isForceShow())
+            gin.forceShow();
         return gin;
     }
 

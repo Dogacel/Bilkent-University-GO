@@ -6,47 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".activities.BuildingListActivity">
 
-    <LinearLayout
-        android:id="@+id/list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43">
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.43">
 
-        <Button
-            android:id="@+id/button_A"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="buttonClicked"
-            android:text="A Building" />
 
-        <Button
-            android:id="@+id/button_B"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="buttonClicked"
-            android:text="B Building" />
-
-        <Button
-            android:id="@+id/button_FF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="buttonClicked"
-            android:text="FF Building"
-            tools:layout_editor_absoluteX="94dp"
-            tools:layout_editor_absoluteY="111dp" />
-
-    </LinearLayout>
-
+                </LinearLayout>
+        </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -81,6 +81,10 @@ public class GPSImageNode extends ARImageNode {
         this.scale = scale;
     }
 
+    public void forceShow() {
+        forceShow = true;
+    }
+
     /**
      * Returns the ID of the node
      *
@@ -274,12 +278,9 @@ public class GPSImageNode extends ARImageNode {
 
         float distanceToObject = gpsLocation.distanceTo(currentLocation); //In meters
 
-        if (distanceToObject >= 250)
-            tooFar = true;
-        else
-            tooFar = false;
+        tooFar = distanceToObject >= 250;
+        show(getStaticVisibility());
 
-        show(true);
         float bearingToObject = GPSManager.bearingFrom(gpsLocation, currentLocation); //In degrees
 
         this.lastBearing = bearingToObject;

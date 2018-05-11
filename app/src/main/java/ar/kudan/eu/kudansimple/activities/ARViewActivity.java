@@ -24,6 +24,7 @@ import ar.kudan.eu.kudansimple.gps.ar.tools.DirectionArrow;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageNode;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSManager;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
+import ar.kudan.eu.kudansimple.sensor.tools.Compass;
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARView;
 import eu.kudan.kudan.ARWorld;
@@ -52,6 +53,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Compass.getInstance().destroy();
         gpsManager.destroy();
         gpsWorldHandler.saveState();
     }
@@ -77,6 +79,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     @Override
     public void setup() {
         super.setup();
+
+        Compass.init(this.getApplicationContext());
 
         //only attempt to setup if the permissions are granted!
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&

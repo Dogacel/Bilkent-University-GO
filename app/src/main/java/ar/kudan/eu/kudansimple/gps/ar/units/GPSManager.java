@@ -51,7 +51,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
         interpolateMotionUsingHeading = false;
 
         bearingNorth = new Bearing();
-        bearingNorth.setDegrees(Compass.getInstance().getCurrentBearing());
+        bearingNorth.setDegrees(-Compass.getInstance().getCurrentBearing());
 
         if (playLocationManager == null)
             playLocationManager = new PlayLocationManager(activity, this);

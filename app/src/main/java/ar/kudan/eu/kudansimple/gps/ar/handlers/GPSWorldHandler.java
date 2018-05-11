@@ -160,7 +160,7 @@ public class GPSWorldHandler {
     /**
      * Hides all objects in the list.
      */
-    private void hideAll() {
+    public void hideAll() {
         for (GPSImageTemplate gpsImageNode : templateList) {
             gpsImageNode.show(false);
         }
@@ -186,6 +186,7 @@ public class GPSWorldHandler {
         for (GPSImageTemplate gin : templateList) {
             if (gin.getID().equals(ID)) {
                 show(gin);
+                gin.forceShow();
             }
         }
     }
