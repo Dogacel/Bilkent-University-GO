@@ -6,7 +6,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +37,9 @@ public class BuildingInfoActivity extends AppCompatActivity {
         //setting the info texts
         if (infoTexts.length == 4) { // to prevent any errors to be caused by lack of information
             ((TextView) findViewById(R.id.building_name)).setText(infoTexts[0]);
-            ((TextView) findViewById(R.id.departments_info)).setText(infoTexts[1]);
+            ((TextView) findViewById(R.id.building_function_info)).setText(infoTexts[1]);
             ((TextView) findViewById(R.id.num_floors_info)).setText(infoTexts[2]);
-            ((TextView) findViewById(R.id.free_labs_info)).setText(infoTexts[3]);
+            ((TextView) findViewById(R.id.study_spaces_info)).setText(infoTexts[3]);
         }
 
         if (intent.getStringExtra(Constants.EXTRA_MESSAGE_SOURCE).equals(ARViewActivity.IS_SOURCE)) {

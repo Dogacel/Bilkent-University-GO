@@ -31,20 +31,13 @@ public class WebAppInterface {
         Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
+    @JavascriptInterface
     public void goPanel(String building) {
+        showToast(building);
         Intent intent = new Intent(mContext, BuildingInfoActivity.class);
-        intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, buildingNameToNumber(building));
+        intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.parseInt(building));
         intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, MapActivity.IS_SOURCE);
-    }
-
-    private int buildingNameToNumber(String name) { // the map provides the building name, the info panel uses the building number,
-        //this method patches things up
-        for (int i = 0; i < Constants.infoStrings.length; i++) {
-            if (Constants.infoStrings[i][0].equals(name)) { // compares the name string for each building with name
-                return i;
-            }
-        }
-        return -1;
+        mContext.startActivity(intent);
     }
 
 
