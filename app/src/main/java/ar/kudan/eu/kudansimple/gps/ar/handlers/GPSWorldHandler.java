@@ -201,6 +201,9 @@ public class GPSWorldHandler {
 
         ArrayList<GPSImageNode> list = this.getGpsObjectList();
 
+        if (list == null)
+            return null;
+
         for (GPSImageNode node : list) {
             //Log.d("TOUCH_EVENT", );
             if (node.getVisible()) {

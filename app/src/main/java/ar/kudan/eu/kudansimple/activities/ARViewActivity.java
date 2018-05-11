@@ -140,11 +140,13 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
             Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, BuildingInfoActivity.class);
-            intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
-            intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.parseInt(id));
-            startActivity(intent);
-
+            if (id != null) {
+                Intent intent = new Intent(this, BuildingInfoActivity.class);
+                intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
+                intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.parseInt(id));
+                startActivity(intent);
+            }
+            
             Log.d("TOUCH_EVENT", "TOUCH END ----------");
 
 
