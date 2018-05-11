@@ -7,7 +7,6 @@ import android.view.View;
 
 import ar.kudan.eu.kudansimple.Constants;
 import ar.kudan.eu.kudansimple.ContainerManager;
-import ar.kudan.eu.kudansimple.Credits;
 import ar.kudan.eu.kudansimple.R;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 
