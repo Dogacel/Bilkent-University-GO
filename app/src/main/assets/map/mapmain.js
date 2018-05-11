@@ -243,7 +243,7 @@ function show(buildingName, buildingSubTitle)
  */
 function panelButton(){
     console.log(selectedId + '==' + selected);
-    Android.showToast(selectedId);
+    //Android.showToast(selectedId);
     Android.goPanel(selectedId);
 };
 
@@ -313,7 +313,7 @@ function updateFromAndroid(lon, lat) {
     var point = new ol.proj.fromLonLat(coor);
     //flyTo(point, function(){}, 16);
 
-    Android.showToast(lon + "==Hello==" + lat);
+    //Android.showToast(lon + "==Hello==" + lat);
     locFeature.setGeometry( new ol.geom.Point(point));
 }
 
