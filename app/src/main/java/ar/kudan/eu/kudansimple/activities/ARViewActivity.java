@@ -135,10 +135,9 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
             Log.d("TOUCH_EVENT", "TOUCH START -------");
             gestureDetector.onTouchEvent(motionEvent);
 
-            //TODO: Open the view.
             String id = gpsWorldHandler.getFocusedVisibleGPSObject(this.getARView(), motionEvent).getID();
 
-            Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 
             if (id != null) {
                 Intent intent = new Intent(this, BuildingInfoActivity.class);
@@ -146,7 +145,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
                 intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.parseInt(id));
                 startActivity(intent);
             }
-            
+
             Log.d("TOUCH_EVENT", "TOUCH END ----------");
 
 
