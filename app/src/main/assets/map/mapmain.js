@@ -28,9 +28,9 @@ closer.onclick = function () {
 
 
 // Githuba yüklerken ata.yurtsever kalsın
-//var geoURL = 'http://ata.yurtsever.ug.bilkent.edu.tr/map.geojson';
+var geoURL = 'http://ata.yurtsever.ug.bilkent.edu.tr/map.geojson';
 
-var geoURL = 'https://raw.githubusercontent.com/Dogacel/teamazm-cs102/master/app/src/main/res/raw/map.geojson?token=AioIuoMy1dZBgyAWXXApORDeuNRqM9Xyks5a_tcDwA%3D%3D';
+//var geoURL = 'https://raw.githubusercontent.com/Dogacel/teamazm-cs102/master/app/src/main/res/raw/map.geojson?token=AioIuoMy1dZBgyAWXXApORDeuNRqM9Xyks5a_tcDwA%3D%3D';
 
 
 //request and take geoUrl json
