@@ -7,11 +7,13 @@ import android.view.View;
 
 import ar.kudan.eu.kudansimple.Constants;
 import ar.kudan.eu.kudansimple.ContainerManager;
+import ar.kudan.eu.kudansimple.Credits;
 import ar.kudan.eu.kudansimple.R;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 
 public class MainMenuActivity extends AppCompatActivity {
     public static final String IS_SOURCE = "MainMenuActivity is the source for this intent";
+    public static final String EXTRA_MESSAGE = "credits";
 
     private Intent mapIntent, arIntent;
 
@@ -40,7 +42,10 @@ public class MainMenuActivity extends AppCompatActivity {
         arIntent = new Intent(this, ARViewActivity.class);
         arIntent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
         startActivity(arIntent);
+    }
 
-
+    public void showCredits(View view) { //linked to button_credits
+        Intent intent = new Intent(this, Credits.class);
+        startActivity(intent);
     }
 }

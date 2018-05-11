@@ -6,4 +6,7 @@
 
     <!--bugo colour-->
     <color name="bugoColor">#303144</color>
+    <!--the background colour-->
+    <color name="background">#F0F3F4</color> <!--240, 243, 244-->
+
 </resources>
