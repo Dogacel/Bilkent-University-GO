@@ -109,12 +109,12 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         gpsManager.start();
 
         /*
-            DirectionArrow arrow = new DirectionArrow(gpsManager.getCompass());
-            arrow.setVisible(true);
+        TODO: Arrow
+        DirectionArrow arrow = new DirectionArrow(75);
+        arrow.setVisible(true);
 
-            currentWorld.addChild(arrow);
-
-         */
+        currentWorld.addChild(arrow);
+        */
 
         //Initializes the world from the preloaded templates.
         gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
