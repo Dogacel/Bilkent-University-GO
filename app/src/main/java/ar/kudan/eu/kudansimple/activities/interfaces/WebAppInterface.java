@@ -27,7 +27,7 @@ public class WebAppInterface {
      * Show a toast from the web page
      */
     @JavascriptInterface
-    private void showToast(String toast) {
+    public void showToast(String toast) {
         Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
@@ -37,7 +37,7 @@ public class WebAppInterface {
      */
     @JavascriptInterface
     public void goPanel(String building) {
-        showToast(building);
+        //showToast(building);
         Intent intent = new Intent(mContext, BuildingInfoActivity.class);
         intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.parseInt(building));
         intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, MapActivity.IS_SOURCE);

@@ -247,8 +247,8 @@ function show(buildingName, buildingSubTitle)
  */
 function panelButton(){
     console.log(selectedId + '==' + selected);
-    Android.showToast(selectedId);
-    Android.goPanel(selectedId);
+    Android.showToast('' + selectedId);
+    Android.goPanel('' + selectedId);
 };
 
 /**
