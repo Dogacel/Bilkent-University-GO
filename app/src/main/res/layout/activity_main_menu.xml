@@ -13,8 +13,7 @@
         android:id="@+id/rootRL"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true" >
 
         <!--the bugo text-->
 
@@ -24,7 +23,7 @@
             android:layout_height="76dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:text="@string/menu_welcome_txt"
             android:textColor="@color/bugoColor"
             android:textSize="30sp" />
@@ -61,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rootRL"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="135dp"
         android:layout_marginBottom="1dp"
         android:background="@drawable/button_location_colour2"
         android:onClick="openMap"

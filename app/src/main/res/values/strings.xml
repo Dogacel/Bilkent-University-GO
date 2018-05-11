@@ -19,7 +19,7 @@
     <string name="credits_teamAzm">Team AZM</string>
     <string name="credits_names"> \nDoğaç Eldenk \nFaruk Balcı \nMehmet Ata Yurtsever \nAdile Büşra Ünver \nIşın Su Ecevit \nCem Cebeci \nCan Cebeci</string>
     <string name="credits_title">Credits</string>
-    <string name="credits_course_info">\n Created for Bilkent University CS102 course. \n\n Instructor: David Davenport \n\n TA: Cihan Eryonucu \n\n 2017-2018 Spring Semester</string>
+    <string name="credits_course_info">\nCreated for Bilkent University CS102 course. \n\nInstructor: David Davenport \n\nTA: Cihan Eryonucu \n\n 2017-2018 Spring Semester</string>
 
     <!--building info page-->
     <string name="button_take_me_there">Take Me There</string>

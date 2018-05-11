@@ -14,7 +14,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -22,7 +22,8 @@
         <activity
             android:name=".activities.MainMenuActivity"
             android:label="BuGO"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +34,8 @@
         <activity android:name=".activities.BuildingListActivity" />
         <activity android:name=".activities.MapActivity" />
         <activity android:name=".activities.ARViewActivity" />
-        <activity android:name=".Credits"></activity>
+        <activity android:name=".Credits"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
