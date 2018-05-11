@@ -1,6 +1,7 @@
 package ar.kudan.eu.kudansimple.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -30,12 +31,22 @@ public class BuildingListActivity extends AppCompatActivity implements View.OnCl
         buttons = new Button[Constants.NUM_BUILDINGS];
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = new Button(this);
-            buttons[i].setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0,0,0,1);
+            buttons[i].setLayoutParams(params);
             buttons[i].setText(Constants.infoStrings[i][0]);
+            buttons[i].setBackgroundColor(Color.parseColor("#303145"));
+            buttons[i].setTextColor(getResources().getColor(R.color.background));
+
             buttons[i].setId(i);
             buttons[i].setOnClickListener(this);
             layout.addView(buttons[i]);
         }
+
+        Button bottomRow = new Button(this);
+        bottomRow.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        bottomRow.setTextColor(getResources().getColor(R.color.background));
+        layout.addView(bottomRow);
 
     }
 
