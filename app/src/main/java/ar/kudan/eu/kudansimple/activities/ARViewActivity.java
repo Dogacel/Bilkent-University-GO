@@ -1,6 +1,7 @@
 package ar.kudan.eu.kudansimple.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ar.kudan.eu.kudansimple.Constants;
 import ar.kudan.eu.kudansimple.ContainerManager;
 import ar.kudan.eu.kudansimple.gps.ar.tools.ARHelper;
 import ar.kudan.eu.kudansimple.gps.ar.tools.DirectionArrow;
@@ -31,7 +33,7 @@ import eu.kudan.kudan.ARWorld;
  */
 public class ARViewActivity extends ARActivity implements GestureDetector.OnGestureListener {
 
-    public static final String IS_SOURCE = "ARActivity is the source for this intent";
+    public static final String IS_SOURCE = "ARViewActivity is the source for this intent";
     private static final int MY_PERMISSIONS_REQUEST_CAMERA_AND_FINE_LOCATION = 100;
     private GestureDetectorCompat gestureDetector;
 
@@ -133,6 +135,11 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
             String id = gpsWorldHandler.getFocusedVisibleGPSObject(this.getARView(), motionEvent).getID();
 
             Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, BuildingInfoActivity.class);
+            intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
+            intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, id);
+            startActivity(intent);
 
             Log.d("TOUCH_EVENT", "TOUCH END ----------");
 

@@ -39,52 +39,13 @@ public class App extends Application {
             Location loc = new Location("dummyprovider");
             loc.setLatitude(inf.getLat());
             loc.setLongitude(inf.getLon());
-            GPSImageTemplate temp = new GPSImageTemplate(inf.getLabel(), "labels/" + inf.getLabel() + ".png", loc, 5, 0, true);
+            GPSImageTemplate temp = new GPSImageTemplate(inf.getLabel(), "labels/" + inf.getLabel() + ".png", loc, 50, 0, true);
             gpsWorldHandler.dumpTemplates(temp);
             temp.scaleByUniform(0.02f);
             temp.show(true);
             Log.d("TEST_NODES", inf.toString());
 
         }
-
-        //North Node
-        Location northL = new Location("dummyprovider");
-        northL.setLatitude(39.866699);
-        northL.setLongitude(32.748784);
-        GPSImageTemplate north = new GPSImageTemplate("north", "North.png", northL, 5, 0, true);
-        gpsWorldHandler.dumpTemplates(north);
-        north.scaleByUniform(0.05f);
-        north.show(true);
-
-
-        //South Node
-        Location southL = new Location("dummyprovider");
-        southL.setLatitude(39.861362);
-        southL.setLongitude(32.748870);
-        GPSImageTemplate south = new GPSImageTemplate("south", "South.png", southL, 5, 90, true);
-        gpsWorldHandler.dumpTemplates(south);
-        south.scaleByUniform(0.05f);
-        south.show(true);
-
-
-        //West Node
-        Location westL = new Location("dummyprovider");
-        westL.setLatitude(39.864003);
-        westL.setLongitude(32.744766);
-        GPSImageTemplate west = new GPSImageTemplate("west", "West.png", westL, 5, 180, true);
-        gpsWorldHandler.dumpTemplates(west);
-        west.scaleByUniform(0.05f);
-        west.show(true);
-
-
-        //East Node
-        Location eastL = new Location("dummyprovider");
-        eastL.setLatitude(39.863903);
-        eastL.setLongitude(32.751890);
-        GPSImageTemplate east = new GPSImageTemplate("east", "East.png", eastL, 5, 0, true);
-        gpsWorldHandler.dumpTemplates(east);
-        east.scaleByUniform(0.05f);
-        east.show(true);
 
 
     }
