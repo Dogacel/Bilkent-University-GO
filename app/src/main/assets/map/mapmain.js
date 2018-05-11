@@ -27,8 +27,12 @@ closer.onclick = function () {
 //*****************************************************************************************************
 
 
+// Githuba yüklerken ata.yurtsever kalsın
+//var geoURL = 'http://ata.yurtsever.ug.bilkent.edu.tr/map.geojson';
 
-var geoURL = 'http://ata.yurtsever.ug.bilkent.edu.tr/map.geojson';
+var geoURL = 'https://raw.githubusercontent.com/Dogacel/teamazm-cs102/master/app/src/main/res/raw/map.geojson?token=AioIuoMy1dZBgyAWXXApORDeuNRqM9Xyks5a_tcDwA%3D%3D';
+
+
 //request and take geoUrl json
 var request = new XMLHttpRequest();
 request.open('GET', geoURL);
@@ -106,7 +110,7 @@ var vector = new ol.layer.Vector({//geojson vectors
 //Select layer
 var selectLayer = new ol.style.Style({
     stroke: new ol.style.Stroke({
-        color: '#5DA07A',
+        color: '#303144',//stroke color
         width: 2.5
     })
 })

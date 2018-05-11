@@ -8,14 +8,14 @@
     position: absolute;
     top: 2px;
     left: 8px;
-    color:#386049;
+    color:#303144;
     font-weight: 900;
     font-size: 24px;
 }
 
 .buildingSubTitle
 {
-    color:#386049;
+    color:#303144;
     font-weight: 600;
     font-size: 16px;
 }
@@ -25,7 +25,7 @@
     position: absolute;
     left: 8px;
     top: 70px;
-    background-color:#386049;
+    background-color:#303144;
     color:white;
     font-weight: 600;
     font-size: 16px;
@@ -35,16 +35,16 @@
 }
 
 .Buildings{
-    border: 0px solid #56a8569f;
+    border: 0px solid #303144;
     width: 100%;
     height: 4vh;
-    padding-top: 0px;
-    border-radius: 7px;
+    
+    
     overflow: hidden;
-    background: #55916f;
+    background: #303144;
     font-family: fantasy;
     /*font: bold;*/
-    font-weight: 900;
+    color:white;
 
 
 }
@@ -125,48 +125,3 @@ margin-left: -11px;
     cursor:pointer;
 }
 
-/*
-.ol-popup {
-    position: absolute;
-    background-color: white;
-    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #cccccc;
-    bottom: 12px;
-    left: -50px;
-    min-width: 280px;
-  }
-  .ol-popup:after, .ol-popup:before {
-    top: 100%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-  .ol-popup:after {
-    border-top-color: white;
-    border-width: 10px;
-    left: 48px;
-    margin-left: -10px;
-  }
-  .ol-popup:before {
-    border-top-color: #cccccc;
-    border-width: 11px;
-    left: 48px;
-    margin-left: -11px;
-  }
-  .ol-popup-closer {
-    text-decoration: none;
-    position: absolute;
-    top: 2px;
-    right: 8px;
-  }
-  .ol-popup-closer:after {
-    content: "✖";
-  }
-
-  */
