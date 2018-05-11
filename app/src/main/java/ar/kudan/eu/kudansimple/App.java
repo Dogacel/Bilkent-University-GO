@@ -11,7 +11,6 @@ import ar.kudan.eu.kudansimple.gps.ar.handlers.GPSWorldHandler;
 import ar.kudan.eu.kudansimple.gps.ar.handlers.NodeInformationHandler;
 import ar.kudan.eu.kudansimple.gps.ar.units.GPSImageTemplate;
 import ar.kudan.eu.kudansimple.gps.information.NodeARInformation;
-import ar.kudan.eu.kudansimple.sensor.tools.Compass;
 
 /**
  * App class for executing tasks while app is starting.

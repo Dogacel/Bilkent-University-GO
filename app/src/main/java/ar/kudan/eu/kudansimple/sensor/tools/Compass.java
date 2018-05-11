@@ -52,14 +52,26 @@ public class Compass {
         DSensorManager.stopDSensor();
     }
 
+    /**
+     * Initiliazes the compass
+     * @param a context
+     */
     public static void init(Context a) {
         instance = new Compass(a);
     }
 
+    /**
+     * Get instance of the compass
+     * @return instance
+     */
     public static Compass getInstance() {
         return instance;
     }
 
+    /**
+     * Get bearing to north according to ARWorld.
+     * @return bearing wrapper
+     */
     public static Bearing getFixedNorthBearing() {
         return fixedNorthBearing;
     }

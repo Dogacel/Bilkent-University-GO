@@ -27,10 +27,14 @@ public class WebAppInterface {
      * Show a toast from the web page
      */
     @JavascriptInterface
-    public void showToast(String toast) {
+    private void showToast(String toast) {
         Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Go to building panel
+     * @param building building id
+     */
     @JavascriptInterface
     public void goPanel(String building) {
         showToast(building);
