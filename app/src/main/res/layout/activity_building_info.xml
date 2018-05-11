@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".activities.BuildingInfoActivity"
     tools:layout_editor_absoluteY="81dp">
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/infoPictures"
@@ -61,24 +63,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_spaces_label" />
 
+    <!--the take me there button-->
     <Button
         android:id="@+id/take_there"
         android:layout_width="337dp"
         android:layout_height="49dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/bugoColor"
         android:onClick="takeMeThere"
-        android:text="Take Me There"
+        android:text="@string/button_take_me_there"
+        android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_spaces_info"
         app:layout_constraintVertical_bias="1.0" />
 
+    <!--the default page components-->
     <TextView
         android:id="@+id/building_name"
         android:layout_width="wrap_content"
@@ -97,8 +101,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Function: "
+        android:text="@string/info_function"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/bugoColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoPictures" />
 
@@ -106,11 +111,11 @@
         android:id="@+id/num_floors_label"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:text="Number of Floors: "
+        android:text="@string/info_number_of_floors"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/bugoColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/building_function_info" />
 
@@ -120,8 +125,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Study Spaces:"
+        android:text="@string/info_study_spaces"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/bugoColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num_floors_label" />
 

@@ -44,6 +44,14 @@
 
     </RelativeLayout>
 
+    <!--bugo logo-->
+    <ImageView
+        android:id="@+id/bugo_logo"
+        android:layout_width="139dp"
+        android:layout_height="117dp"
+        android:layout_below="@+id/rootRL"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/logo" />
 
     <!--show me my location button-->
     <Button
@@ -135,69 +143,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_give_me"
         app:layout_constraintVertical_bias="0.14999998" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="139dp"
-        android:layout_height="117dp"
-        android:layout_below="@+id/rootRL"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/logo" />
-
 
 </RelativeLayout>
 
-
-<!--
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.MainMenuActivity">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="358dp"
-            android:layout_height="144dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/bugo" />
-
-        <Button
-            android:id="@+id/button_show_location"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="32dp"
-            android:onClick="openMap"
-            android:text="@string/button_show_location"
-            android:layout_below="@+id/logo"
-            android:layout_centerHorizontal="true"/>
-
-        <Button
-            android:id="@+id/button_identify_buildings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="openAR"
-            android:text="@string/identify_buildings"
-            android:layout_below="@id/button_show_location"
-            android:layout_centerHorizontal="true"/>
-
-        <Button
-            android:id="@+id/button_give_directions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="openList"
-            android:text="@string/button_give_directions"
-            android:layout_below="@id/button_identify_buildings"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
-
--->

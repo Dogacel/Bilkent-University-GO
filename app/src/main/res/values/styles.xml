@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customizing the theme. -->
-        <item name="colorPrimary">@color/background</item>
-        <item name="colorPrimaryDark">@color/background</item>
+        <item name="colorPrimary">@color/bugoColor</item>
+        <item name="colorPrimaryDark">@color/bugoColor</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
