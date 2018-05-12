@@ -13,7 +13,7 @@ public abstract class Constants {
     public static final int[][] imageIDs = new int[][]{ // buildings have to be in alphabetical order in here and the
             //building list to keep the program consistent & working
             new int[]{R.drawable.building_a, R.drawable.a_first_floor, R.drawable.a_second_floor}, // A Building
-            new int[]{R.drawable.building_b}, // B Building //taken from: http://www.hukuk.bilkent.edu.tr/img/1.jpg
+            new int[]{R.drawable.building_b}, // B Building
             new int[]{R.drawable.building_cafein}, // CAFEIN
             new int[]{R.drawable.dorm_50}, // Dorm 50
             new int[]{R.drawable.dorm_51}, // Dorm 51
@@ -31,12 +31,12 @@ public abstract class Constants {
             new int[]{R.drawable.dorm_72}, // Dorm 72
             new int[]{R.drawable.dorm_73}, // Dorm 73
             new int[]{R.drawable.dorm_74}, // Dorm 74
-            new int[]{R.drawable.blank_photo}, // Dorm 75
-            new int[]{R.drawable.blank_photo}, // Dorm 76
-            new int[]{R.drawable.blank_photo}, // Dorm 77
-            new int[]{R.drawable.blank_photo}, // Dorm 78
+            new int[]{R.drawable.dorm_75}, // Dorm 75
+            new int[]{R.drawable.dorm_76}, // Dorm 76
+            new int[]{R.drawable.dorm_77}, // Dorm 77
+            new int[]{R.drawable.dorm_78}, // Dorm 78
             new int[]{R.drawable.building_sports_dorm}, // Dormitory GYM //taken from: https://assets.change.org/photos/9/yi/tr/TAYITRqPcBbuWxq-800x450-noPad.jpg?1456957214
-            new int[]{R.drawable.building_ea}, // EA //taken from: http://mf.bilkent.edu.tr/wp-content/uploads/2014/09/mf_bina-940x360.jpg
+            new int[]{R.drawable.building_ea}, // EA
             new int[]{R.drawable.building_ee2}, // EE
             new int[]{R.drawable.building_fc}, // FA / FC
             new int[]{R.drawable.building_fb}, // FB
@@ -46,7 +46,7 @@ public abstract class Constants {
             new int[]{R.drawable.building_l}, // L
             new int[]{R.drawable.building_library}, // Library
             new int[]{R.drawable.building_sports_main}, // Main GYM
-            new int[]{R.drawable.building_marmara}, // Marmara //taken from: http://galeri3.arkitera.com/var/albums/Arkiv.com.tr/Proje/butuner-mimarlik/bilkent-universitesi-marmara-restoran/
+            new int[]{R.drawable.building_marmara}, // Marmara 
             new int[]{R.drawable.building_mayfest}, // Mayfest
             new int[]{R.drawable.building_meteksan}, // Meteksan
             new int[]{R.drawable.building_nanotam}, // Nanotam //taken from: http://www.nanotam.bilkent.edu.tr/images/n1.png
