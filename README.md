@@ -98,7 +98,7 @@ Other than that, there are 3 classes in project's main package.
                 
 #### Note:
 
-The gps.ar.* classes can be used to create your own GPS based AR applications. For further info please checkout the [javadoc](/docs). Every class is carefully commented.
+The gps.ar.* classes can be used to create your own GPS based AR applications. For further info please checkout the [javadoc](./docs). Every class is carefully commented.
 
 ### Tools:
 * Android Studio used as an Integrated Development Enviroment
