@@ -12,49 +12,49 @@ public abstract class Constants {
 
     public static final int[][] imageIDs = new int[][]{ // buildings have to be in alphabetical order in here and the
             //building list to keep the program consistent & working
-            new int[]{R.drawable.a_building, R.drawable.a_first_floor, R.drawable.a_second_floor}, // A Building
+            new int[]{R.drawable.building_a, R.drawable.a_first_floor, R.drawable.a_second_floor}, // A Building
             new int[]{R.drawable.building_b}, // B Building //taken from: http://www.hukuk.bilkent.edu.tr/img/1.jpg
-            new int[]{R.drawable.blank_photo}, // CAFEIN
-            new int[]{R.drawable.blank_photo}, // Dorm 50
-            new int[]{R.drawable.blank_photo}, // Dorm 51
-            new int[]{R.drawable.blank_photo}, // Dorm 52
-            new int[]{R.drawable.blank_photo}, // Dorm 54
-            new int[]{R.drawable.blank_photo}, // Dorm 55
-            new int[]{R.drawable.blank_photo}, // Dorm 60
-            new int[]{R.drawable.blank_photo}, // Dorm 61
-            new int[]{R.drawable.blank_photo}, // Dorm 62
-            new int[]{R.drawable.blank_photo}, // Dorm 63
-            new int[]{R.drawable.blank_photo}, // Dorm 64
-            new int[]{R.drawable.blank_photo}, // Dorm 69
-            new int[]{R.drawable.blank_photo}, // Dorm 70
-            new int[]{R.drawable.blank_photo}, // Dorm 71
-            new int[]{R.drawable.blank_photo}, // Dorm 72
-            new int[]{R.drawable.blank_photo}, // Dorm 73
-            new int[]{R.drawable.blank_photo}, // Dorm 74
+            new int[]{R.drawable.building_cafein}, // CAFEIN
+            new int[]{R.drawable.dorm_50}, // Dorm 50
+            new int[]{R.drawable.dorm_51}, // Dorm 51
+            new int[]{R.drawable.dorm_52}, // Dorm 52
+            new int[]{R.drawable.dorm_54}, // Dorm 54
+            new int[]{R.drawable.dorm_55}, // Dorm 55
+            new int[]{R.drawable.dorm_60}, // Dorm 60
+            new int[]{R.drawable.dorm_61}, // Dorm 61
+            new int[]{R.drawable.dorm_62}, // Dorm 62
+            new int[]{R.drawable.dorm_63}, // Dorm 63
+            new int[]{R.drawable.dorm_64}, // Dorm 64
+            new int[]{R.drawable.dorm_69}, // Dorm 69
+            new int[]{R.drawable.dorm_70}, // Dorm 70
+            new int[]{R.drawable.dorm_71}, // Dorm 71
+            new int[]{R.drawable.dorm_72}, // Dorm 72
+            new int[]{R.drawable.dorm_73}, // Dorm 73
+            new int[]{R.drawable.dorm_74}, // Dorm 74
             new int[]{R.drawable.blank_photo}, // Dorm 75
             new int[]{R.drawable.blank_photo}, // Dorm 76
             new int[]{R.drawable.blank_photo}, // Dorm 77
             new int[]{R.drawable.blank_photo}, // Dorm 78
-            new int[]{R.drawable.blank_photo}, // Dormitory GYM
+            new int[]{R.drawable.building_sports_dorm}, // Dormitory GYM //taken from: https://assets.change.org/photos/9/yi/tr/TAYITRqPcBbuWxq-800x450-noPad.jpg?1456957214
             new int[]{R.drawable.building_ea}, // EA //taken from: http://mf.bilkent.edu.tr/wp-content/uploads/2014/09/mf_bina-940x360.jpg
-            new int[]{R.drawable.blank_photo}, // EE
-            new int[]{R.drawable.blank_photo}, // FA / FC
-            new int[]{R.drawable.blank_photo}, // FB
-            new int[]{R.drawable.blank_photo}, // FF
-            new int[]{R.drawable.blank_photo}, // FOOD COURT
-            new int[]{R.drawable.blank_photo}, // G
-            new int[]{R.drawable.blank_photo}, // L
-            new int[]{R.drawable.blank_photo}, // Library
-            new int[]{R.drawable.blank_photo}, // Main GYM
+            new int[]{R.drawable.building_ee2}, // EE
+            new int[]{R.drawable.building_fc}, // FA / FC
+            new int[]{R.drawable.building_fb}, // FB
+            new int[]{R.drawable.building_ff}, // FF
+            new int[]{R.drawable.building_food_court}, // FOOD COURT
+            new int[]{R.drawable.building_g}, // G
+            new int[]{R.drawable.building_l}, // L
+            new int[]{R.drawable.building_library}, // Library
+            new int[]{R.drawable.building_sports_main}, // Main GYM
             new int[]{R.drawable.building_marmara}, // Marmara //taken from: http://galeri3.arkitera.com/var/albums/Arkiv.com.tr/Proje/butuner-mimarlik/bilkent-universitesi-marmara-restoran/
-            new int[]{R.drawable.blank_photo}, // Mayfest
-            new int[]{R.drawable.blank_photo}, // Meteksan
-            new int[]{R.drawable.blank_photo}, // Nanotam
-            new int[]{R.drawable.blank_photo}, // Prayer
-            new int[]{R.drawable.blank_photo}, // SA
-            new int[]{R.drawable.blank_photo}, // SB
-            new int[]{R.drawable.blank_photo}, // Student Council
-            new int[]{R.drawable.blank_photo}, // UNAM
+            new int[]{R.drawable.building_mayfest}, // Mayfest
+            new int[]{R.drawable.building_meteksan}, // Meteksan
+            new int[]{R.drawable.building_nanotam}, // Nanotam //taken from: http://www.nanotam.bilkent.edu.tr/images/n1.png
+            new int[]{R.drawable.building_prayers}, // Prayer
+            new int[]{R.drawable.building_sa}, // SA
+            new int[]{R.drawable.building_sb}, // SB
+            new int[]{R.drawable.building_student}, // Student Council
+            new int[]{R.drawable.building_unam}, // UNAM
             new int[]{R.drawable.building_v}, // V taken from: http://oguzhantesisat.com/site/wp-content/uploads/2013/03/proje_1303731504.jpg
 
     };
