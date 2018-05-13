@@ -53,9 +53,15 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Compass.getInstance().destroy();
-        gpsManager.destroy();
-        gpsWorldHandler.saveState();
+        if (Compass.getInstance() != null) {
+            Compass.getInstance().destroy();
+        }
+        if (gpsManager != null) {
+            gpsManager.destroy();
+        }
+        if (gpsWorldHandler != null) {
+            gpsWorldHandler.saveState();
+        }
     }
 
     @Override
@@ -86,6 +92,8 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             setupARActivity();
+        } else {
+            onBackPressed();
         }
     }
 
@@ -139,7 +147,7 @@ public class ARViewActivity extends ARActivity implements GestureDetector.OnGest
 
             //Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
 
-            if (id != null) {
+            if (id != null && gpsManager.getCurrentLocation() != null) {
                 Intent intent = new Intent(this, BuildingInfoActivity.class);
                 intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, ARViewActivity.IS_SOURCE);
                 intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.parseInt(id));

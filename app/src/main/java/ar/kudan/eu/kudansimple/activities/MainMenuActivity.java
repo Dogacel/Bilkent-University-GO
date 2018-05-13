@@ -42,7 +42,7 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(arIntent);
     }
 
-    public void showCredits(View view) { //linked to the credits button
+    public void showCredits(View v) { //linked to the credits button
         Intent intent = new Intent(this, Credits.class);
         startActivity(intent);
     }

@@ -23,19 +23,20 @@
             android:name=".activities.MainMenuActivity"
             android:label="BuGO"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode = "singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.BuildingInfoActivity" />
-        <activity android:name=".activities.BuildingListActivity" />
-        <activity android:name=".activities.MapActivity" />
-        <activity android:name=".activities.ARViewActivity" />
+        <activity android:name=".activities.BuildingInfoActivity" android:launchMode = "singleInstance"/>
+        <activity android:name=".activities.BuildingListActivity" android:launchMode = "singleInstance"/>
+        <activity android:name=".activities.MapActivity" android:launchMode = "singleInstance"/>
+        <activity android:name=".activities.ARViewActivity" android:launchMode = "singleInstance"/>
         <activity android:name=".activities.Credits"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:launchMode = "singleInstance"/>
     </application>
 
 </manifest>

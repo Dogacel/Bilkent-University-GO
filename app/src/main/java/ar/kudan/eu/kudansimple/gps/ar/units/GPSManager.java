@@ -101,7 +101,7 @@ public class GPSManager implements PlayLocationListener, ARRendererListener {
      *
      * @return previous location retrieved.
      */
-    private Location getCurrentLocation() {
+    public Location getCurrentLocation() {
         return previousLocation;
     }
 

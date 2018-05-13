@@ -49,11 +49,9 @@ public class BuildingInfoActivity extends AppCompatActivity {
         ViewPager infoPictures = findViewById(R.id.infoPictures);
         infoPictures.setAdapter(new CustomPagerAdapter(this));
 
-
     }
 
     public void takeMeThere(View v) { // linked to take_there (Button)
-
         GPSWorldHandler gpsWorldHandler = ContainerManager.getInstance().getGpsWorldHandler();
         gpsWorldHandler.showOnly(Integer.toString(building));
 
@@ -61,6 +59,7 @@ public class BuildingInfoActivity extends AppCompatActivity {
         intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
         intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, building);
         startActivity(intent);
+
     }
 
     public class CustomPagerAdapter extends PagerAdapter { //This class is taken directly from http://codetheory.in/android-image-slideshow-using-viewpager-pageradapter/

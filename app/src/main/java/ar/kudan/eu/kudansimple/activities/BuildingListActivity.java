@@ -50,15 +50,6 @@ public class BuildingListActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    public void buttonClicked(View b) {
-        for (int i = 0; i < buttons.length; i++) {
-            if (b == buttons[i]) {
-                openInfoScreen(i);
-            }
-        }
-
-    }
-
 
     private void openInfoScreen(int building) {
         Intent intent = new Intent(this, BuildingInfoActivity.class);
@@ -67,13 +58,12 @@ public class BuildingListActivity extends AppCompatActivity implements View.OnCl
         intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
         startActivity(intent);
 
-
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View b) {
         for (int i = 0; i < buttons.length; i++) {
-            if (view == buttons[i]) {
+            if (b == buttons[i]) {
                 openInfoScreen(i);
             }
         }
