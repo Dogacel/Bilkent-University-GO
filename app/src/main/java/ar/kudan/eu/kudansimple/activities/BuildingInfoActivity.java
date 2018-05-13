@@ -57,7 +57,7 @@ public class BuildingInfoActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ARViewActivity.class);
         intent.putExtra(Constants.EXTRA_MESSAGE_SOURCE, IS_SOURCE);
-        intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, building);
+        intent.putExtra(Constants.EXTRA_MESSAGE_BUILDING, Integer.toString(building));
         startActivity(intent);
 
     }

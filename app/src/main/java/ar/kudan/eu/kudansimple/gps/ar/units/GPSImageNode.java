@@ -52,7 +52,7 @@ public class GPSImageNode extends ARImageNode {
 
         this.tooFar = false;
         this.forceShow = false;
-        this.lastBearing = 0;
+        this.lastBearing = 550;
         this.previousFrameTime = 0;
         this.isStatic = isStatic;
         this.objectHeight = -height;

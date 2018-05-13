@@ -191,6 +191,18 @@ public class GPSWorldHandler {
         }
     }
 
+    /**
+     * Gets node from id
+     * @param id id
+     * @return node
+     */
+    public GPSImageNode getNodeFromID(String id) {
+        for (GPSImageNode n : gpsObjectList) {
+            if (n.getID().equals(id))
+                return n;
+        }
+        return null;
+    }
 
     /**
      * Gets focused GPS object but it must be visible.
